@@ -1,0 +1,46 @@
+[
+  {
+    "id": "ice_block",
+    "name": "Block of ice — mission hospital",
+    "hold_space": 2,
+    "pay": 70,
+    "note": "Melts every beat. Bonus if half survives.",
+    "traits": ["melting"],
+    "effects": [{ "trigger": "beat", "effect": "melt", "value": 4 }],
+    "unlocks_jokes": ["ice_bench"],
+    "failure": { "type": "melted", "penalty": 40 }
+  },
+  {
+    "id": "upright_piano",
+    "name": "Crated upright piano",
+    "hold_space": 3,
+    "pay": 55,
+    "note": "Top-heavy. Sounds a note on every impact.",
+    "traits": ["top_heavy", "noisemaker"],
+    "effects": [{ "trigger": "impact", "effect": "play_note" }],
+    "unlocks_jokes": ["piano_wet"],
+    "failure": { "type": "damaged", "penalty": 60 }
+  },
+  {
+    "id": "leopard",
+    "name": "Leopard, bound for Antwerp",
+    "hold_space": 3,
+    "pay": 110,
+    "note": "Escapes if the boat gets rough. You will not get it back.",
+    "traits": ["live", "escape"],
+    "effects": [{ "trigger": "impact", "effect": "escape", "chance_key": "leopardEscapeChance" }],
+    "unlocks_jokes": ["leopard_spotted"],
+    "failure": { "type": "escaped", "penalty": 60 }
+  },
+  {
+    "id": "mail_sacks",
+    "name": "Mail sacks",
+    "hold_space": 1,
+    "pay": 30,
+    "note": "Safe. Boring. Sometimes you need boring.",
+    "traits": ["safe"],
+    "effects": [],
+    "unlocks_jokes": [],
+    "failure": { "type": "wet", "penalty": 10 }
+  }
+]

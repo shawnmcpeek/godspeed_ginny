@@ -1,0 +1,545 @@
+[
+  {
+    "id": "named_godspeed",
+    "category": "rehearsed",
+    "title": "Named Godspeed",
+    "variants": [
+      { "text": "She's the Godspeed Ginny. Somebody named her that. Four knots. Downhill. With a tailwind.", "weight": 3 },
+      { "text": "Godspeed Ginny. The name was optimistic and the boat has never once agreed with it.", "weight": 2 },
+      { "text": "Yes, Godspeed. No, I don't know who. Whoever it was never met her.", "weight": 1 }
+    ],
+    "flavors": ["wordplay", "self_deprecating", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boat"],
+    "fatigue_runs": 1,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat", "signature"]
+  },
+  {
+    "id": "breezy",
+    "category": "story",
+    "title": "The name under the paint",
+    "variants": [
+      { "text": "That BREEZY showing through the transom? Previous owner. Lovely woman. Terrible sailor.", "weight": 3 },
+      { "text": "You've spotted BREEZY under the paint. That was a horse. Long story. Don't ask the horse.", "weight": 2 },
+      { "text": "BREEZY? That's not a name, that's a warning about the starboard rail.", "weight": 1 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boat"],
+    "fatigue_runs": 1,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat", "signature"]
+  },
+  {
+    "id": "forty_two_cubits",
+    "category": "rehearsed",
+    "title": "Forty-two cubits",
+    "variants": [
+      { "text": "Ahead of you — KNIGHT FALLS. Forty-two cubits of thundering water. Forty-two. Cubits.", "weight": 3 },
+      { "text": "Forty-two cubits, folks. I'm required to say it. I've never been told what a cubit is.", "weight": 2 },
+      { "text": "Forty-two cubits. That's the figure in the brochure and I stand behind the brochure.", "weight": 1, "follow": "Water comes over the rail and over everyone's head and, yes, behind the brochure.", "water": 8 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falls"],
+    "fatigue_runs": 1,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark", "signature"]
+  },
+  {
+    "id": "named_for_a_knight",
+    "category": "rehearsed",
+    "title": "Named for a knight",
+    "variants": [
+      { "text": "Named for a knight who went over it in armour. Or a surveyor named Knight. Or it's just 'night,' spelled wrong. Pick one.", "weight": 3 },
+      { "text": "Knight Falls. Named after Sir somebody. The chart's the only record and the chart is a rumour.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falls"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark"]
+  },
+  {
+    "id": "not_that_kind_of_bail",
+    "category": "rehearsed",
+    "title": "Not that kind of bail",
+    "variants": [
+      { "text": "No. Don't jump. NOT THAT KIND OF BAIL.", "weight": 3 },
+      { "text": "THE BUCKET. SIR. The bucket. Sit down.", "weight": 2 },
+      { "text": "I said bail. I meant the buckets. We have been over this.", "weight": 1 }
+    ],
+    "flavors": ["pun", "dark", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["taking_water"],
+    "unlock": { "method": "bail" },
+    "fatigue_runs": 3,
+    "callback_to": [],
+    "risk": { "chance": 0.28, "generates": "overboard" },
+    "tags": ["signature", "risk"]
+  },
+  {
+    "id": "para_ducks",
+    "category": "rehearsed",
+    "title": "The para-ducks",
+    "variants": [
+      { "text": "Two ducks, one either side. Steer between them and you create a para-ducks.", "weight": 3 },
+      { "text": "Duck to port, duck to starboard. Straight up the middle and we've got ourselves a para-ducks.", "weight": 2 }
+    ],
+    "flavors": ["pun", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["ducks", "falls"],
+    "excludes": { "nodes": ["two_ducks_goose"] },
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark", "signature"]
+  },
+  {
+    "id": "duck_duck_goose",
+    "category": "salvage",
+    "title": "Duck, Duck, Goose",
+    "variants": [
+      { "text": "Duck… duck… GOOSE.", "weight": 3 },
+      { "text": "Two ducks and a— that's a goose. That's a goose, folks.", "weight": 2 },
+      { "text": "Duck. Duck. …I had something for this.", "weight": 1 }
+    ],
+    "flavors": ["pun", "groaner", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["goose"],
+    "requires": { "nodes": ["two_ducks_goose"] },
+    "fatigue_runs": 2,
+    "callback_to": ["para_ducks"],
+    "risk": null,
+    "unlock": { "method": "salvage", "source_node": "two_ducks_goose" },
+    "tags": ["landmark", "recurring", "signature"]
+  },
+  {
+    "id": "miss_my_mine",
+    "category": "story",
+    "title": "I miss my mine",
+    "variants": [
+      { "text": "I had shares in that mine. Of all the things I've lost in my life, it's my mine I miss the most.", "weight": 3 },
+      { "text": "Shares. In that. Bought high. I lost my mine, and I think about it most days.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["mine"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark", "signature"]
+  },
+  {
+    "id": "white_star",
+    "category": "story",
+    "title": "White Star Line",
+    "variants": [
+      { "text": "I worked for White Star Line. …We'll leave it there.", "weight": 3 },
+      { "text": "Before this? White Star Line. I'd rather not go into it.", "weight": 2 },
+      { "text": "White Star. Yes. That White Star. No further questions.", "weight": 1 }
+    ],
+    "flavors": ["dark", "self_deprecating", "meta"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "clashes_with": ["poop_deck"],
+    "fatigue_runs": 3,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["resume", "signature"]
+  },
+  {
+    "id": "poop_deck",
+    "category": "story",
+    "title": "The poop deck",
+    "variants": [
+      { "text": "I served on the poop deck. …It's a real term. It's from the French. La poupe. It's in the— stop laughing. That job stunk.", "weight": 3 },
+      { "text": "Poop deck. Raised deck aft. Nautical term, centuries old. And yes. That job stunk.", "weight": 2 },
+      { "text": "My first posting was the poop deck. I'd thank you not to make it a thing. It was already a thing. It stunk.", "weight": 1 }
+    ],
+    "flavors": ["groaner", "self_deprecating", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "clashes_with": ["white_star"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["resume", "signature"]
+  },
+  {
+    "id": "steaming_pile",
+    "category": "rehearsed",
+    "title": "That's a steaming pile",
+    "variants": [
+      { "text": "Off the port bow — the Calliope. Aground since '33. Same chart, same fork, same wide water and good bottom. That, folks, is a steaming pile.", "weight": 3 },
+      { "text": "She was the pride of the upper river. Now she's a steaming pile. And I do mean steaming. Boiler's still going. Nobody's told it.", "weight": 2 },
+      { "text": "That's the competition. Sorry — that WAS the competition. Steam launch, hard aground, listing. A steaming pile.", "weight": 1 }
+    ],
+    "flavors": ["groaner", "dark", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["wreck"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark", "signature"]
+  },
+  {
+    "id": "same_three_words",
+    "category": "story",
+    "title": "He read the same three words",
+    "variants": [
+      { "text": "Same chart as mine. Same fork. He read the same three words I read. I just read them slower.", "weight": 3 },
+      { "text": "There's no version of this where I'm better than him. There's only a version where I was slower that day.", "weight": 2 }
+    ],
+    "flavors": ["dark", "meta", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["wreck", "chart"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark"]
+  },
+  {
+    "id": "were_going_in",
+    "category": "rehearsed",
+    "title": "We're going in",
+    "variants": [
+      { "text": "Reverse is more of a suggestion on this boat. So whatever's ahead — we're going in.", "weight": 3 },
+      { "text": "She doesn't back up. She's never backed up. We commit, or we discuss it with the bank.", "weight": 2 }
+    ],
+    "flavors": ["dark", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["narrows", "mine", "mill", "snags"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "only_fix_is_faster",
+    "category": "rehearsed",
+    "title": "The only fix is faster",
+    "variants": [
+      { "text": "Safety valve's painted shut. Pressure only goes one way. Good news — the fix is more speed.", "weight": 3 },
+      { "text": "When she starts screaming, we go faster. I know. I've stopped arguing with it.", "weight": 2 }
+    ],
+    "flavors": ["dark", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boat", "boiler"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "wide_water_good_bottom",
+    "category": "rehearsed",
+    "title": "Wide water, good bottom",
+    "variants": [
+      { "text": "Chart calls this stretch wide water, good bottom. Named after someone the surveyor met that season. …I hear it. I hear it now.", "weight": 3 },
+      { "text": "'Wide water, good bottom,' it says. In his handwriting. Named for a personal acquaintance. I'm going to keep going.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "pun"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["reach", "chart"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark", "signature"]
+  },
+  {
+    "id": "dentistry",
+    "category": "rehearsed",
+    "title": "Dentistry",
+    "variants": [
+      { "text": "Hippopotamus. Four tons, opens to a hundred and fifty degrees. That's not a yawn, that's an appointment.", "weight": 3 },
+      { "text": "They look sleepy. They are not sleepy. They are the least sleepy animal on this river.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["hippo"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["animal"]
+  },
+  {
+    "id": "no_crocodiles",
+    "category": "rehearsed",
+    "title": "Crocodile Bend",
+    "variants": [
+      { "text": "The chart says crocodile. I have looked. I am still looking. If you see one, do not tell me — I have a bit.", "weight": 3 },
+      { "text": "Crocodile Bend. Named in hope. Stocked in never. I apologise on behalf of the reptiles.", "weight": 2 }
+    ],
+    "flavors": ["meta", "self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["croc"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["animal", "chart"]
+  },
+  {
+    "id": "welcome_crazi",
+    "category": "rehearsed",
+    "title": "Welcome back to Cra-Zi",
+    "variants": [
+      { "text": "Home port's Cra-Zi. Spelled on the chart the way a drunk surveyor heard it. Everyone here says Crazy. Everyone here is wrong.", "weight": 3 },
+      { "text": "Cra-Zi. Two syllables, one hyphen, zero relation to what the locals actually call it.", "weight": 2 }
+    ],
+    "flavors": ["meta", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["crazi"],
+    "fatigue_runs": 1,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["port"]
+  },
+  {
+    "id": "three_days",
+    "category": "rehearsed",
+    "title": "Three days",
+    "variants": [
+      { "text": "That sign says NOWHERE — THREE DAYS. It said that yesterday. It'll say it tomorrow. From either direction.", "weight": 3 },
+      { "text": "You want to go to Nowhere? Everyone does. It's three days. It's always three days.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["crazi", "nowhere"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["nowhere"]
+  },
+  {
+    "id": "leopard_spotted",
+    "category": "prop",
+    "title": "Spotted",
+    "variants": [
+      { "text": "The crate? Cargo. Nothing to— the telegram said LEOPARD SPOTTED. Then SPOTTED LEOPARD. I never got a clarification.", "weight": 3 },
+      { "text": "Don't put fingers through the slats. That's not a rule, that's a eulogy.", "weight": 2 }
+    ],
+    "flavors": ["pun", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["leopard"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["cargo"]
+  },
+  {
+    "id": "piano_wet",
+    "category": "prop",
+    "title": "Key of wet",
+    "variants": [
+      { "text": "That's the piano. It does that every wake. It's been doing it for nine miles. It's in the key of wet.", "weight": 3 },
+      { "text": "Yes, the freight is playing. No, I can't stop it. It's a piano with opinions.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["piano"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["cargo"]
+  },
+  {
+    "id": "ice_bench",
+    "category": "prop",
+    "title": "The best seat",
+    "variants": [
+      { "text": "Whoever's sitting on the ice — that's mission property and it's melting on your account.", "weight": 3 },
+      { "text": "The ice is for the hospital. It is not a bench. Ma'am. It is not a bench.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["ice"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["cargo"]
+  },
+  {
+    "id": "unnamed_river",
+    "category": "story",
+    "title": "The river's name",
+    "variants": [
+      { "text": "The river's called the Unnamed. That's not me being coy. He left the box blank and the printer set it in capitals.", "weight": 3 },
+      { "text": "You're on the Unnamed River. Named, in the end, by a man who couldn't be bothered to ask.", "weight": 2 },
+      { "text": "The Unnamed. Yes. I know. No, there isn't another one.", "weight": 1 }
+    ],
+    "flavors": ["meta", "absurd", "dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["river"],
+    "fatigue_runs": 1,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river", "signature"]
+  },
+  {
+    "id": "names_stack",
+    "category": "story",
+    "title": "All the same word",
+    "variants": [
+      { "text": "This water's been called the Unnamed, Sin Nombre, Rio Sem Nome, Sans Nom, and Innominata. Five languages. One word. Nobody asked.", "weight": 3 },
+      { "text": "Every outfit that came through wrote down 'unnamed' and thought they were copying the last lot. Four hundred years of that.", "weight": 2 },
+      { "text": "Innominata's on the oldest sheet, so that's the one the lawyers use. It means the same as all the others. It means nobody asked.", "weight": 1 }
+    ],
+    "flavors": ["meta", "absurd", "dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["river"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river", "signature"]
+  },
+  {
+    "id": "nonesuch",
+    "category": "rehearsed",
+    "title": "Nonesuch",
+    "variants": [
+      { "text": "Some charts say Nonesuch. That's a clerk who read 'no such name' and thought it was pretty.", "weight": 2 },
+      { "text": "The Nonesuch. Sounds grand. It's a filing error with good handwriting.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["river"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river"]
+  },
+  {
+    "id": "he_says_it_once",
+    "category": "story",
+    "title": "He says it once",
+    "variants": [
+      { "text": "The people who live here have always had a name for it. It's never been on a chart. I'm not going to be the first to spell it wrong.", "weight": 3 },
+      { "text": "There is a name. It's a good one. It's just never been official, which is a different thing from never being true.", "weight": 2 }
+    ],
+    "flavors": ["meta", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["river"],
+    "fatigue_runs": 1,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river"]
+  },
+  {
+    "id": "second_survey",
+    "category": "rehearsed",
+    "title": "A second survey",
+    "variants": [
+      { "text": "They could fix the chart. That'd mean a second survey. Nobody's paying for a second survey while the first one still floats most boats.", "weight": 3 },
+      { "text": "Every wrong name on this water could be corrected tomorrow. It would cost money. So it won't be.", "weight": 2 }
+    ],
+    "flavors": ["dark", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["chart"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chart"]
+  },
+  {
+    "id": "one_flask",
+    "category": "story",
+    "title": "One man, one flask",
+    "variants": [
+      { "text": "Every boat on this river runs the same chart. One survey. One season. One man with a flask and a bad ear.", "weight": 3 },
+      { "text": "This chart's wrong in the same places for everybody. Comforting, in a way.", "weight": 2 }
+    ],
+    "flavors": ["meta", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["chart"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["surveyor"]
+  },
+  {
+    "id": "strictly_speaking",
+    "category": "story",
+    "title": "Strictly speaking",
+    "variants": [
+      { "text": "I'm not, strictly speaking, licensed. I mention it early so it isn't a surprise later.", "weight": 3 },
+      { "text": "Licensing is a complicated subject on this river and I'd rather we enjoyed the trees.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "dark", "meta"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["crazi", "boat"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["resume"]
+  },
+  {
+    "id": "duck_the_branch",
+    "category": "rehearsed",
+    "title": "Duck!",
+    "variants": [
+      { "text": "DUCK! …the branch. THE BRANCH. Not the birds. Why are you looking at the birds.", "weight": 3 },
+      { "text": "Everybody DUCK — no, down. DOWN. Sir, there are no ducks here.", "weight": 2 }
+    ],
+    "flavors": ["physical", "pun"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["narrows", "snags"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": { "chance": 0.3, "generates": "overboard" },
+    "tags": ["risk"]
+  },
+  {
+    "id": "conflicted_boulder",
+    "category": "rehearsed",
+    "title": "Conflicted",
+    "variants": [
+      { "text": "The river splits around a boulder here. I am conflicted on which way to go. Left or right.", "weight": 3 },
+      { "text": "Big rock, two channels. I am conflicted. You are looking at me like that is not a nautical term.", "weight": 2 }
+    ],
+    "flavors": ["pun", "wordplay", "groaner"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["boulder"],
+    "fatigue_runs": 2,
+    "callback_to": [],
+    "risk": null,
+    "tags": ["landmark", "signature"]
+  }
+]

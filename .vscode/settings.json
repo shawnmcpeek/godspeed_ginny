@@ -1,0 +1,6 @@
+{
+    "notchlist.completedVisibilityMode": "hide_all",
+    "dart.flutterRunAdditionalArgs": [
+        "--release"
+    ]
+}

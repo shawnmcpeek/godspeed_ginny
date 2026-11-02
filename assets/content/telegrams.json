@@ -1,0 +1,46 @@
+{
+  "typos": [
+    { "from": "DELAY", "to": "DALY" },
+    { "from": "RECEIVED", "to": "RECIEVED" },
+    { "from": "AFFECT", "to": "AFECT" },
+    { "from": "PROMPTLY", "to": "PROMTLY" },
+    { "from": "WHICH", "to": "WICH" },
+    { "from": "SATISFACTORY", "to": "SATISFACTRY" }
+  ],
+  "office": {
+    "header": "POSTAL TELEGRAPH — CRA-ZI LANDING",
+    "lines": [
+      "ONE CRUISE STOP FORTY FARES STOP NOWHERE THREE DAYS STOP MUST PASS KNIGHT FALLS STOP ADVERTISED STOP",
+      "PICK YOUR OWN FREIGHT STOP I AM NOT YOUR MOTHER STOP",
+      "DO NOT DELAY STOP"
+    ],
+    "signoff": "— MCRIVER"
+  },
+  "settle": [
+    {
+      "id": "refunds",
+      "if": { "refunds_gte": 4 },
+      "text": "{refunds} REFUNDS STOP EXPLAIN STOP"
+    },
+    {
+      "id": "owe",
+      "if": { "net_lt": 0 },
+      "text": "YOU OWE ME MONEY STOP THIS IS A NOVEL SITUATION STOP"
+    },
+    {
+      "id": "leopard",
+      "if": { "cargo_lost": "leopard" },
+      "text": "LEOPARD UNACCOUNTED STOP DO NOT DISCUSS LEOPARD WITH PASSENGERS STOP"
+    },
+    {
+      "id": "good",
+      "if": { "sat_gte": 80 },
+      "text": "RECEIVED GOOD REPORT STOP DO NOT LET IT AFFECT YOU STOP"
+    },
+    {
+      "id": "ok",
+      "if": { "default": true },
+      "text": "SATISFACTORY STOP DELAY NOT TOLERATED NEXT WEEK STOP"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+[
+  {
+    "id": "fork1",
+    "prompt": "The river forks below the landing. No reverse — whichever you pick, you are committed to it.",
+    "pick": 2,
+    "edges": [
+      {
+        "id": "west",
+        "from": "fork1",
+        "to": "hippo",
+        "leg": "outbound",
+        "charted": {
+          "label": "The West Channel",
+          "claim": "Wide water. Good bottom.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "fast",
+          "danger": "high",
+          "material": "low",
+          "surprise": "silted_since_1934"
+        },
+        "annotation_on_discovery": "silted '34 — hippos",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "east",
+        "from": "fork1",
+        "to": "narrows",
+        "leg": "outbound",
+        "charted": {
+          "label": "The East Cut",
+          "claim": "Narrow. Foul ground.",
+          "time": "slow",
+          "danger": "high",
+          "material": "low"
+        },
+        "actual": {
+          "time": "fast",
+          "danger": "high",
+          "material": "low",
+          "surprise": "faster_than_it_looks"
+        },
+        "annotation_on_discovery": "faster than it looks",
+        "boiler_bonus": -8
+      },
+      {
+        "id": "snag_run",
+        "from": "fork1",
+        "to": "snags",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Timber Pass",
+          "claim": "Clear. Logged out years ago.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "slow",
+          "danger": "high",
+          "material": "low",
+          "surprise": "still_a_fence"
+        },
+        "annotation_on_discovery": "not logged out — duck",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "croc_bend",
+        "from": "fork1",
+        "to": "croc",
+        "leg": "outbound",
+        "charted": {
+          "label": "Crocodile Bend",
+          "claim": "Crocodiles. Exciting. Low water.",
+          "time": "slow",
+          "danger": "high",
+          "material": "high"
+        },
+        "actual": {
+          "time": "fast",
+          "danger": "low",
+          "material": "low",
+          "surprise": "no_crocodiles"
+        },
+        "annotation_on_discovery": "no crocs. passengers furious.",
+        "boiler_bonus": 0
+      }
+    ]
+  },
+  {
+    "id": "fork2",
+    "prompt": "A tributary opens to starboard. No reverse — whichever you pick, you are committed to it.",
+    "pick": 2,
+    "edges": [
+      {
+        "id": "adit",
+        "from": "fork2",
+        "to": "mine",
+        "leg": "outbound",
+        "detour": true,
+        "charted": {
+          "label": "Up to Ilostmi Mine",
+          "claim": "Salvage at the head. Turnaround required. She does not reverse.",
+          "time": "slow",
+          "danger": "high",
+          "material": "high"
+        },
+        "actual": {
+          "time": "slow",
+          "danger": "high",
+          "material": "high",
+          "surprise": "no_room_to_turn"
+        },
+        "annotation_on_discovery": "no reverse. helm the loop or the wall.",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "main",
+        "from": "fork2",
+        "to": "reach",
+        "leg": "outbound",
+        "charted": {
+          "label": "Hold the main channel",
+          "claim": "Straight water toward Nowhere. Falls advertised.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "fast",
+          "danger": "low",
+          "material": "low",
+          "surprise": "good_water_bad_smell"
+        },
+        "annotation_on_discovery": "good water, bad smell",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "race",
+        "from": "fork2",
+        "to": "mill",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Old Race",
+          "claim": "Mill gone. Quiet water.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "fast",
+          "danger": "high",
+          "material": "low",
+          "surprise": "water_still_works"
+        },
+        "annotation_on_discovery": "mill gone. race is not.",
+        "boiler_bonus": 6
+      },
+      {
+        "id": "steps",
+        "from": "fork2",
+        "to": "shrine",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Stone Landing",
+          "claim": "Ruin. Name uncertain. Safe approach.",
+          "time": "slow",
+          "danger": "low",
+          "material": "high"
+        },
+        "actual": {
+          "time": "slow",
+          "danger": "low",
+          "material": "high",
+          "surprise": "they_want_the_name"
+        },
+        "annotation_on_discovery": "they will ask you to spell it",
+        "boiler_bonus": 0
+      }
+    ]
+  }
+]
