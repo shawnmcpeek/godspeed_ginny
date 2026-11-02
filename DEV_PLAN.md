@@ -254,7 +254,9 @@ There is no deck screen, draft screen or office step. The skipper's act develops
 - [ ] CI, release builds, QA checklist
 - [x] Store listing copy + Fastlane upload lanes (`fastlane/metadata`, Bottled Star ASC + Play credentials under `secrets/`)
 - [ ] Privacy policy page for Ginny support/marketing URLs if not live yet
-- [ ] Screenshots / feature graphic
+- [x] Play hi-res icon (512) + feature graphic (1024×500); adaptive icon safe-zone padding
+- [x] Phone screenshots via Linux harness (`lib/screenshot_main.dart` → Play upload)
+- [ ] Trailer
 
 **Codemagic → Google Play:** reuse **Bottled Star**’s Play service-account JSON  
 (`Documents/github/bottled_star/secrets/google/play-store.json`).  

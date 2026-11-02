@@ -44,6 +44,14 @@ Upload App Store screenshots only
 
 Upload Play Store listing text only (no AAB, no images)
 
+### android upload_play_graphics
+
+```sh
+[bundle exec] fastlane android upload_play_graphics
+```
+
+Upload Play Store icon + feature graphic
+
 ### android upload_play_screenshots
 
 ```sh

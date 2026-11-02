@@ -120,6 +120,9 @@ class GameController extends ChangeNotifier {
     _bump();
   }
 
+  /// Force a UI rebuild after mutating [game] fields (screenshot harness, tools).
+  void refresh() => _bump();
+
   bool get hasActiveRun => game?.run != null;
 
   bool get hasCareerHistory => (game?.career.runs ?? 0) > 0;

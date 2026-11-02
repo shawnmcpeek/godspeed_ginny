@@ -110,6 +110,37 @@ platform :android do
     UI.success("Play listing text uploaded for #{lang}")
   end
 
+  desc "Upload Play Store icon + feature graphic"
+  lane :upload_play_graphics do
+    require "supply"
+
+    package = "pro.daddoodev.godspeedginny"
+    lang = "en-US"
+    images = File.join(repo_root, "fastlane/metadata/android", lang, "images")
+
+    Supply.config = FastlaneCore::Configuration.create(Supply::Options.available_options, {
+      json_key: File.join(repo_root, "secrets/google/play-store.json"),
+      package_name: package,
+      metadata_path: File.join(repo_root, "fastlane/metadata/android")
+    })
+
+    client = Supply::Client.make_from_config
+    client.begin_edit(package_name: package)
+
+    icon = Dir[File.join(images, "icon.{png,PNG}")].first
+    UI.user_error!("Missing 512x512 icon.png under #{images}") unless icon
+    client.upload_image(image_path: icon, image_type: "icon", language: lang)
+    UI.message("Uploaded #{File.basename(icon)}")
+
+    feature = Dir[File.join(images, "featureGraphic.{png,PNG,jpg,JPG,jpeg,JPEG}")].first
+    UI.user_error!("Missing 1024x500 featureGraphic under #{images}") unless feature
+    client.upload_image(image_path: feature, image_type: "featureGraphic", language: lang)
+    UI.message("Uploaded #{File.basename(feature)}")
+
+    client.commit_current_edit!
+    UI.success("Play icon + feature graphic uploaded for #{lang}")
+  end
+
   desc "Upload Play Store phone screenshots only"
   lane :upload_play_screenshots do
     require "supply"
