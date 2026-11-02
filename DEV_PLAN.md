@@ -117,15 +117,19 @@ The M0 port is a faithful copy of the web proof of concept: one fixed run, a han
 - Meta: purse, chart notes, salvage jokes, leopard-at-large, best room. The purse has nothing to spend it on.
 - Randomness: one global unseeded `Random()` in `lib/engine/util.dart`.
 
-### System 1 — Joke deck (the foundation)
-- **Collection:** every joke the player has found (base set plus salvage).
-- **Run deck:** the player picks about 8 at the office before cast-off. Deck size can become an upgrade later.
-- **Hand:** about 5 jokes drawn per stretch; unplayed jokes return to the draw pile at the next stretch.
-- **Cost and risk:** cost is 1 or 2 beats. One-liners are cheap and safe, stories cost 2 and pay big, dark jokes carry risk. Uses `attention_cost` and `risk`, which already exist.
-- **Drafting:** after each stretch, choose 1 of 3 new jokes for this run's deck. Salvage jokes join the collection permanently.
-- **Flavors as suits:** synergies reward committing to a style, e.g. "each pun played this stretch adds +1."
-- **Callbacks:** a joke with a `callback_to` target pays extra if the setup was told earlier in the run. This is the comedy-native mechanic and replaces dead fields like `fatigue_runs`.
-- **Passenger reactions:** after each joke, show which passenger laughed or winced, so tastes are learnable without a manual.
+### System 1 — Voice and material (the foundation)
+There is no deck screen, draft screen or office step. The skipper's act develops over time, and the jokes arrive spontaneously during the cruise.
+- **Collection:** every joke found (base set, salvage, gifts). All of it stays in the pool.
+- **Spontaneous hand:** when the skipper patters, about 3 jokes "come to mind," drawn from the pool rather than chosen from the full list. Unplayed ones fade; the next patter draws fresh.
+- **Voice:** a running profile of the flavors you've told (dry, pun, absurd, dark and so on). Every joke told nudges it, and the draw is weighted toward your voice. A skipper who goes dry keeps getting dry material, even when the room isn't laughing. Stubbornness is a real strategy and a real risk.
+- **Momentum:** consecutive jokes in the same voice build a streak multiplier. With the right audience it is big; with the wrong one it amplifies the bombs, because negative scores multiply too.
+- **Pivot:** spend 1 beat to "think of something else." It redraws from the full pool and halves your voice, at the cost of the beat and the silence drain.
+- **Voice over the career:** part of your voice carries into the next run (about a quarter), so a style develops over many runs. Skipper types (System 3) seed the starting voice.
+- **Bits mature:** a joke told across runs and landing becomes Rehearsed (lighter fatigue), then Signature (drawn more often, bigger payoff). Bits that keep bombing don't level up. The act grows the way a comedian's does.
+- **Inspiration:** when the room laughs during a stretch, a new bit tied to that stretch joins the pool for the rest of the run, and joins the collection if it is salvaged. New material comes from the cruise itself, not from a shop.
+- **Cost and risk:** cost is 1 or 2 beats (quick one-liners, long stories); risk uses the existing field.
+- **Callbacks:** a joke with a `callback_to` target pays extra if the setup was told earlier in the run.
+- **Reactions:** the room meter is the main read. The 1–2 notable passengers (goal passengers and the loudest critic) also show a named reaction after each joke. Per-passenger satisfaction is tracked underneath.
 
 ### System 2 — River map and the lying chart
 - Replace the fixed `runPlan` with a **branching map** (Slay the Spire style, 8–10 stretches, 2–3 choices per fork).
@@ -149,7 +153,7 @@ The M0 port is a faithful copy of the web proof of concept: one fixed run, a han
 ### System 5 — Passengers with goals
 - Each run has 3–5 passengers with hidden tastes (existing profiles) and an optional goal: make the honeymooners laugh, get the administrator to tip, keep the heckler quiet.
 - Finish the dormant fields: `patience` sets how fast silence drains that passenger; `fear_threshold` sets the hazard level at which they panic and demand refunds.
-- Per-passenger satisfaction, rolled up to the room meter.
+- Per-passenger satisfaction, rolled up to the room meter. The room is the main read; only the 1–2 notable passengers show visible reactions.
 
 ### System 6 — The river remembers (saga)
 - Repeat passengers recall jokes told to them in earlier runs ("heard that one"), applying extra fatigue or a callback bonus.
@@ -161,8 +165,8 @@ The M0 port is a faithful copy of the web proof of concept: one fixed run, a han
 - **Daily river:** one seeded run per day, the same for everyone, no account needed. Results shared as a screenshot or a share card.
 - **Joke templates:** jokes with slots (`{hazard}`, `{cargo}`, `{passenger}`) multiply the content without writing every line by hand.
 
-### Purse
-- Spend purse at the office before a run: more deck slots, boat upgrades (boiler, hull), better cargo contracts, skipper unlocks.
+### Purse and upgrades (deferred)
+- Upgrades and purse sinks (boat upgrades, better cargo contracts, skipper unlocks) are to be designed later. Until then the purse is score and bragging rights.
 
 ### Technical prerequisites
 - **Seedable RNG (do first):** replace the global `_rng` in `util.dart` with an injected, seedable generator. Needed for the daily river, reproducible bug reports and balance tests.
@@ -174,7 +178,7 @@ The M0 port is a faithful copy of the web proof of concept: one fixed run, a han
 | Phase | Deliverable | Done when |
 |-------|-------------|-----------|
 | P0 | Seedable RNG | Same seed gives the same run; existing tests pass |
-| P1 | Joke deck: collection, run deck, hand, costs, drafting, reactions, callbacks | A run is won or lost on deck choices, not on knowing the whole list |
+| P1 | Voice and material: spontaneous hand, voice drift, momentum, pivot, reactions, callbacks, bit maturity | Two runs with different voices play differently; a bombing voice can be ridden out or abandoned |
 | P2 | River map + lying chart + event pool | No two runs have the same route; at least 10 events |
 | P3 | Props/relics, skippers, passenger goals | 3 skippers, 12 relics, goals on every manifest |
 | P4 | Saga: repeat passengers, persistent world, Nowhere outcomes | A returning player sees earlier runs referenced |
@@ -185,10 +189,10 @@ The M0 port is a faithful copy of the web proof of concept: one fixed run, a han
 - **Writing load:** the deck needs 60+ jokes to feel fresh. Templates and variants (already supported) cut this.
 - **Keep:** the engine, tone and JSON pipeline. **Do not:** rewrite the engine, add multiplayer, or require accounts.
 
-### Open decisions
-1. Is the deck pick part of the office scene, or its own screen?
-2. Reactions per passenger, or one room meter?
-3. Upgrades in the purse, or keep the game purely about jokes and cargo?
+### Decisions made
+1. No deck screen; the deck develops over time and jokes are spontaneous during the cruise (System 1).
+2. Room meter first, with visible reactions for a few notable individuals.
+3. Upgrades and purse sinks come later.
 
 ---
 
@@ -335,4 +339,4 @@ Retention light-touch, polished career arcs, ship.
 
 ## 11. Immediate next step
 
-**Next:** finish M1 first-run teach if needed, then gameplay phases **P0 (seedable RNG) and P1 (joke deck)** from §4A, since the map, relics and saga all build on them. Art bible for M2 (ribbon + docked stage + chart sheet) and the Flame ribbon → docked hazard bit can run in parallel, because P0–P2 need no new art.
+**Next:** finish M1 first-run teach if needed, then gameplay phases **P0 (seedable RNG) and P1 (voice and material)** from §4A, since the map, relics and saga all build on them. Art bible for M2 (ribbon + docked stage + chart sheet) and the Flame ribbon → docked hazard bit can run in parallel, because P0–P2 need no new art.
