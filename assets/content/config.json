@@ -39,7 +39,11 @@
   "situationTags": [
     { "tag": "boiler", "boiler_gte": 80 },
     { "tag": "taking_water", "water_gte": 70 },
-    { "tag": "damaged", "hull_gte": 8 }
+    { "tag": "damaged", "hull_gte": 8 },
+    { "tag": "full_steam", "boiler_gte": 95 },
+    { "tag": "sinking", "water_gte": 90 },
+    { "tag": "falling_apart", "hull_gte": 20 },
+    { "tag": "chaos", "boiler_gte": 70, "water_gte": 60 }
   ],
   "jokeStrongAt": 6,
   "jokeFairAt": 2,

@@ -541,5 +541,1957 @@
     "callback_to": [],
     "risk": null,
     "tags": ["landmark", "signature"]
+  },
+  {
+    "id": "rule_two",
+    "category": "rehearsed",
+    "title": "Rule two",
+    "variants": [
+      { "text": "Safety briefing: the boat floats. That's the whole briefing. Please hold us to it.", "weight": 3 },
+      { "text": "Rule one: stay in the boat. Rule two: see rule one. There is no rule three; the river keeps eating the paperwork.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "tip_jar",
+    "category": "rehearsed",
+    "title": "The tip jar",
+    "variants": [
+      { "text": "Tips are welcome. Refunds are handled by a clerk in Cra-Zi named Dennis, whom I've never met and suspect is a ledger.", "weight": 3 },
+      { "text": "Gratuities are optional. Complaints are mandatory, and Dennis reads every one. Dennis is a drawer.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "complimentary",
+    "category": "rehearsed",
+    "title": "Complimentary",
+    "variants": [
+      { "text": "Everything on this cruise is complimentary. That includes the leaks.", "weight": 3 },
+      { "text": "Complimentary water is available throughout. Throughout the boat. Mind your shoes.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "brochure",
+    "category": "rehearsed",
+    "title": "The brochure",
+    "variants": [
+      { "text": "The brochure said 'leisurely.' It didn't say whose.", "weight": 3 },
+      { "text": "The brochure promised 'an unhurried voyage.' Nobody consulted the boiler.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "meta"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "the_hat",
+    "category": "rehearsed",
+    "title": "The hat",
+    "variants": [
+      { "text": "This hat came with the boat. So did the opinions about it.", "weight": 3 },
+      { "text": "I've worn this hat for eleven years. It's the only thing aboard that's never let me down, and that is not a compliment to the hat.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "whistle_code",
+    "category": "rehearsed",
+    "title": "Whistle code",
+    "variants": [
+      { "text": "One blast on the whistle means hello. Two means brace. Three means I've said something I regret.", "weight": 3 },
+      { "text": "The whistle has three settings: polite, urgent, and apology.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "wave_bank",
+    "category": "rehearsed",
+    "title": "Wave to the bank",
+    "variants": [
+      { "text": "Wave to the bank, folks. Nobody's waved at it all week. It'll tell its friends.", "weight": 3 },
+      { "text": "Go on, wave. The bank is very shy. It's been that way since the bridge.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": {"chance": 0.12, "generates": "overboard"},
+    "tags": ["general"]
+  },
+  {
+    "id": "first_day",
+    "category": "story",
+    "title": "Never look surprised",
+    "variants": [
+      { "text": "First day on the river, I made a rule: never look surprised. I haven't looked surprised since. I've been very, very surprised.", "weight": 3 },
+      { "text": "I've never once been surprised on this river. I've only been caught holding the same expression.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "on_her_legs",
+    "category": "rehearsed",
+    "title": "Last legs",
+    "variants": [
+      { "text": "I'm told I can't say the boat is 'on her last legs.' She hasn't got legs. It's a technical matter.", "weight": 3 },
+      { "text": "People say she's showing her age. She's showing her rivets, which is the same thing with more draught.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boat"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "compass",
+    "category": "rehearsed",
+    "title": "The compass",
+    "variants": [
+      { "text": "The compass points north. The river does not. We've agreed to differ.", "weight": 3 },
+      { "text": "Compass says north. River says 'we'll see.' I tend to side with the river; it's bigger.", "weight": 2 }
+    ],
+    "flavors": ["absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "no_flash",
+    "category": "rehearsed",
+    "title": "No flash",
+    "variants": [
+      { "text": "Photographs are welcome. Flash is discouraged. The river is very sensitive about its chart.", "weight": 3 },
+      { "text": "No flash, please. Last time, the river saw how it looked and sulked for a week.", "weight": 2 }
+    ],
+    "flavors": ["meta", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "moment_silence",
+    "category": "story",
+    "title": "A moment's silence",
+    "variants": [
+      { "text": "Let's have a moment of silence for the previous skipper. …There. He'd have hated that. He loved noise.", "weight": 3 },
+      { "text": "A moment's silence for the last skipper, who retired in a hurry. …Thank you. He sends his regards.", "weight": 2 }
+    ],
+    "flavors": ["dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "stay_seated",
+    "category": "rehearsed",
+    "title": "Stay seated",
+    "variants": [
+      { "text": "Please remain seated. I can't stop you standing. I can only stop the boat from agreeing with you.", "weight": 3 },
+      { "text": "Remain seated, please. The boat is happier, and so, in a small way, am I.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "tell_grandchildren",
+    "category": "rehearsed",
+    "title": "Tell the grandchildren",
+    "variants": [
+      { "text": "This is the kind of trip you'll tell your grandchildren about. Not because it was good. Because they'll ask where your shoes went.", "weight": 3 },
+      { "text": "In five years you'll say, 'That was the day the boat leaked and nobody sued.' I'd like that on a plaque.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "credentials",
+    "category": "story",
+    "title": "Credentials",
+    "variants": [
+      { "text": "I hold a master's licence. I've never been told which subject.", "weight": 3 },
+      { "text": "My credentials hang on the wall of my office in Cra-Zi. The wall is in the river. It's a long swim.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "junior_crew",
+    "category": "rehearsed",
+    "title": "Junior crew",
+    "variants": [
+      { "text": "If you're under ten, you're in charge of the horizon. Tell me if it moves.", "weight": 3 },
+      { "text": "Junior crew, I have a job for you: watch for trouble. If you see any, point at it and say nothing. It's what I do.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": [],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["general"]
+  },
+  {
+    "id": "crazi_sign",
+    "category": "rehearsed",
+    "title": "The sign",
+    "variants": [
+      { "text": "Cra-Zi Landing, population forty, if you count the ones on the boat.", "weight": 3 },
+      { "text": "The sign says 'Welcome to Cra-Zi.' It's been apologising for itself since 1911.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["crazi"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["crazi"]
+  },
+  {
+    "id": "crazi_pier",
+    "category": "rehearsed",
+    "title": "The pier",
+    "variants": [
+      { "text": "That pier has held up a hundred years on spite and varnish.", "weight": 3 },
+      { "text": "The pier is very proud. It's survived two floods and one town council.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["crazi"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["crazi"]
+  },
+  {
+    "id": "crazi_clock",
+    "category": "rehearsed",
+    "title": "The landing clock",
+    "variants": [
+      { "text": "The clock on the landing has been right twice. Both times by accident.", "weight": 3 },
+      { "text": "The Cra-Zi clock is always on time for something. We just don't know what.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["crazi"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["crazi"]
+  },
+  {
+    "id": "crazi_goodbye",
+    "category": "rehearsed",
+    "title": "Goodbye, Cra-Zi",
+    "variants": [
+      { "text": "Wave goodbye to Cra-Zi. It's your last chance. Though it's never waved back, so don't take it personally.", "weight": 3 },
+      { "text": "You'll grow to love Cra-Zi. Most people do, from a distance, in about an hour.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["crazi", "port"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["crazi", "port"]
+  },
+  {
+    "id": "boat_sharing",
+    "category": "rehearsed",
+    "title": "She's sharing",
+    "variants": [
+      { "text": "She isn't leaking. She's sharing.", "weight": 3 },
+      { "text": "The boat isn't taking on water. She's making friends with the river.", "weight": 2 }
+    ],
+    "flavors": ["pun", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boat", "taking_water"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat", "taking_water"]
+  },
+  {
+    "id": "who_was_ginny",
+    "category": "rehearsed",
+    "title": "Who was Ginny?",
+    "variants": [
+      { "text": "Who was Ginny? Nobody asks. Everybody wonders. It's the one mystery on this river I'm paid to keep.", "weight": 3 },
+      { "text": "Ginny. Lovely name. Nobody's told me who she was, and I've learned not to push.", "weight": 2 }
+    ],
+    "flavors": ["meta", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["boat"],
+    "callback_to": ["named_godspeed"],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "horsepower",
+    "category": "rehearsed",
+    "title": "Horsepower",
+    "variants": [
+      { "text": "She's got two horsepower. Both of them are asleep.", "weight": 3 },
+      { "text": "Two horsepower, and neither horse has been consulted.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boat"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "the_anchor",
+    "category": "story",
+    "title": "The anchor",
+    "variants": [
+      { "text": "The anchor is a decorative feature. The last time we used it, it found the river bottom and stayed.", "weight": 3 },
+      { "text": "We carry an anchor for morale. Morale's been at the bottom ever since.", "weight": 2 }
+    ],
+    "flavors": ["dark", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["boat"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "life_belts",
+    "category": "rehearsed",
+    "title": "Life belts",
+    "variants": [
+      { "text": "Life belts are under the seats. Mostly. One of them is a hat.", "weight": 3 },
+      { "text": "Life belts are located under your seat. Please do not wear the one marked 'seat.'", "weight": 2 }
+    ],
+    "flavors": ["absurd", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boat"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "full_crew",
+    "category": "rehearsed",
+    "title": "Full crew",
+    "variants": [
+      { "text": "We carry a full crew: one skipper, one boiler, and a boy who left in March.", "weight": 3 },
+      { "text": "Crew complement is me. The rest are rumours.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["boat"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boat"]
+  },
+  {
+    "id": "engine_thinking",
+    "category": "rehearsed",
+    "title": "She's thinking",
+    "variants": [
+      { "text": "That steam isn't trouble. That's the engine thinking. Don't interrupt it.", "weight": 3 },
+      { "text": "She's just letting off steam. We've all been there. I've been there since Tuesday.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boiler"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boiler"]
+  },
+  {
+    "id": "boiler_applause",
+    "category": "rehearsed",
+    "title": "Applause",
+    "variants": [
+      { "text": "That whistle isn't a warning. That's applause. The boiler likes your questions.", "weight": 3 },
+      { "text": "She's venting because she's happy. It's the only way she knows how to cheer.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boiler"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boiler"]
+  },
+  {
+    "id": "boiler_gauge",
+    "category": "rehearsed",
+    "title": "The gauge",
+    "variants": [
+      { "text": "Pressure's normal. It's just that normal for this boiler is closer to 'imminent.'", "weight": 3 },
+      { "text": "The gauge says high. The gauge has said high since '09. We've learned to take it as personality.", "weight": 2 }
+    ],
+    "flavors": ["dark", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["boiler"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boiler"]
+  },
+  {
+    "id": "boiler_faith",
+    "category": "rehearsed",
+    "title": "Lost faith",
+    "variants": [
+      { "text": "She's lost faith in me. I can tell by the hissing.", "weight": 3 },
+      { "text": "The boiler and I have an understanding. She hisses; I pretend not to notice.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boiler"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boiler"]
+  },
+  {
+    "id": "water_feature",
+    "category": "rehearsed",
+    "title": "Dynamic water feature",
+    "variants": [
+      { "text": "We prefer to call it a 'dynamic water feature.'", "weight": 3 },
+      { "text": "The deck is wet by design. We call it a splash zone. The zone is the whole boat.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "groaner"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["taking_water"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["taking_water"]
+  },
+  {
+    "id": "water_handshake",
+    "category": "rehearsed",
+    "title": "The river's handshake",
+    "variants": [
+      { "text": "If your feet are wet, that's the river's way of shaking hands.", "weight": 3 },
+      { "text": "Don't worry about the damp. It's just the river checking you're all aboard.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["taking_water"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["taking_water"]
+  },
+  {
+    "id": "water_forecast",
+    "category": "rehearsed",
+    "title": "Forecast",
+    "variants": [
+      { "text": "Forecast: scattered showers, concentrated mostly in the boat.", "weight": 3 },
+      { "text": "Weather today: fair outside, wet inside. It's rare for both to be accurate.", "weight": 2 }
+    ],
+    "flavors": ["pun", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["taking_water"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["taking_water"]
+  },
+  {
+    "id": "hull_story",
+    "category": "rehearsed",
+    "title": "A long story",
+    "variants": [
+      { "text": "That creak is structural. The boat is telling us a story. It's a long one, and it ends abruptly.", "weight": 3 },
+      { "text": "Listen. That's the hull. She's been through a lot, and she'd like to share.", "weight": 2 }
+    ],
+    "flavors": ["dark", "absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["damaged"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["damaged"]
+  },
+  {
+    "id": "hull_character",
+    "category": "rehearsed",
+    "title": "Character",
+    "variants": [
+      { "text": "She isn't damaged. She has character. Character is just damage with a better reputation.", "weight": 3 },
+      { "text": "She's not broken. She's seasoned.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["damaged"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["damaged"]
+  },
+  {
+    "id": "hull_postcard",
+    "category": "rehearsed",
+    "title": "The postcard patch",
+    "variants": [
+      { "text": "We patched it with a postcard from Cra-Zi. It's holding. It says 'Wish you were here.'", "weight": 3 },
+      { "text": "That patch is a postcard. It says 'Greetings from Cra-Zi.' I can't promise the greeting is mutual.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "dark", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["damaged"],
+    "callback_to": ["welcome_crazi"],
+    "risk": null,
+    "tags": ["damaged"]
+  },
+  {
+    "id": "river_bends",
+    "category": "rehearsed",
+    "title": "Give or take",
+    "variants": [
+      { "text": "The river is four hundred miles long, give or take a bend. Most of the bends are take.", "weight": 3 },
+      { "text": "Four hundred miles of river. Four hundred and one, if you count the bit where we turned around.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["river"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river"]
+  },
+  {
+    "id": "river_current",
+    "category": "rehearsed",
+    "title": "The current",
+    "variants": [
+      { "text": "Current's three knots. Which way, nobody's said. We assume downstream, out of politeness.", "weight": 3 },
+      { "text": "The current's gentle today. It's got somewhere to be and it's being polite about it.", "weight": 2 }
+    ],
+    "flavors": ["absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["river"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river"]
+  },
+  {
+    "id": "river_brown",
+    "category": "rehearsed",
+    "title": "Brown on purpose",
+    "variants": [
+      { "text": "That water's brown on purpose. It's keeping its options open.", "weight": 3 },
+      { "text": "People ask why the river is that colour. It's embarrassed. It's the colour of everything that's ever fallen in.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["river"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river"]
+  },
+  {
+    "id": "river_fish",
+    "category": "rehearsed",
+    "title": "The fish",
+    "variants": [
+      { "text": "There are fish down there. Opinions differ on whether they're ours.", "weight": 3 },
+      { "text": "Every fish in this river has a name. None of them answers to it.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["river"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river"]
+  },
+  {
+    "id": "river_mist",
+    "category": "rehearsed",
+    "title": "Mist",
+    "variants": [
+      { "text": "That's mist. It's the river's way of saying 'I'm not here.'", "weight": 3 },
+      { "text": "The mist rises every morning because the river has learned to hide its mistakes.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["river"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["river"]
+  },
+  {
+    "id": "cartographer",
+    "category": "story",
+    "title": "The cartographer",
+    "variants": [
+      { "text": "The chart was drawn by one man in one afternoon. He was very sure. It's the best thing about him.", "weight": 3 },
+      { "text": "The cartographer drew this in a single sitting. We all sat down afterwards, too, out of respect.", "weight": 2 }
+    ],
+    "flavors": ["dark", "meta", "callback"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["chart"],
+    "callback_to": ["second_survey"],
+    "risk": null,
+    "tags": ["chart"]
+  },
+  {
+    "id": "chart_x",
+    "category": "rehearsed",
+    "title": "X marks the stump",
+    "variants": [
+      { "text": "The chart marks an X for treasure. I've been to the X. It's a stump. The stump and I have an understanding.", "weight": 3 },
+      { "text": "X marks the spot. The spot is a stump. The stump has seen things and doesn't care to discuss them.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["chart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chart"]
+  },
+  {
+    "id": "chart_legend",
+    "category": "rehearsed",
+    "title": "The legend",
+    "variants": [
+      { "text": "The chart has a legend. It says 'Trust me.'", "weight": 3 },
+      { "text": "There's a legend in the corner of the chart. It's a single word, and the word is 'probably.'", "weight": 2 }
+    ],
+    "flavors": ["groaner", "meta"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["chart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chart"]
+  },
+  {
+    "id": "chart_scale",
+    "category": "rehearsed",
+    "title": "Scale",
+    "variants": [
+      { "text": "Scale: one inch to one mile, says the chart. The inch has other ideas.", "weight": 3 },
+      { "text": "The chart says one inch equals a mile. I'd measure it, but the ruler has opinions too.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["chart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chart"]
+  },
+  {
+    "id": "chart_blank",
+    "category": "rehearsed",
+    "title": "Here be monsters",
+    "variants": [
+      { "text": "That blank patch says 'here be monsters.' We went. It's mostly mud.", "weight": 3 },
+      { "text": "The blank bit on the chart is unexplored, largely because there's nothing there. We checked.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["chart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chart"]
+  },
+  {
+    "id": "hippo_sleepy",
+    "category": "rehearsed",
+    "title": "Sleepy",
+    "variants": [
+      { "text": "They look sleepy. That's how they get you. Same as the schedule.", "weight": 3 },
+      { "text": "Hippos are sleepy, placid and wildly dangerous. You'll find the same in any committee.", "weight": 2 }
+    ],
+    "flavors": ["dark", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["hippo", "animal"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["hippo", "animal"]
+  },
+  {
+    "id": "hippo_yawn",
+    "category": "rehearsed",
+    "title": "The yawn",
+    "variants": [
+      { "text": "That one's yawning. In hippo, that means 'I haven't decided.' In English, it means the same.", "weight": 3 },
+      { "text": "That's a lot of mouth. Nobody's asked what's behind it, and I'd advise against it.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["hippo"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["hippo"]
+  },
+  {
+    "id": "hippo_unconcerned",
+    "category": "rehearsed",
+    "title": "Unconcerned",
+    "variants": [
+      { "text": "They aren't hostile. They're just large and unconcerned about your plans.", "weight": 3 },
+      { "text": "Hippos aren't malicious. They simply haven't heard about you and see no reason to start.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["hippo", "animal"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["hippo", "animal"]
+  },
+  {
+    "id": "hippo_names",
+    "category": "rehearsed",
+    "title": "We name them",
+    "variants": [
+      { "text": "We name them. They don't come when called. Neither do I, in fairness.", "weight": 3 },
+      { "text": "This is Margaret. That's Dennis. Dennis is the one looking at you.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["hippo"],
+    "callback_to": ["tip_jar"],
+    "risk": null,
+    "tags": ["hippo"]
+  },
+  {
+    "id": "narrows_squeeze",
+    "category": "rehearsed",
+    "title": "Tight squeeze",
+    "variants": [
+      { "text": "Tight squeeze. If you've eaten, hold your breath. If you haven't, hold the boat.", "weight": 3 },
+      { "text": "It's a squeeze. Please keep your elbows in and your opinions to yourself.", "weight": 2 }
+    ],
+    "flavors": ["physical", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["narrows"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["narrows"]
+  },
+  {
+    "id": "narrows_echo",
+    "category": "rehearsed",
+    "title": "The echo",
+    "variants": [
+      { "text": "The cut has a marvellous echo. Go on. Say something kind to the river.", "weight": 3, "follow": "…kind… kind… ind…" },
+      { "text": "Listen to that echo. It's the only thing on the river that agrees with me.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["narrows"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["narrows"]
+  },
+  {
+    "id": "narrows_names",
+    "category": "rehearsed",
+    "title": "The names",
+    "variants": [
+      { "text": "Those walls are covered in the names of skippers who stood right here. Most of them in the past tense.", "weight": 3 },
+      { "text": "Carved in the rock: the name of everyone who's come through here. It's a long list. It's still on page one.", "weight": 2 }
+    ],
+    "flavors": ["dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["narrows"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["narrows"]
+  },
+  {
+    "id": "calliope_comfortable",
+    "category": "rehearsed",
+    "title": "Comfortable",
+    "variants": [
+      { "text": "That's the Calliope. Aground since '33. She's very comfortable. Please don't wake her.", "weight": 3 },
+      { "text": "She hasn't moved in decades. I envy her. She's the only one on this river with a settled schedule.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["wreck"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["wreck"]
+  },
+  {
+    "id": "calliope_neighbour",
+    "category": "rehearsed",
+    "title": "Good neighbours",
+    "variants": [
+      { "text": "Good neighbours, the Calliope. Never complains, never moves, never comes to dinner.", "weight": 3 },
+      { "text": "The Calliope and I go way back. Mostly she goes back; I go past.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["wreck"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["wreck"]
+  },
+  {
+    "id": "calliope_ghost",
+    "category": "story",
+    "title": "The ghost",
+    "variants": [
+      { "text": "They say she's haunted. The ghost is very polite. It just keeps asking where the exit is.", "weight": 3 },
+      { "text": "Locals say she's haunted by the first skipper. He isn't angry. He just doesn't know the way out either.", "weight": 2 }
+    ],
+    "flavors": ["dark", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["wreck"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["wreck"]
+  },
+  {
+    "id": "mine_sigh",
+    "category": "rehearsed",
+    "title": "The sigh",
+    "variants": [
+      { "text": "The only thing coming out of that mine these days is the occasional sigh.", "weight": 3 },
+      { "text": "Closed years ago. They found everything in it. Then it ran out of everything.", "weight": 2 }
+    ],
+    "flavors": ["dark", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["mine"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["mine"]
+  },
+  {
+    "id": "mine_canary",
+    "category": "story",
+    "title": "The canary",
+    "variants": [
+      { "text": "They used to send a canary in first. These days it's a passenger. Don't worry. I'm joking. Mostly. Sit still.", "weight": 3 },
+      { "text": "Old miners sent a canary ahead. I've considered the same system with passengers. Sit still; I'm only considering.", "weight": 2 }
+    ],
+    "flavors": ["dark", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["mine"],
+    "callback_to": [],
+    "risk": {"chance": 0.2, "generates": "overboard"},
+    "tags": ["mine"]
+  },
+  {
+    "id": "mine_dead_end",
+    "category": "rehearsed",
+    "title": "Dead end",
+    "variants": [
+      { "text": "A dead end. It's the nicest way I've found to describe my career.", "weight": 3 },
+      { "text": "Dead end. It has a certain charm, if you like a cul-de-sac with a hole in it.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "wordplay", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["mine"],
+    "callback_to": ["miss_my_mine"],
+    "risk": null,
+    "tags": ["mine"]
+  },
+  {
+    "id": "reach_far_bank",
+    "category": "rehearsed",
+    "title": "The far bank",
+    "variants": [
+      { "text": "The Reach. So wide you can't see the far bank. We've decided it doesn't exist.", "weight": 3 },
+      { "text": "Wide water! Look at all that room. No walls, no rocks, no excuses.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["reach"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["reach"]
+  },
+  {
+    "id": "reach_calm",
+    "category": "rehearsed",
+    "title": "The calm",
+    "variants": [
+      { "text": "Enjoy the calm. It's the calm they warn you about.", "weight": 3 },
+      { "text": "Smooth water. I'm told it's soothing. I find it suspicious.", "weight": 2 }
+    ],
+    "flavors": ["dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["reach"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["reach"]
+  },
+  {
+    "id": "snags_fence",
+    "category": "rehearsed",
+    "title": "The fence",
+    "variants": [
+      { "text": "The river has put up a fence. Nobody asked why. If we did, it would just say 'reasons.'", "weight": 3 },
+      { "text": "That's a snag field. It's the river's way of saying 'private.'", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["snags"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["snags"]
+  },
+  {
+    "id": "snags_ancient",
+    "category": "story",
+    "title": "The timber",
+    "variants": [
+      { "text": "Ancient, hollow and utterly uninterested in your opinion of it. That's the timber, not the skipper. Though now you mention it.", "weight": 3 },
+      { "text": "These trees fell in a flood nobody wrote down. They haven't forgiven the river, and they've told it so.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["snags"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["snags"]
+  },
+  {
+    "id": "snags_hat",
+    "category": "rehearsed",
+    "title": "Hold your hat",
+    "variants": [
+      { "text": "If you're wearing a hat, you may want to hold it. If you're not, you may want a hat.", "weight": 3 },
+      { "text": "Branches ahead. If you've got a hat, keep it on. If you've got a head, I'd keep that on too.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["snags"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["snags"]
+  },
+  {
+    "id": "croc_holiday",
+    "category": "rehearsed",
+    "title": "On holiday",
+    "variants": [
+      { "text": "The crocodiles are on holiday. They sent a postcard. It says 'Wish you weren't here.'", "weight": 3 },
+      { "text": "No crocodiles today. They've taken a long weekend. It's the only time anyone on this river gets one.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "pun", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["croc"],
+    "callback_to": ["no_crocodiles"],
+    "risk": null,
+    "tags": ["croc"]
+  },
+  {
+    "id": "croc_teeth",
+    "category": "rehearsed",
+    "title": "The teeth",
+    "variants": [
+      { "text": "You can read a crocodile's mood by its teeth. Today, the teeth are elsewhere.", "weight": 3 },
+      { "text": "This is where the teeth live. They're away. They'll be back, and they'll want to hear all about it.", "weight": 2 }
+    ],
+    "flavors": ["dark", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["croc"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["croc"]
+  },
+  {
+    "id": "mill_loyal",
+    "category": "rehearsed",
+    "title": "Loyal",
+    "variants": [
+      { "text": "The mill's gone. The race stayed. It says it's loyal.", "weight": 3 },
+      { "text": "They tore the mill down in '04. The water didn't get the memo. It's still working overtime.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["mill"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["mill"]
+  },
+  {
+    "id": "mill_habit",
+    "category": "rehearsed",
+    "title": "Out of habit",
+    "variants": [
+      { "text": "The wheel is long gone. The river keeps turning out of habit. I know the feeling.", "weight": 3 },
+      { "text": "A century of grinding corn, and the river still thinks it's got a quota.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["mill"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["mill"]
+  },
+  {
+    "id": "shrine_offering",
+    "category": "story",
+    "title": "An offering",
+    "variants": [
+      { "text": "It's tradition to leave an offering. Mine is an apology. It's been a long season.", "weight": 3 },
+      { "text": "Folks leave flowers. I leave a short note: 'Sorry about earlier.' It's a very general note.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["shrine"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["shrine"]
+  },
+  {
+    "id": "shrine_saint",
+    "category": "rehearsed",
+    "title": "Patron of the mislaid",
+    "variants": [
+      { "text": "The shrine is to the patron saint of misplaced things. We've lost the paperwork.", "weight": 3 },
+      { "text": "Patron of the mislaid. He's very good. Whenever anything goes missing here, it turns up in a surprising place: usually here.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["shrine"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["shrine"]
+  },
+  {
+    "id": "shrine_photo",
+    "category": "rehearsed",
+    "title": "Pose for the saint",
+    "variants": [
+      { "text": "Take a photograph. Whatever's inside will be delighted to be remembered, even as a smudge.", "weight": 3 },
+      { "text": "Go on, pose for a snap. If it comes out blurry, that's the saint's way of saying thank you.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["shrine"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["shrine"]
+  },
+  {
+    "id": "falls_knight",
+    "category": "story",
+    "title": "Sir Knight",
+    "variants": [
+      { "text": "Knight Falls. Named for a knight who went over. We don't say which way.", "weight": 3 },
+      { "text": "Named for Sir Reginald Knight, who was told 'don't' and was therefore never seen again.", "weight": 2 }
+    ],
+    "flavors": ["dark", "pun"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falls"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["falls"]
+  },
+  {
+    "id": "falls_spray",
+    "category": "rehearsed",
+    "title": "The spray",
+    "variants": [
+      { "text": "That's genuine falls spray. Or something I did earlier to the boiler. You can't tell, but it feels the same.", "weight": 3 },
+      { "text": "Feel that mist? That's a real waterfall. Please don't tell the boiler.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falls"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["falls"]
+  },
+  {
+    "id": "falls_mighty",
+    "category": "rehearsed",
+    "title": "Mighty",
+    "variants": [
+      { "text": "Advertised as mighty. It's a very good water feature. It's a mighty good water feature.", "weight": 3 },
+      { "text": "Nine feet of mighty. Which, in a boat, feels like quite a lot more.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "groaner", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falls"],
+    "callback_to": ["forty_two_cubits"],
+    "risk": null,
+    "tags": ["falls"]
+  },
+  {
+    "id": "falls_nine_feet",
+    "category": "rehearsed",
+    "title": "Nine feet",
+    "variants": [
+      { "text": "Some people go a lifetime without falling nine feet. Today, you're doing it from the comfort of a boat.", "weight": 3 },
+      { "text": "Nine feet! That's a long way down, if you've got the right attitude.", "weight": 2 }
+    ],
+    "flavors": ["physical", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falls"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["falls"]
+  },
+  {
+    "id": "ducks_formation",
+    "category": "rehearsed",
+    "title": "Formation",
+    "variants": [
+      { "text": "Two in front, one behind. That's formation flying. Or a very small queue.", "weight": 3 },
+      { "text": "Look at them go. Not a bird among them knows where we're going, and yet they're ahead of us.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "groaner", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["ducks"],
+    "callback_to": ["para_ducks"],
+    "risk": null,
+    "tags": ["ducks"]
+  },
+  {
+    "id": "goose_opinion",
+    "category": "rehearsed",
+    "title": "The goose has opinions",
+    "variants": [
+      { "text": "That's a goose. Ask it yourself. It'll give you an answer. At length.", "weight": 3 },
+      { "text": "The goose has opinions on the river, the boat and you. I'd leave it be.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["goose"],
+    "callback_to": ["duck_duck_goose"],
+    "risk": null,
+    "tags": ["goose"]
+  },
+  {
+    "id": "boulder_choice",
+    "category": "rehearsed",
+    "title": "Left or right",
+    "variants": [
+      { "text": "Left or right. Both are wrong. One is less wrong, and I won't say which.", "weight": 3 },
+      { "text": "Left or right? I've done both. I'm told it's good to be consistent, so I've done both.", "weight": 2 }
+    ],
+    "flavors": ["meta", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["boulder"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boulder"]
+  },
+  {
+    "id": "boulder_proud",
+    "category": "rehearsed",
+    "title": "Proud of its work",
+    "variants": [
+      { "text": "That boulder has been splitting the river since before there was a river. It's very proud of its work.", "weight": 3 },
+      { "text": "The boulder doesn't move. The river does the moving. They've been a team for a thousand years, and it's still unclear who's in charge.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["boulder"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["boulder"]
+  },
+  {
+    "id": "nowhere_season",
+    "category": "rehearsed",
+    "title": "Lovely this time of year",
+    "variants": [
+      { "text": "Nowhere is lovely this time of year. It's lovely every time of year. It's the one consistent thing about it.", "weight": 3 },
+      { "text": "The weather in Nowhere is always fine, because nobody has stayed long enough to complain.", "weight": 2 }
+    ],
+    "flavors": ["absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["nowhere"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["nowhere"]
+  },
+  {
+    "id": "nowhere_sign",
+    "category": "rehearsed",
+    "title": "Welcome back",
+    "variants": [
+      { "text": "There's a sign: 'Welcome to Nowhere.' Underneath it is another sign: 'Welcome Back.'", "weight": 3 },
+      { "text": "They built a monument to Nowhere. It's very modest. You'll walk past it and not notice. That's the point.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta", "callback"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["nowhere"],
+    "callback_to": ["three_days"],
+    "risk": null,
+    "tags": ["nowhere"]
+  },
+  {
+    "id": "nowhere_home",
+    "category": "rehearsed",
+    "title": "Where she ends up",
+    "variants": [
+      { "text": "Home is where the boat is. Nowhere is where she ends up.", "weight": 3 },
+      { "text": "Everybody who comes to Nowhere is on their way somewhere else. It's the town's one civic virtue.", "weight": 2 }
+    ],
+    "flavors": ["meta", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["nowhere"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["nowhere"]
+  },
+  {
+    "id": "piano_tuning",
+    "category": "prop",
+    "title": "Out of tune",
+    "variants": [
+      { "text": "He's out of tune. The piano, I mean. The man in the boat is fine.", "weight": 3 },
+      { "text": "That's a very fine upright. The note you just heard is how it says hello to the river.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "prop"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["piano"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["piano"]
+  },
+  {
+    "id": "ice_trying",
+    "category": "prop",
+    "title": "Doing its best",
+    "variants": [
+      { "text": "The ice is doing its best. The sun is doing its best. Neither is on our side.", "weight": 3 },
+      { "text": "It's a block of ice with ambitions. They're mostly in the form of puddles.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "prop"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["ice"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["ice"]
+  },
+  {
+    "id": "leopard_misunderstood",
+    "category": "prop",
+    "title": "Misunderstood",
+    "variants": [
+      { "text": "The leopard isn't scary. He's misunderstood. And bigger than the sign.", "weight": 3 },
+      { "text": "He's a very calm cat. He's also a very large cat. I'd treat those as separate facts.", "weight": 2 }
+    ],
+    "flavors": ["prop", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["leopard"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["leopard"]
+  },
+  {
+    "id": "mail_love",
+    "category": "prop",
+    "title": "Seventeen letters",
+    "variants": [
+      { "text": "Mail sacks. Seventeen letters of love, nine of complaint, and one that just says 'ha.'", "weight": 3 },
+      { "text": "Somewhere in those sacks is a love letter that will never arrive. I like to think the river's reading it.", "weight": 2 }
+    ],
+    "flavors": ["prop", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["mail"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["mail"]
+  },
+  {
+    "id": "mail_soggy",
+    "category": "prop",
+    "title": "Neither rain nor hippos",
+    "variants": [
+      { "text": "Neither rain nor sleet nor hippos shall keep these sacks from being slightly damp.", "weight": 3 },
+      { "text": "The mail goes through. It goes through the river, mostly. Some of it arrives.", "weight": 2 }
+    ],
+    "flavors": ["prop", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["mail"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["mail"]
+  },
+  {
+    "id": "market_gift_shop",
+    "category": "rehearsed",
+    "title": "Every boat a gift shop",
+    "variants": [
+      { "text": "The floating market. Forty boats, and every one is a gift shop. We needn't stop. They'll come to us.", "weight": 3 },
+      { "text": "That's the market. Everything's a bargain. That's because everything's slightly damp.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["market"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["market"]
+  },
+  {
+    "id": "market_haggle",
+    "category": "rehearsed",
+    "title": "Haggling",
+    "variants": [
+      { "text": "Haggle if you like. They'll go down. They'll also go up. They'll go sideways, if you let them.", "weight": 3 },
+      { "text": "Prices are fixed. They're fixed to a point somewhere near the horizon, and they move when you look.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["market"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["market"]
+  },
+  {
+    "id": "market_souvenir",
+    "category": "rehearsed",
+    "title": "A small clay boat",
+    "variants": [
+      { "text": "Buy a souvenir. Nothing says 'I survived the river' like a small clay boat that doesn't float.", "weight": 3 },
+      { "text": "They sell little models of this boat. Very accurate. They leak in all the same places.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["market"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["market"]
+  },
+  {
+    "id": "market_umbrellas",
+    "category": "rehearsed",
+    "title": "Umbrellas",
+    "variants": [
+      { "text": "That man is selling umbrellas. On a boat. On a river. I admire the nerve and I resent the logic.", "weight": 3 },
+      { "text": "Don't make eye contact. They'll sell you a map. It's of a different river. It's better than ours.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "meta"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["market", "chart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["market", "chart"]
+  },
+  {
+    "id": "fog_by_ear",
+    "category": "rehearsed",
+    "title": "By ear",
+    "variants": [
+      { "text": "Fog. Don't worry, I know the river. By ear. Mostly my ear, occasionally the boat's.", "weight": 3 },
+      { "text": "Lovely fog. You can't see a thing, which makes me an excellent skipper. I see no problems.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["fog"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["fog"]
+  },
+  {
+    "id": "fog_horn",
+    "category": "rehearsed",
+    "title": "The horn",
+    "variants": [
+      { "text": "Sound the horn! If anything answers, we'll know it's a boat. If nothing does, we'll know it's also a boat.", "weight": 3 },
+      { "text": "That's the horn. It's very loud. It's so we can hear ourselves not hitting anything.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["fog"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["fog"]
+  },
+  {
+    "id": "fog_shapes",
+    "category": "rehearsed",
+    "title": "Shapes",
+    "variants": [
+      { "text": "Don't worry about the shapes in the fog. Most of them are trees. The rest are also trees, but closer.", "weight": 3 },
+      { "text": "Out of the fog, a shape. It's our own reflection. We nod. We don't speak. It's tradition.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["fog"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["fog"]
+  },
+  {
+    "id": "fog_chart",
+    "category": "rehearsed",
+    "title": "Dead reckoning",
+    "variants": [
+      { "text": "The chart says clear. The chart has never been in fog. The chart has never been anywhere.", "weight": 3 },
+      { "text": "We're navigating by dead reckoning. I'd like to stress it's the reckoning that's alive. It's the 'dead' I'm worried about.", "weight": 2 }
+    ],
+    "flavors": ["meta", "dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["fog", "chart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["fog", "chart"]
+  },
+  {
+    "id": "bridge_headroom",
+    "category": "rehearsed",
+    "title": "Headroom",
+    "variants": [
+      { "text": "Headroom is seven feet. The boat's eight. That's the maths. We've never got the numbers to agree.", "weight": 3 },
+      { "text": "The sign says 'Low bridge.' It's a very honest sign. It doesn't offer advice.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["bridge"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["bridge"]
+  },
+  {
+    "id": "bridge_arches",
+    "category": "rehearsed",
+    "title": "Three arches",
+    "variants": [
+      { "text": "Three arches. The chart says four. The middle one is a rumour, and I'm taking the left.", "weight": 3 },
+      { "text": "That bridge is a hundred years old. That's older than me, in better shape, and I resent it.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["bridge", "chart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["bridge", "chart"]
+  },
+  {
+    "id": "bridge_down",
+    "category": "rehearsed",
+    "title": "Down",
+    "variants": [
+      { "text": "Everyone down. I said down. Not 'thoughtfully down.' Down.", "weight": 3 },
+      { "text": "Heads! If you've got one, lower it. If you haven't, I'd like to meet you.", "weight": 2 }
+    ],
+    "flavors": ["physical", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["bridge"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["bridge"]
+  },
+  {
+    "id": "bridge_toll",
+    "category": "rehearsed",
+    "title": "The toll",
+    "variants": [
+      { "text": "There's a toll. It's one shilling. Nobody's collected it since the war. We pay anyway, in spirit.", "weight": 3 },
+      { "text": "They say a troll lives under there. I've never seen him. I've seen the receipts.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["bridge"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["bridge"]
+  },
+  {
+    "id": "rapids_rattle",
+    "category": "rehearsed",
+    "title": "A different key",
+    "variants": [
+      { "text": "Everything on this boat is about to rattle in a different key. Please enjoy the music.", "weight": 3 },
+      { "text": "That's washboard water. It's the river's way of giving you a free massage. Without consent.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["rapids"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["rapids"]
+  },
+  {
+    "id": "rapids_temper",
+    "category": "rehearsed",
+    "title": "Lost its temper",
+    "variants": [
+      { "text": "The river's lost its temper. It'll find it again. It always does, usually downstream.", "weight": 3 },
+      { "text": "Bad day for the water. Don't take it personally. It's mostly the rocks.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["rapids"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["rapids"]
+  },
+  {
+    "id": "rapids_hold_on",
+    "category": "rehearsed",
+    "title": "Hold on",
+    "variants": [
+      { "text": "Hold on to something. Not me. I'm busy. Hold something with a bit more future.", "weight": 3 },
+      { "text": "Hold the rail, and the rail holds you. It's the closest thing we have to a safety plan.", "weight": 2 }
+    ],
+    "flavors": ["physical", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["rapids"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["rapids"]
+  },
+  {
+    "id": "rapids_lunch",
+    "category": "rehearsed",
+    "title": "Lunch",
+    "variants": [
+      { "text": "Whether you eat lunch now or later is a question the river has already answered, and the answer is 'later.'", "weight": 3 },
+      { "text": "Seasickness advice: don't look at the water. Don't look at me either. Look at the horizon, and hope.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["rapids"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["rapids"]
+  },
+  {
+    "id": "island_waver",
+    "category": "rehearsed",
+    "title": "The man who waves",
+    "variants": [
+      { "text": "That man's been waving since 1998. It's his job. He's very good. He's never once been thanked.", "weight": 3 },
+      { "text": "A man on a tiny island, waving. I've known him fifteen years. We've never spoken. It's the best relationship I have.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["island"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["island"]
+  },
+  {
+    "id": "island_one_tree",
+    "category": "rehearsed",
+    "title": "One tree",
+    "variants": [
+      { "text": "One island. One tree. One man. A complete ecosystem and a very small committee.", "weight": 3 },
+      { "text": "The island has one tree. It's the tallest on the island. It's also the shortest. It's all about perspective.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["island"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["island"]
+  },
+  {
+    "id": "island_wave_back",
+    "category": "rehearsed",
+    "title": "Wave back",
+    "variants": [
+      { "text": "Everybody wave. He'll wave back. He always does. It's the nicest thing that happens to him all year.", "weight": 3 },
+      { "text": "Go on, wave. He does it for a living. It's only polite to give him something to do.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["island"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["island"]
+  },
+  {
+    "id": "island_secret",
+    "category": "rehearsed",
+    "title": "The secret of the river",
+    "variants": [
+      { "text": "They say the man on the island knows the secret of the river. I asked. He waved. I took it as a yes.", "weight": 3 },
+      { "text": "Sometimes I think he's the only one who knows where the river ends. He just waves. I think that's an answer.", "weight": 2 }
+    ],
+    "flavors": ["meta", "absurd", "callback"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["island"],
+    "callback_to": ["three_days"],
+    "risk": null,
+    "tags": ["island"]
+  },
+  {
+    "id": "ferry_cable",
+    "category": "rehearsed",
+    "title": "The cable",
+    "variants": [
+      { "text": "A cable ferry. The cable is at neck height. He is very sure it's your move.", "weight": 3 },
+      { "text": "The ferryman has right of way. He's had it forty years. We're guests.", "weight": 2 }
+    ],
+    "flavors": ["dark", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["ferry"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["ferry"]
+  },
+  {
+    "id": "ferry_duck",
+    "category": "rehearsed",
+    "title": "Cable!",
+    "variants": [
+      { "text": "Cable! Duck! Left! No, your other left!", "weight": 3 },
+      { "text": "That's a cable. It's taut. You'll feel a certain tension. That's the cable, and also me.", "weight": 2 }
+    ],
+    "flavors": ["physical", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["ferry"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["ferry"]
+  },
+  {
+    "id": "ferry_waits",
+    "category": "rehearsed",
+    "title": "The patient ferryman",
+    "variants": [
+      { "text": "The ferryman waits for passengers. He's been waiting since the Tuesday before last. He's patient. It's his one skill.", "weight": 3 },
+      { "text": "Don't worry about the ferry. It's going nowhere. That's the whole route.", "weight": 2 }
+    ],
+    "flavors": ["absurd", "dark"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["ferry"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["ferry"]
+  },
+  {
+    "id": "full_steam_ambition",
+    "category": "rehearsed",
+    "title": "An ambition",
+    "variants": [
+      { "text": "She's at full steam. That's not a warning. That's an ambition.", "weight": 3 },
+      { "text": "The gauge is in the red. It isn't alarming; it's committed.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["full_steam"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["full_steam"]
+  },
+  {
+    "id": "full_steam_bang",
+    "category": "rehearsed",
+    "title": "A pleasure",
+    "variants": [
+      { "text": "If you hear a loud bang, that's just the boiler's way of saying it's been a pleasure.", "weight": 3 },
+      { "text": "The boiler is on fire. It's a small fire. It's proud of itself.", "weight": 2 }
+    ],
+    "flavors": ["dark", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["full_steam"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["full_steam"]
+  },
+  {
+    "id": "full_steam_speed",
+    "category": "rehearsed",
+    "title": "Speed of imminent",
+    "variants": [
+      { "text": "Everyone sit back. We're travelling at the speed of imminent.", "weight": 3 },
+      { "text": "Pressure's high. That's what I tell my doctor, too.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["full_steam"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["full_steam"]
+  },
+  {
+    "id": "sinking_dignity",
+    "category": "rehearsed",
+    "title": "With dignity",
+    "variants": [
+      { "text": "We're not sinking. We're descending, with dignity.", "weight": 3 },
+      { "text": "The water is at the rail. I'm told that's good for morale. It isn't. But I'm told.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "dark"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["sinking"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["sinking"]
+  },
+  {
+    "id": "sinking_visit",
+    "category": "rehearsed",
+    "title": "The river comes to visit",
+    "variants": [
+      { "text": "If you're wondering what that sound is, it's the river coming to visit. Kindly show it the door.", "weight": 3 },
+      { "text": "There's water in the boat. Please don't think of it as 'in.' Think of it as 'we're in the water.'", "weight": 2 }
+    ],
+    "flavors": ["absurd", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["sinking"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["sinking"]
+  },
+  {
+    "id": "sinking_indoor_river",
+    "category": "rehearsed",
+    "title": "The indoor river",
+    "variants": [
+      { "text": "It's not water. It's a new design. The 'indoor river.'", "weight": 3 },
+      { "text": "Bail, folks. It's good for the arms. And, I'm told, for the buoyancy.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "physical"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["sinking"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["sinking"]
+  },
+  {
+    "id": "apart_own_pace",
+    "category": "rehearsed",
+    "title": "Her own pace",
+    "variants": [
+      { "text": "She's not falling apart. She's coming undone at her own pace.", "weight": 3 },
+      { "text": "Parts of the boat are leaving. They'll send a postcard.", "weight": 2 }
+    ],
+    "flavors": ["wordplay", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falling_apart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["falling_apart"]
+  },
+  {
+    "id": "apart_hello",
+    "category": "rehearsed",
+    "title": "A hello from the structure",
+    "variants": [
+      { "text": "That wasn't a crack. That was a hello from the structure.", "weight": 3 },
+      { "text": "If any of the boat comes off in your hand, it's a souvenir. If it's the whole boat, please tell me.", "weight": 2 }
+    ],
+    "flavors": ["dark", "groaner"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falling_apart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["falling_apart"]
+  },
+  {
+    "id": "apart_optimism",
+    "category": "rehearsed",
+    "title": "Optimism and paint",
+    "variants": [
+      { "text": "Keep calm. The boat is mostly still here. It's a matter of how much 'mostly' you need.", "weight": 3 },
+      { "text": "We're held together by optimism and paint. Mostly paint. Please don't touch the paint.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["falling_apart"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["falling_apart"]
+  },
+  {
+    "id": "chaos_control",
+    "category": "rehearsed",
+    "title": "Under control",
+    "variants": [
+      { "text": "Everything is under control. Not my control, but somebody's.", "weight": 3 },
+      { "text": "Don't panic. I'll do the panicking. I'm trained.", "weight": 2 }
+    ],
+    "flavors": ["self_deprecating", "absurd"],
+    "attention_cost": 1,
+    "deadpan": true,
+    "at": ["chaos"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chaos"]
+  },
+  {
+    "id": "chaos_full_experience",
+    "category": "rehearsed",
+    "title": "The full experience",
+    "variants": [
+      { "text": "This is what we call the full experience. It's available on all bookings.", "weight": 3 },
+      { "text": "Fire above, water below. It's balanced, if you think about it. Please don't think about it.", "weight": 2 }
+    ],
+    "flavors": ["dark", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["chaos"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chaos"]
+  },
+  {
+    "id": "chaos_the_show",
+    "category": "rehearsed",
+    "title": "Part of the show",
+    "variants": [
+      { "text": "It's all part of the show. The show is called 'Why Did We Book This.'", "weight": 3 },
+      { "text": "If anyone has questions, hold them. I haven't got answers. I've got a bucket.", "weight": 2 }
+    ],
+    "flavors": ["meta", "self_deprecating"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["chaos"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["chaos"]
   }
 ]

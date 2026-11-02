@@ -87,6 +87,69 @@
         },
         "annotation_on_discovery": "no crocs. passengers furious.",
         "boiler_bonus": 0
+      },
+      {
+        "id": "market_run",
+        "from": "fork1",
+        "to": "market",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Provisions Stop",
+          "claim": "Fresh water and fair prices.",
+          "time": "slow",
+          "danger": "low",
+          "material": "high"
+        },
+        "actual": {
+          "time": "slow",
+          "danger": "low",
+          "material": "low",
+          "surprise": "every_boat_a_gift_shop"
+        },
+        "annotation_on_discovery": "fair prices. nothing you need.",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "fog_bank",
+        "from": "fork1",
+        "to": "fog",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Clear Reach",
+          "claim": "Clear. Excellent visibility.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "slow",
+          "danger": "high",
+          "material": "low",
+          "surprise": "fog_since_forever"
+        },
+        "annotation_on_discovery": "not clear. sound the horn.",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "low_bridge",
+        "from": "fork1",
+        "to": "bridge",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Old Bridge",
+          "claim": "Seven feet of headroom.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "fast",
+          "danger": "high",
+          "material": "low",
+          "surprise": "headroom_is_a_rumour"
+        },
+        "annotation_on_discovery": "headroom is a rumour. heads down.",
+        "boiler_bonus": 4
       }
     ]
   },
@@ -178,6 +241,69 @@
           "surprise": "they_want_the_name"
         },
         "annotation_on_discovery": "they will ask you to spell it",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "washboard",
+        "from": "fork2",
+        "to": "rapids",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Gentle Run",
+          "claim": "Ripples. Pleasant.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "fast",
+          "danger": "high",
+          "material": "low",
+          "surprise": "not_ripples"
+        },
+        "annotation_on_discovery": "not ripples. hold on.",
+        "boiler_bonus": 8
+      },
+      {
+        "id": "waver",
+        "from": "fork2",
+        "to": "island",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Quiet Island",
+          "claim": "Uninhabited.",
+          "time": "slow",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "slow",
+          "danger": "low",
+          "material": "high",
+          "surprise": "someone_lives_here"
+        },
+        "annotation_on_discovery": "someone lives here. he waves.",
+        "boiler_bonus": 0
+      },
+      {
+        "id": "cable",
+        "from": "fork2",
+        "to": "ferry",
+        "leg": "outbound",
+        "charted": {
+          "label": "The Open Crossing",
+          "claim": "Open water. No traffic.",
+          "time": "fast",
+          "danger": "low",
+          "material": "low"
+        },
+        "actual": {
+          "time": "slow",
+          "danger": "high",
+          "material": "low",
+          "surprise": "a_cable_across_the_channel"
+        },
+        "annotation_on_discovery": "cable at neck height.",
         "boiler_bonus": 0
       }
     ]

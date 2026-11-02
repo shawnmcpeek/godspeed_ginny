@@ -7,7 +7,7 @@
     "note": "Melts every beat. Bonus if half survives.",
     "traits": ["melting"],
     "effects": [{ "trigger": "beat", "effect": "melt", "value": 4 }],
-    "unlocks_jokes": ["ice_bench"],
+    "unlocks_jokes": ["ice_bench", "ice_trying"],
     "failure": { "type": "melted", "penalty": 40 }
   },
   {
@@ -18,7 +18,7 @@
     "note": "Top-heavy. Sounds a note on every impact.",
     "traits": ["top_heavy", "noisemaker"],
     "effects": [{ "trigger": "impact", "effect": "play_note" }],
-    "unlocks_jokes": ["piano_wet"],
+    "unlocks_jokes": ["piano_wet", "piano_tuning"],
     "failure": { "type": "damaged", "penalty": 60 }
   },
   {
@@ -29,7 +29,7 @@
     "note": "Escapes if the boat gets rough. You will not get it back.",
     "traits": ["live", "escape"],
     "effects": [{ "trigger": "impact", "effect": "escape", "chance_key": "leopardEscapeChance" }],
-    "unlocks_jokes": ["leopard_spotted"],
+    "unlocks_jokes": ["leopard_spotted", "leopard_misunderstood"],
     "failure": { "type": "escaped", "penalty": 60 }
   },
   {
@@ -40,7 +40,7 @@
     "note": "Safe. Boring. Sometimes you need boring.",
     "traits": ["safe"],
     "effects": [],
-    "unlocks_jokes": [],
+    "unlocks_jokes": ["mail_love", "mail_soggy"],
     "failure": { "type": "wet", "penalty": 10 }
   }
 ]
