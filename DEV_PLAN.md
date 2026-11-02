@@ -98,6 +98,100 @@ Jungle Cruise postcard that *moves* between bits; desk and wrong chart for burea
 
 ---
 
+## 4A. Gameplay design — the replayability spine
+
+The M0 port is a faithful copy of the web proof of concept: one fixed run, a handful of jokes, a light meta. This section is the design for turning it into a run-based game people replay indefinitely. The engine stays; the **run structure, joke handling and meta** grow on top of it.
+
+### Pillars
+1. **Read the room.** Passengers have tastes; the skill is spending scarce beats where they pay off.
+2. **The chart lies.** The river is never what the chart claims, and experience (annotations) is how you beat it.
+3. **The skipper is the entertainment.** Jokes are the main verb, not a side action.
+4. **Everything is a trade.** Entertaining costs steering, steering costs silence, silence costs the room.
+
+### What exists today (facts from the code)
+- Core loop: each stretch has a fixed number of beats; each beat is Patter / Steer / Wrench / Bail. Jokes heat the boiler, non-patter beats drain satisfaction (`silenceDrain` 3), unresolved threat damages hull/water/satisfaction.
+- Joke scoring: passenger flavor weights × on-topic bonus (1.9) / off-topic penalty (0.45) × repeat fatigue (0.35 per repeat) × selling multiplier at the falls.
+- Run structure: fixed `runPlan` in `config.json` (cast off → fork → node → wreck → boulder → fork → node → falls → ducks → Nowhere → settle). About 20 beats, two route choices.
+- Hand: `startRun` gives the player every unlocked joke (31 jokes, all `attention_cost` 1). There is no scarcity, drafting or build.
+- Unused data: `patience`, `fear_threshold`, `callback_to`, `fatigue_runs`, and risk on most jokes.
+- Meta: purse, chart notes, salvage jokes, leopard-at-large, best room. The purse has nothing to spend it on.
+- Randomness: one global unseeded `Random()` in `lib/engine/util.dart`.
+
+### System 1 — Joke deck (the foundation)
+- **Collection:** every joke the player has found (base set plus salvage).
+- **Run deck:** the player picks about 8 at the office before cast-off. Deck size can become an upgrade later.
+- **Hand:** about 5 jokes drawn per stretch; unplayed jokes return to the draw pile at the next stretch.
+- **Cost and risk:** cost is 1 or 2 beats. One-liners are cheap and safe, stories cost 2 and pay big, dark jokes carry risk. Uses `attention_cost` and `risk`, which already exist.
+- **Drafting:** after each stretch, choose 1 of 3 new jokes for this run's deck. Salvage jokes join the collection permanently.
+- **Flavors as suits:** synergies reward committing to a style, e.g. "each pun played this stretch adds +1."
+- **Callbacks:** a joke with a `callback_to` target pays extra if the setup was told earlier in the run. This is the comedy-native mechanic and replaces dead fields like `fatigue_runs`.
+- **Passenger reactions:** after each joke, show which passenger laughed or winced, so tastes are learnable without a manual.
+
+### System 2 — River map and the lying chart
+- Replace the fixed `runPlan` with a **branching map** (Slay the Spire style, 8–10 stretches, 2–3 choices per fork).
+- The chart shows what each stretch *claims* to be. The real stretch is revealed on arrival and often differs. A run's cartographer errors are seeded, so every river is wrong in a different way.
+- **Stretch types:** hazard, sight, selling (falls), port (shop and repairs), shrine, event, and the fixed Nowhere finale.
+- **Event pool:** generalize Two Ducks and a Goose and the boulder into short choice events written in JSON (setup, 2–3 choices, outcomes using existing gauges).
+- **Annotations pay off:** notes from past runs partially reveal the true stretch type on later maps.
+
+### System 3 — Skipper types
+- Each skipper has a starting kit and one rule twist:
+  - **The Veteran:** starts with a bigger rehearsed deck; repeat fatigue is lighter.
+  - **The Deadpan:** silence does not drain satisfaction, but jokes score lower.
+  - **The Mechanic:** repairs are cheap; patter is weaker.
+- Unlock skippers through career arcs (Calliope stages, goose, leopard) and milestones.
+
+### System 4 — Props and relics
+- Run-long modifiers found at ports, shrines and events: rubber chicken, pith helmet, cracked megaphone, a better whistle.
+- Each is a trade, not a plain buff (e.g. louder whistle: +satisfaction on landed jokes, boiler heats faster).
+- Data-driven in a `relics.json`, same pipeline as jokes and cargo.
+
+### System 5 — Passengers with goals
+- Each run has 3–5 passengers with hidden tastes (existing profiles) and an optional goal: make the honeymooners laugh, get the administrator to tip, keep the heckler quiet.
+- Finish the dormant fields: `patience` sets how fast silence drains that passenger; `fear_threshold` sets the hazard level at which they panic and demand refunds.
+- Per-passenger satisfaction, rolled up to the room meter.
+
+### System 6 — The river remembers (saga)
+- Repeat passengers recall jokes told to them in earlier runs ("heard that one"), applying extra fatigue or a callback bonus.
+- Persistent world state: the Calliope keeps decaying, the leopard at large turns up as a random event, the goose arrives after 3 runs.
+- Nowhere has multiple outcomes (passed, missed, abort) that feed unlocks and story beats.
+
+### System 7 — Challenge and endgame
+- **Charter levels:** unlocked after a good run, each adds a modifier (stricter inspector, hotter boiler, fewer beats, harsher refunds).
+- **Daily river:** one seeded run per day, the same for everyone, no account needed. Results shared as a screenshot or a share card.
+- **Joke templates:** jokes with slots (`{hazard}`, `{cargo}`, `{passenger}`) multiply the content without writing every line by hand.
+
+### Purse
+- Spend purse at the office before a run: more deck slots, boat upgrades (boiler, hull), better cargo contracts, skipper unlocks.
+
+### Technical prerequisites
+- **Seedable RNG (do first):** replace the global `_rng` in `util.dart` with an injected, seedable generator. Needed for the daily river, reproducible bug reports and balance tests.
+- **Run state in data:** keep `RunState` serializable so an interrupted run can resume (phones get killed).
+- **Content stays JSON:** new files `events.json`, `relics.json`, `skippers.json`; map generation parameters in `config.json`.
+- **Telemetry:** extend the existing reports to joke pick rate, win rate by skipper, and stretch lethality. Balance from numbers.
+
+### Build phases and milestones
+| Phase | Deliverable | Done when |
+|-------|-------------|-----------|
+| P0 | Seedable RNG | Same seed gives the same run; existing tests pass |
+| P1 | Joke deck: collection, run deck, hand, costs, drafting, reactions, callbacks | A run is won or lost on deck choices, not on knowing the whole list |
+| P2 | River map + lying chart + event pool | No two runs have the same route; at least 10 events |
+| P3 | Props/relics, skippers, passenger goals | 3 skippers, 12 relics, goals on every manifest |
+| P4 | Saga: repeat passengers, persistent world, Nowhere outcomes | A returning player sees earlier runs referenced |
+| P5 | Charter levels, daily river, joke templates | Daily seed works offline; levels 1–5 playable |
+
+### Risks and non-goals
+- **Scope:** P1 and P2 alone are a big step; ship them before adding P3+. Do not start P5 until P1–P3 feel good.
+- **Writing load:** the deck needs 60+ jokes to feel fresh. Templates and variants (already supported) cut this.
+- **Keep:** the engine, tone and JSON pipeline. **Do not:** rewrite the engine, add multiplayer, or require accounts.
+
+### Open decisions
+1. Is the deck pick part of the office scene, or its own screen?
+2. Reactions per passenger, or one room meter?
+3. Upgrades in the purse, or keep the game purely about jokes and cargo?
+
+---
+
 ## 5. Workstreams
 
 ### A. Product shell (must)
@@ -126,7 +220,7 @@ Jungle Cruise postcard that *moves* between bits; desk and wrong chart for burea
 ### D. Content depth
 - [ ] More jokes, stretches, cargo, passengers
 - [ ] Career arcs (Calliope stages, goose, leopard, salvage)
-- [ ] Decide: implement dormant JSON fields (callbacks, patience, chart ratings) **or** cut them from data
+- [ ] Dormant JSON fields: implement callbacks, patience and fear threshold per §4A; cut `fatigue_runs` and any others §4A does not use
 - [ ] Balance from telemetry, not vibes alone
 
 ### E. Meta / retention (mobile expectation)
@@ -241,4 +335,4 @@ Retention light-touch, polished career arcs, ship.
 
 ## 11. Immediate next step
 
-**Next:** finish M1 first-run teach if needed, then **art bible for M2** (ribbon + docked stage + chart sheet) and Flame ribbon → docked hazard bit.
+**Next:** finish M1 first-run teach if needed, then gameplay phases **P0 (seedable RNG) and P1 (joke deck)** from §4A, since the map, relics and saga all build on them. Art bible for M2 (ribbon + docked stage + chart sheet) and the Flame ribbon → docked hazard bit can run in parallel, because P0–P2 need no new art.
