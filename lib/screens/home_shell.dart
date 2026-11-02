@@ -5,13 +5,15 @@ import '../content/loader.dart';
 import '../engine/game_controller.dart';
 import '../flame/river_scene.dart';
 import '../theme/app_theme.dart';
-import '../theme/branding.dart';
 import 'branch_screen.dart';
 import 'choice_screen.dart';
+import 'credits_screen.dart';
 import 'node_screen.dart';
 import 'office_screen.dart';
+import 'settings_screen.dart';
 import 'settle_screen.dart';
 import 'telemetry_panel.dart';
+import 'title_screen.dart';
 
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key, required this.controller});
@@ -29,65 +31,26 @@ class _HomeShellState extends State<HomeShell> {
   void initState() {
     super.initState();
     _river = RiverScene();
-    widget.controller.addListener(_syncRiver);
-    _syncRiver();
-  }
-
-  @override
-  void didUpdateWidget(covariant HomeShell oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.controller != widget.controller) {
-      oldWidget.controller.removeListener(_syncRiver);
-      widget.controller.addListener(_syncRiver);
-      _syncRiver();
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.controller.removeListener(_syncRiver);
-    super.dispose();
-  }
-
-  void _syncRiver() {
-    final g = widget.controller.game;
-    final r = g?.run;
-    final playing = r != null &&
-        (g!.screen == 'node' || g.screen == 'branch' || g.screen == 'choice') &&
-        !widget.controller.showTelemetry;
-    _river.syncGauges(
-      boiler: r?.boiler ?? 15,
-      water: r?.water ?? 10,
-      hull: r?.hull ?? 0,
-      threat: r?.threat ?? 0,
-      playing: playing,
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     final c = widget.controller;
     if (c.loading) {
-      return Scaffold(
-        backgroundColor: const Color(0xFFB8BEDB),
-        body: Center(
-          child: Image.asset(
-            Branding.splash,
-            fit: BoxFit.contain,
-            filterQuality: FilterQuality.high,
-          ),
-        ),
+      return const Scaffold(
+        backgroundColor: AppColors.chart,
+        body: Center(child: CircularProgressIndicator(color: AppColors.water)),
       );
     }
-    if (c.loadError != null || c.game == null) {
+    if (c.loadError != null) {
       return Scaffold(
         backgroundColor: AppColors.chart,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'Failed to load content.\n${c.loadError ?? ''}',
-              style: Theme.of(context).textTheme.bodyLarge,
+              c.loadError!,
+              style: const TextStyle(color: AppColors.stamp),
               textAlign: TextAlign.center,
             ),
           ),
@@ -97,17 +60,20 @@ class _HomeShellState extends State<HomeShell> {
 
     final g = c.g;
     final S = c.strings;
-    final office = Map<String, dynamic>.from(S['office'] as Map);
+    final menu = Map<String, dynamic>.from(S['menu'] as Map);
     final mastTitle = (S['mastTitle'] as List).cast<String>();
-    final playing = g.run != null &&
+    final playing = c.shell == AppShell.play &&
+        g.run != null &&
         (g.screen == 'node' || g.screen == 'branch' || g.screen == 'choice') &&
         !c.showTelemetry;
-
+    final showPlayFooter = c.shell == AppShell.play && !c.showTelemetry;
     final career = fill(S['career'] as String, {
       'runs': g.career.runs,
       'purse': g.formatPurse(g.career.purse),
       'best': g.career.best.round(),
-      'extra': g.career.leopardOut ? ' · ${office['leopardAtLarge']}' : '',
+      'extra': g.career.leopardOut
+          ? ' · ${(S['office'] as Map)['leopardAtLarge']}'
+          : '',
     });
 
     return Scaffold(
@@ -139,7 +105,7 @@ class _HomeShellState extends State<HomeShell> {
                       width: width,
                       height: constraints.maxHeight,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: AppTheme.shellPadH),
                         child: Column(
                           children: [
                             _Mast(
@@ -150,73 +116,38 @@ class _HomeShellState extends State<HomeShell> {
                               compact: playing,
                             ),
                             Expanded(
-                              child: c.showTelemetry
-                                  ? TelemetryPanel(controller: c)
-                                  : _screenFor(c),
+                              child: c.showTelemetry && c.shell == AppShell.settings
+                                  ? _settingsTelemetry(c, menu)
+                                  : _shellBody(c),
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              decoration: const BoxDecoration(
-                                border: Border(top: BorderSide(color: AppColors.chartDeep)),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      career,
-                                      style: AppTheme.mono.copyWith(
-                                        fontSize: 12,
-                                        letterSpacing: 1.2,
+                            if (showPlayFooter)
+                              Container(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                decoration: const BoxDecoration(
+                                  border: Border(top: BorderSide(color: AppColors.chartDeep)),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        career,
+                                        style: AppTheme.menuMeta,
                                       ),
                                     ),
-                                  ),
-                                  TextButton(
-                                    onPressed: c.toggleTelemetry,
-                                    child: Text(
-                                      S['telemetryToggle'] as String,
-                                      style: AppTheme.mono.copyWith(
-                                        fontSize: 12,
-                                        color: AppColors.stamp,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () async {
-                                      final ok = await showDialog<bool>(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          backgroundColor: AppColors.chart,
-                                          content: Text(S['wipeConfirm'] as String),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(ctx, false),
-                                              child: const Text('Keep'),
-                                            ),
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(ctx, true),
-                                              child: Text(
-                                                S['wipe'] as String,
-                                                style: const TextStyle(color: AppColors.stamp),
-                                              ),
-                                            ),
-                                          ],
+                                    TextButton(
+                                      onPressed: c.openTitle,
+                                      child: Text(
+                                        menu['toTitle'] as String,
+                                        style: AppTheme.menuMeta.copyWith(
+                                          color: AppColors.stamp,
+                                          decoration: TextDecoration.underline,
+                                          fontWeight: FontWeight.w700,
                                         ),
-                                      );
-                                      if (ok == true) await c.resetCareer();
-                                    },
-                                    child: Text(
-                                      S['wipe'] as String,
-                                      style: AppTheme.mono.copyWith(
-                                        fontSize: 12,
-                                        color: AppColors.stamp,
-                                        decoration: TextDecoration.underline,
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
                           ],
                         ),
                       ),
@@ -231,7 +162,45 @@ class _HomeShellState extends State<HomeShell> {
     );
   }
 
-  Widget _screenFor(GameController c) {
+  Widget _settingsTelemetry(GameController c, Map<String, dynamic> menu) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TextButton(
+            onPressed: () {
+              if (c.showTelemetry) c.toggleTelemetry();
+            },
+            child: Text(
+              menu['back'] as String,
+              style: AppTheme.menuMeta.copyWith(
+                color: AppColors.stamp,
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+        Expanded(child: TelemetryPanel(controller: c)),
+      ],
+    );
+  }
+
+  Widget _shellBody(GameController c) {
+    switch (c.shell) {
+      case AppShell.title:
+        return TitleScreen(controller: c);
+      case AppShell.settings:
+        return SettingsScreen(controller: c);
+      case AppShell.credits:
+        return CreditsScreen(controller: c);
+      case AppShell.play:
+        return _playScreen(c);
+    }
+  }
+
+  Widget _playScreen(GameController c) {
     switch (c.g.screen) {
       case 'branch':
         return BranchScreen(controller: c);
@@ -265,10 +234,11 @@ class _Mast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final metaStyle = compact ? AppTheme.mastMetaCompact : AppTheme.mastMeta;
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(top: compact ? 10 : 28, bottom: compact ? 8 : 12),
-      margin: EdgeInsets.only(bottom: compact ? 8 : 20),
+      padding: EdgeInsets.only(top: compact ? 8 : 16, bottom: compact ? 8 : 12),
+      margin: EdgeInsets.only(bottom: compact ? 8 : 14),
       decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: AppColors.water, width: 3)),
       ),
@@ -277,25 +247,20 @@ class _Mast extends StatelessWidget {
         children: [
           Text(
             title.join('\n').toUpperCase(),
-            style: AppTheme.display.copyWith(
-              fontSize: compact ? 22 : 40,
-              letterSpacing: 3.2,
-              height: 0.95,
-            ),
+            style: compact ? AppTheme.mastTitleCompact : AppTheme.mastTitle,
           ),
           const SizedBox(height: 8),
           Text.rich(
             TextSpan(
-              style: AppTheme.mono.copyWith(
-                fontSize: 13,
-                letterSpacing: 2.4,
-                color: AppColors.inkSoft,
-              ),
+              style: metaStyle,
               children: [
                 TextSpan(text: '${company.toUpperCase()}  ·  '),
                 TextSpan(
                   text: tag.toUpperCase(),
-                  style: const TextStyle(color: AppColors.stamp, fontWeight: FontWeight.w700),
+                  style: metaStyle.copyWith(
+                    color: AppColors.stamp,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 TextSpan(text: '  ·  ${port.toUpperCase()}'),
               ],

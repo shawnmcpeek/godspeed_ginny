@@ -32,29 +32,25 @@ class ChartButton extends StatelessWidget {
           onTap: onPressed,
           child: Container(
             width: wide ? double.infinity : null,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+            constraints: const BoxConstraints(minHeight: 52),
+            padding: AppTheme.chartButtonPadding,
             decoration: BoxDecoration(
               border: Border.all(color: border, width: 1.5),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   label,
-                  style: AppTheme.display.copyWith(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: fg,
-                  ),
+                  style: AppTheme.chartButtonLabel.copyWith(color: fg),
                 ),
                 if (hint != null) ...[
-                  const SizedBox(height: 3),
+                  const SizedBox(height: 4),
                   Text(
                     hint!,
-                    style: AppTheme.mono.copyWith(
-                      fontSize: 12,
-                      letterSpacing: 1.4,
-                      color: fg.withValues(alpha: 0.7),
+                    style: AppTheme.chartButtonHint.copyWith(
+                      color: fg.withValues(alpha: 0.75),
                     ),
                   ),
                 ],
@@ -106,7 +102,7 @@ class ChartCardButton extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               subtitle!,
-              style: AppTheme.mono.copyWith(fontSize: 12, color: AppColors.water),
+              style: AppTheme.menuMeta.copyWith(color: AppColors.water),
             ),
           ],
           if (claim != null) ...[
@@ -116,11 +112,11 @@ class ChartCardButton extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: '${claimPrefix ?? 'CHART'}: ',
-                    style: AppTheme.mono.copyWith(fontSize: 12, color: AppColors.inkSoft),
+                    style: AppTheme.menuMeta,
                   ),
                   TextSpan(
                     text: claim,
-                    style: AppTheme.mono.copyWith(fontSize: 12, color: AppColors.water),
+                    style: AppTheme.menuMeta.copyWith(color: AppColors.water),
                   ),
                 ],
               ),

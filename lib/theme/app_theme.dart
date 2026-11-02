@@ -124,4 +124,64 @@ abstract final class AppTheme {
         fontWeight: FontWeight.w700,
         letterSpacing: 0.8,
       );
+
+  /// Phone-first type + touch scale (arm's-length portrait).
+  static TextStyle get mastTitle => display.copyWith(
+        fontSize: 34,
+        letterSpacing: 2.4,
+        height: 0.95,
+      );
+
+  static TextStyle get mastTitleCompact => display.copyWith(
+        fontSize: 24,
+        letterSpacing: 2.0,
+        height: 0.95,
+      );
+
+  static TextStyle get mastMeta => mono.copyWith(
+        fontSize: 15,
+        letterSpacing: 1.1,
+        height: 1.35,
+        color: AppColors.inkSoft,
+      );
+
+  static TextStyle get mastMetaCompact => mono.copyWith(
+        fontSize: 13,
+        letterSpacing: 1.0,
+        height: 1.3,
+        color: AppColors.inkSoft,
+      );
+
+  static TextStyle get menuTag => mono.copyWith(
+        fontSize: 15,
+        letterSpacing: 1.6,
+        height: 1.3,
+        fontWeight: FontWeight.w700,
+        color: AppColors.stamp,
+      );
+
+  static TextStyle get menuMeta => mono.copyWith(
+        fontSize: 14,
+        letterSpacing: 0.8,
+        height: 1.35,
+        color: AppColors.inkSoft,
+      );
+
+  static TextStyle get chartButtonLabel => display.copyWith(
+        fontSize: 19,
+        fontWeight: FontWeight.w600,
+        height: 1.2,
+      );
+
+  static TextStyle get chartButtonHint => mono.copyWith(
+        fontSize: 14,
+        letterSpacing: 0.6,
+        height: 1.35,
+      );
+
+  static const chartButtonPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 16);
+
+  static const menuSectionGap = 20.0;
+  static const menuItemGap = 12.0;
+  static const shellPadH = 16.0;
 }

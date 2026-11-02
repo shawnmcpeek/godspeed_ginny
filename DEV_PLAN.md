@@ -18,12 +18,13 @@ Faithful Flutter/Flame port of the lab webpage at `daddoodev/static/lab/godspeed
 ### Presentation
 - Chart-paper Flutter UI (office, passage, branch, choice, settle, telemetry)
 - Flame river/boat as a thin backdrop under play screens (placeholder)
-- Branding: `assets/branding/app_icon.png` (app icon), `assets/branding/splash.png` (native splash + office hero)
+- Branding: `assets/branding/app_icon.png` (app icon), `assets/branding/splash.png` (native splash + title hero)
+- Title / settings / credits shell; office is a destination
 
 ### Not yet a mobile product
-- Jump-straight-into-office (no title/menu shell)
 - UI is the game; Flame is not the passage yet
 - No real art pipeline, audio, haptics, store packaging, or retention meta
+- First-run teach still thin
 
 **Keep:** rules engine, JSON content pipeline, tone, branding seeds.  
 **Do not:** rewrite the engine or chase open-world / multiplayer / heavy 3D early.
@@ -133,14 +134,24 @@ Jungle Cruise postcard that *moves* between bits; desk and wrong chart for burea
 - [ ] Collection: salvage jokes, chart annotations
 - [ ] Achievements
 - [ ] Cloud save later if needed
-- [ ] Monetization decision early: prefer premium / IAP, no ads
+- [x] Monetization direction (agreed): **B + C**
+  - **B:** ~2 free full runs, then paid unlock for unlimited career
+  - **C:** optional ads only in safe seams (post-settle / back to office) — **not AdMob** (account closed); use another network later
+  - Never interrupt mid-joke / mid-beat
+  - Soft ask after settle; prefer unlocking career continuity over gutting shown content
 
 ### F. Store / shipping
-- [ ] iOS + Android signing, listings, screenshots, trailer
+- [x] Android upload keystore → `secrets/` + `android/key.properties` (gitignored)
+- [ ] iOS signing, listings, screenshots, trailer
 - [ ] Crash reporting (e.g. Sentry); minimal analytics
 - [ ] Performance budget on mid-tier phones
 - [ ] CI, release builds, QA checklist
 - [ ] Privacy policy / store compliance
+
+**Codemagic → Google Play:** reuse **Bottled Star**’s Play service-account JSON  
+(`Documents/github/bottled_star/secrets/google/play-store.json`).  
+Service account: `codemagic-play@bottled-star.iam.gserviceaccount.com`  
+Invite that email on the Godspeed Ginny Play listing; do not invent a second JSON unless rotating keys.
 
 ### G. Live ops discipline
 - [ ] Content versioning that doesn’t break careers
@@ -199,7 +210,10 @@ Pipeline: named assets → `assets/art/` → Flame sprites / Flutter HUD. Prefer
 Webpage loop in Flutter; content loads; icons/splash; placeholder Flame.
 
 ### M1 — Mobile shell
-Title screen, settings, resume/new run, first-run teach; office is a destination, not boot.
+- [x] Title screen (splash hero)
+- [x] Settings + credits
+- [x] Resume / cast off into office (office not boot)
+- [ ] First-run teach
 
 ### M2 — Graphical passage
 Ribbon transit + at least one docked hazard bit with HUD; chart overlay openable; art for that node near-final.
@@ -227,4 +241,4 @@ Retention light-touch, polished career arcs, ship.
 
 ## 11. Immediate next step
 
-**M1 kickoff:** title / main menu using `assets/branding/splash.png` as hero, then route into office / continue / settings — then art bible for M2 (ribbon + docked stage + chart sheet).
+**Next:** finish M1 first-run teach if needed, then **art bible for M2** (ribbon + docked stage + chart sheet) and Flame ribbon → docked hazard bit.

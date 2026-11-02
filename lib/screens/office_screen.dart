@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../content/loader.dart';
 import '../engine/game_controller.dart';
 import '../theme/app_theme.dart';
-import '../theme/branding.dart';
 import '../widgets/chart_button.dart';
 import '../widgets/telegram_view.dart';
 
@@ -29,20 +28,6 @@ class OfficeScreen extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 32),
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(2),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: Image.asset(
-                Branding.titleArt,
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high,
-              ),
-            ),
-          ),
-        ),
         TelegramView(
           header: t['header']!,
           body: t['body']!,

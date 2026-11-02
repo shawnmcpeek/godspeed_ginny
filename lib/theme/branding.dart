@@ -8,4 +8,7 @@ abstract final class Branding {
 
   /// Alias for the eventual main / title screen hero.
   static const titleArt = splash;
+
+  /// Title hero width as a fraction of the content column (portrait).
+  static const titleHeroWidthFactor = 0.5;
 }

@@ -5,6 +5,8 @@ import '../content/loader.dart';
 import 'game.dart';
 import 'telemetry.dart';
 
+enum AppShell { title, play, settings, credits }
+
 class GameController extends ChangeNotifier {
   GameController();
 
@@ -13,6 +15,7 @@ class GameController extends ChangeNotifier {
   bool loading = true;
   String? loadError;
   bool showTelemetry = false;
+  AppShell shell = AppShell.title;
 
   Future<void> boot() async {
     loading = true;
@@ -92,4 +95,32 @@ class GameController extends ChangeNotifier {
     showTelemetry = !showTelemetry;
     _bump();
   }
+
+  void openTitle() {
+    showTelemetry = false;
+    shell = AppShell.title;
+    _bump();
+  }
+
+  void openPlay() {
+    showTelemetry = false;
+    shell = AppShell.play;
+    _bump();
+  }
+
+  void openSettings() {
+    showTelemetry = false;
+    shell = AppShell.settings;
+    _bump();
+  }
+
+  void openCredits() {
+    showTelemetry = false;
+    shell = AppShell.credits;
+    _bump();
+  }
+
+  bool get hasActiveRun => game?.run != null;
+
+  bool get hasCareerHistory => (game?.career.runs ?? 0) > 0;
 }
