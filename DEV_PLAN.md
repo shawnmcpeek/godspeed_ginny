@@ -132,6 +132,13 @@ There is no deck screen, draft screen or office step. The skipper's act develops
 - **Reactions:** the room meter is the main read. The 1–2 notable passengers (goal passengers and the loudest critic) also show a named reaction after each joke. Per-passenger satisfaction is tracked underneath.
 
 ### System 2 — River map and the lying chart
+**Run structure (decided, first version built):** a run is about **18 scenes**, like a ride with many short beats rather than a few long ones.
+- **Hard-set:** Cast-off opens the run and Nowhere closes it. The landmark scenes (Calliope, boulder, falls, ducks and goose) and the two forks are always present, but their **order is shuffled** every run.
+- **Wild pool:** 40 stretches (`"pool": "wild"` in `nodes.json`), of which 10 are drawn at random per run, never repeating. Sights are 2–3 beats; hazards are 3–4 beats.
+- **Forks** still offer 2 of 7 chart-lie stretches and lead to one scene. Stretches offered at a fork are reserved so the run can't visit them twice.
+- Run plan lives in `config.json` (`runPlan`): `{"kind": "shuffle", "units": [...]}` shuffles its units; a node step with `"pool"` is filled at random.
+- **Balance not yet tested:** longer runs mean more beats, so the Nowhere abort thresholds were loosened (hull 18→26, crises 2→4). Tune from telemetry.
+
 - Replace the fixed `runPlan` with a **branching map** (Slay the Spire style, 8–10 stretches, 2–3 choices per fork).
 - The chart shows what each stretch *claims* to be. The real stretch is revealed on arrival and often differs. A run's cartographer errors are seeded, so every river is wrong in a different way.
 - **Stretch types:** hazard, sight, selling (falls), port (shop and repairs), shrine, event, and the fixed Nowhere finale.

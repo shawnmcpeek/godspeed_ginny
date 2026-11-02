@@ -294,7 +294,7 @@ class Game {
       hand: hand,
       goose: goose,
       forkOffer: dealForks(),
-      plan: cfg.runPlan.map((s) => Map<String, dynamic>.from(s)).toList(),
+      plan: _buildPlan(),
     );
     run!.record = {
       'cargo': cargoId,
@@ -308,6 +308,58 @@ class Game {
     advanceToCurrent();
   }
 
+  /// Builds this run's step list from `runPlan`. A `{"kind": "shuffle", "units": [[...], ...]}`
+  /// entry expands to its units in random order; each unit is a list of steps that stay together
+  /// (e.g. a fork and the stretch it leads to).
+  List<Map<String, dynamic>> _buildPlan() {
+    final out = <Map<String, dynamic>>[];
+    for (final s in cfg.runPlan) {
+      if (s['kind'] == 'shuffle') {
+        final units = (s['units'] as List)
+            .map(
+              (u) => (u as List)
+                  .map((e) => Map<String, dynamic>.from(e as Map))
+                  .toList(),
+            )
+            .toList();
+        for (final unit in shuffled(units)) {
+          out.addAll(unit);
+        }
+      } else {
+        out.add(Map<String, dynamic>.from(s));
+      }
+    }
+    return out;
+  }
+
+  /// Fills a `{"kind": "node", "pool": "..."}` step with a random stretch from that pool that
+  /// this run has not used yet. Leaves `id` null when the pool is exhausted.
+  void _resolvePool(Map<String, dynamic>? step) {
+    if (step == null || step['kind'] != 'node' || step['id'] != null) return;
+    final pool = step['pool'] as String?;
+    if (pool == null) return;
+    final r = run!;
+    final taken = <String>{
+      for (final s in r.plan)
+        if (s['id'] is String) s['id'] as String,
+      for (final row in r.record['nodes'] as List) (row as Map)['id'] as String,
+    };
+    // Stretches offered at this run's forks are reserved so a fork never leads somewhere
+    // the run has already been.
+    final reserved = <String>{};
+    for (final ids in r.forkOffer.values) {
+      for (final id in ids) {
+        final edge = edgeById(id);
+        if (edge != null) reserved.add(edge.to);
+      }
+    }
+    final options = content.nodes
+        .where((n) => n.pools.contains(pool) && !taken.contains(n.id) && !reserved.contains(n.id))
+        .toList();
+    if (options.isEmpty) return;
+    step['id'] = pick(options).id;
+  }
+
   Map<String, dynamic>? currentStep() {
     final r = run;
     if (r == null || r.step >= r.plan.length) return null;
@@ -319,6 +371,13 @@ class Game {
     if (s == null) {
       screen = 'office';
       run = null;
+      return;
+    }
+    _resolvePool(s);
+    if (s['kind'] == 'node' && s['id'] == null && s['pool'] != null) {
+      // Pool exhausted: skip this scene rather than ending the run.
+      run!.step++;
+      advanceToCurrent();
       return;
     }
     if (s['kind'] == 'node' && s['id'] != null) {
@@ -624,6 +683,7 @@ class Game {
     run!.awaitingContinue = false;
     run!.step++;
     final nx = currentStep();
+    _resolvePool(nx);
     if (nx != null && nx['kind'] == 'node' && nx['id'] != null) {
       enterNode(nx['id'] as String);
     } else {

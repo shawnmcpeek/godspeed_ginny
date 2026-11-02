@@ -18,6 +18,17 @@ List<T> pickUnique<T>(List<T> arr, int n) {
   return out;
 }
 
+List<T> shuffled<T>(List<T> arr) {
+  final out = List<T>.from(arr);
+  for (var i = out.length - 1; i > 0; i--) {
+    final k = _rng.nextInt(i + 1);
+    final tmp = out[i];
+    out[i] = out[k];
+    out[k] = tmp;
+  }
+  return out;
+}
+
 JokeVariant pickWeighted(List<JokeVariant> variants) {
   final total = variants.fold<int>(0, (s, v) => s + v.weight);
   var r = _rng.nextDouble() * total;

@@ -178,10 +178,15 @@ class NodeDef {
     this.brief,
     this.settleStages,
     this.stationCopy,
+    this.pools = const [],
   });
 
   factory NodeDef.fromJson(Map<String, dynamic> j) {
+    final poolRaw = j['pool'];
     return NodeDef(
+      pools: poolRaw is String
+          ? [poolRaw]
+          : (poolRaw as List?)?.map((e) => e as String).toList() ?? const [],
       id: j['id'] as String,
       name: j['name'] as String,
       sub: j['sub'] as String,
@@ -226,6 +231,9 @@ class NodeDef {
   final bool salvage;
   final List<Map<String, dynamic>>? settleStages;
   final Map<String, String>? stationCopy;
+
+  /// Random-scene pools this node can be drawn from (see `runPlan` steps with a `pool`).
+  final List<String> pools;
 }
 
 class BranchDef {

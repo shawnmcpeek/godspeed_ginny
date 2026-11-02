@@ -84,20 +84,33 @@
   },
   "nowhere": {
     "wrongTurn": "adit",
-    "abortHull": 18,
+    "abortHull": 26,
     "abortSat": 22,
-    "abortCrises": 2
+    "abortCrises": 4
   },
   "runPlan": [
     { "kind": "node", "id": "castoff" },
-    { "kind": "branch", "id": "fork1" },
-    { "kind": "node", "id": null },
-    { "kind": "node", "id": "wreck" },
-    { "kind": "choice", "id": "boulder" },
-    { "kind": "branch", "id": "fork2" },
-    { "kind": "node", "id": null },
-    { "kind": "node", "id": "falls" },
-    { "kind": "choice", "id": "ducks" },
+    {
+      "kind": "shuffle",
+      "units": [
+        [{ "kind": "branch", "id": "fork1" }, { "kind": "node", "id": null }],
+        [{ "kind": "branch", "id": "fork2" }, { "kind": "node", "id": null }],
+        [{ "kind": "node", "id": "wreck" }],
+        [{ "kind": "choice", "id": "boulder" }],
+        [{ "kind": "node", "id": "falls" }],
+        [{ "kind": "choice", "id": "ducks" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }],
+        [{ "kind": "node", "id": null, "pool": "wild" }]
+      ]
+    },
     { "kind": "node", "id": "nowhere" },
     { "kind": "settle" }
   ]
