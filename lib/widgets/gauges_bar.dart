@@ -52,7 +52,7 @@ class _GaugesBarState extends State<GaugesBar> with SingleTickerProviderStateMix
 
     final boilerHot = r.boiler >= 80;
     final waterHot = r.water >= 80;
-    final hullHot = r.hull >= 50;
+    final hullHot = r.hull >= 35;
     final roomHot = r.sat <= 30;
     final anyHot = boilerHot || waterHot || hullHot || roomHot;
     WidgetsBinding.instance.addPostFrameCallback((_) {

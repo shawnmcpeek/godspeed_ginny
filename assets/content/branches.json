@@ -20,9 +20,9 @@
           "time": "fast",
           "danger": "high",
           "material": "low",
-          "surprise": "silted_since_1934"
+          "surprise": "silted_since_1914"
         },
-        "annotation_on_discovery": "silted '34 — hippos",
+        "annotation_on_discovery": "silted '14 — hippos",
         "boiler_bonus": 0
       },
       {
@@ -104,7 +104,7 @@
           "time": "slow",
           "danger": "low",
           "material": "low",
-          "surprise": "every_boat_a_gift_shop"
+          "surprise": "every_boat_a_souvenir_stall"
         },
         "annotation_on_discovery": "fair prices. nothing you need.",
         "boiler_bonus": 0

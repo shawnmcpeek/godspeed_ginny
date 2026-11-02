@@ -488,6 +488,16 @@ class Game {
     }
   }
 
+  void damageHull(double amount) {
+    final r = run!;
+    r.hull = clamp(r.hull + amount, 0, cfg.gaugeClamp);
+  }
+
+  void repairHull(double amount) {
+    final r = run!;
+    r.hull = clamp(r.hull - amount, 0, cfg.gaugeClamp);
+  }
+
   void checkCrisis() {
     final r = run!;
     if (r.boiler >= cfg.boilerCrisisAt) {
@@ -501,7 +511,7 @@ class Game {
     if (r.water >= cfg.waterCrisisAt) {
       say('bad', dig(S, 'log.waterCrisis') as String);
       r.water = clamp(r.water - cfg.waterCrisisVent, 0, cfg.gaugeClamp);
-      r.hull += cfg.waterCrisisHull;
+      damageHull(cfg.waterCrisisHull);
       r.sat = clamp(r.sat - cfg.waterCrisisSat, 0, 100);
       r.nodeCrises.add('water');
     }
@@ -592,7 +602,7 @@ class Game {
       }
     }
     if (kind == 'wrench') {
-      run!.hull = (run!.hull - cfg.wrenchHullReduce).clamp(0, double.infinity);
+      repairHull(cfg.wrenchHullReduce);
       say('act', node.stationCopy?['wrench'] ?? dig(S, 'log.wrench') as String);
     }
     if (kind == 'bail') {
@@ -645,7 +655,12 @@ class Game {
           'side': pick(sides),
         }),
       );
-      run!.hull += (t * cfg.unresolvedHullScale).round();
+      // Scale + floor so "takes a hit" always moves the Damage meter on the 0–100 dial.
+      final hit = math.max(
+        cfg.unresolvedHullMin,
+        (t * cfg.unresolvedHullScale).round().toDouble(),
+      );
+      damageHull(hit);
       run!.water = clamp(run!.water + t * cfg.unresolvedWaterScale, 0, cfg.gaugeClamp);
       run!.sat = clamp(run!.sat - t * cfg.unresolvedSatScale, 0, 100);
       if (c.hasEffect('play_note')) say('act', dig(S, 'log.pianoNote') as String);
@@ -763,7 +778,7 @@ class Game {
     final bS = Map<String, dynamic>.from(S['boulder'] as Map);
     beginTurn();
     if (side == run!.boulderScrape) {
-      run!.hull += (bCfg['scrapeHull'] as num).toDouble();
+      damageHull((bCfg['scrapeHull'] as num).toDouble());
       run!.water = clamp(run!.water + (bCfg['scrapeWater'] as num).toDouble(), 0, cfg.gaugeClamp);
       run!.sat = clamp(run!.sat - (bCfg['scrapeSat'] as num).toDouble(), 0, 100);
       say('bad', bS['scrape'] as String);
@@ -896,15 +911,18 @@ class Game {
   }
 
   Map<String, String> officeTelegram() {
-    officeWire ??= {
-      'header': content.telegrams.office.header,
-      'body': applyTypos(
-        content.telegrams.office.lines.join('\n'),
-        content.telegrams.typos,
-        cfg.typosPerTelegram,
-      ),
-      'signoff': content.telegrams.office.signoff,
-    };
+    officeWire ??= () {
+      final lines = pick(content.telegrams.office.variants);
+      return {
+        'header': content.telegrams.office.header,
+        'body': applyTypos(
+          lines.join('\n'),
+          content.telegrams.typos,
+          cfg.typosPerTelegram,
+        ),
+        'signoff': content.telegrams.office.signoff,
+      };
+    }();
     return officeWire!;
   }
 

@@ -18,7 +18,7 @@
   "scoreScale": 2.2,
   "steerThreatReduce": 3,
   "steerBoilerReduce": 32,
-  "wrenchHullReduce": 8,
+  "wrenchHullReduce": 10,
   "bailWaterReduce": 26,
   "bailJumpChance": 0.45,
   "hullWaterFactor": 25,
@@ -28,9 +28,10 @@
   "boilerCrisisSat": 6,
   "waterCrisisAt": 100,
   "waterCrisisVent": 40,
-  "waterCrisisHull": 8,
+  "waterCrisisHull": 14,
   "waterCrisisSat": 10,
-  "unresolvedHullScale": 1.4,
+  "unresolvedHullScale": 3.5,
+  "unresolvedHullMin": 6,
   "unresolvedWaterScale": 2,
   "unresolvedSatScale": 2,
   "riskThreat": 4,
@@ -39,10 +40,10 @@
   "situationTags": [
     { "tag": "boiler", "boiler_gte": 80 },
     { "tag": "taking_water", "water_gte": 70 },
-    { "tag": "damaged", "hull_gte": 8 },
+    { "tag": "damaged", "hull_gte": 14 },
     { "tag": "full_steam", "boiler_gte": 95 },
     { "tag": "sinking", "water_gte": 90 },
-    { "tag": "falling_apart", "hull_gte": 20 },
+    { "tag": "falling_apart", "hull_gte": 32 },
     { "tag": "chaos", "boiler_gte": 70, "water_gte": 60 }
   ],
   "jokeStrongAt": 6,
@@ -61,7 +62,7 @@
   "iceSurvivePct": 50,
   "iceSurviveBonus": 40,
   "leopardLostPay": -60,
-  "pianoDamageHull": 25,
+  "pianoDamageHull": 40,
   "pianoDamagedPayScale": 0.4,
   "fallsRatingHigh": 14,
   "fallsRatingMid": 6,
@@ -78,13 +79,13 @@
     "fastBoiler": -6
   },
   "boulder": {
-    "scrapeHull": 5,
+    "scrapeHull": 14,
     "scrapeWater": 10,
     "scrapeSat": 3
   },
   "nowhere": {
     "wrongTurn": "adit",
-    "abortHull": 26,
+    "abortHull": 42,
     "abortSat": 22,
     "abortCrises": 4
   },

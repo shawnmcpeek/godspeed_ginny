@@ -20,17 +20,46 @@ void main() {
     game.startRun('mail_sacks');
     expect(game.screen, 'node');
     expect(game.run?.node, 'castoff');
+    expect(content.telegrams.office.variants.length, greaterThan(1));
 
-    // Burn castoff beats on steer.
-    while (game.run != null && game.screen == 'node' && !game.run!.awaitingContinue) {
-      game.doAction('steer');
-    }
-    if (game.run?.awaitingContinue == true) game.continueNode();
+    final wireA = game.officeTelegram()['body'];
+    game.officeWire = null;
+    final wireB = game.officeTelegram()['body'];
+    // Same or different is fine; both must be non-empty STOP wires.
+    expect(wireA, contains('STOP'));
+    expect(wireB, contains('STOP'));
+  });
 
-    expect(game.screen, 'branch');
-    final branch = game.branches[game.currentStep()!['id']]!;
-    final edge = game.offeredEdges(branch).first;
-    await game.chooseBranch(edge.id);
-    expect(game.screen, 'node');
+  test('unresolved threat always bumps hull by at least unresolvedHullMin', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final content = await loadGameContent();
+    final game = Game(content, Telemetry(content.config, prefs), prefs);
+
+    game.startRun('mail_sacks');
+    final before = game.run!.hull;
+    game.run!.threat = 1;
+    game.beginTurn();
+    game.applyNodeResolution();
+    final delta = game.run!.hull - before;
+
+    expect(delta, greaterThanOrEqualTo(content.config.unresolvedHullMin));
+  });
+
+  test('boulder scrape raises hull on the Damage meter', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final content = await loadGameContent();
+    final game = Game(content, Telemetry(content.config, prefs), prefs);
+
+    game.startRun('mail_sacks');
+    game.screen = 'choice';
+    game.choiceId = 'boulder';
+    game.choiceDone = false;
+    game.run!.boulderScrape = 'left';
+    final before = game.run!.hull;
+    game.chooseBoulder('left');
+    expect(game.run!.hull - before, (content.config.boulder['scrapeHull'] as num).toDouble());
+    expect(game.run!.card!.deltas['hull'], (content.config.boulder['scrapeHull'] as num).toDouble());
   });
 }

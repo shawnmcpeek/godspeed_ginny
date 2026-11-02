@@ -187,7 +187,7 @@
     "category": "rehearsed",
     "title": "That's a steaming pile",
     "variants": [
-      { "text": "Off the port bow — the Calliope. Aground since '33. Same chart, same fork, same wide water and good bottom. That, folks, is a steaming pile.", "weight": 3 },
+      { "text": "Off the port bow — the Calliope. Aground since '13. Same chart, same fork, same wide water and good bottom. That, folks, is a steaming pile.", "weight": 3 },
       { "text": "She was the pride of the upper river. Now she's a steaming pile. And I do mean steaming. Boiler's still going. Nobody's told it.", "weight": 2 },
       { "text": "That's the competition. Sorry — that WAS the competition. Steam launch, hard aground, listing. A steaming pile.", "weight": 1 }
     ],
@@ -1395,7 +1395,7 @@
     "category": "rehearsed",
     "title": "Comfortable",
     "variants": [
-      { "text": "That's the Calliope. Aground since '33. She's very comfortable. Please don't wake her.", "weight": 3 },
+      { "text": "That's the Calliope. Aground since '13. She's very comfortable. Please don't wake her.", "weight": 3 },
       { "text": "She hasn't moved in decades. I envy her. She's the only one on this river with a settled schedule.", "weight": 2 }
     ],
     "flavors": ["self_deprecating", "absurd"],
@@ -1716,7 +1716,7 @@
     "title": "Mighty",
     "variants": [
       { "text": "Advertised as mighty. It's a very good water feature. It's a mighty good water feature.", "weight": 3 },
-      { "text": "Nine feet of mighty. Which, in a boat, feels like quite a lot more.", "weight": 2 }
+      { "text": "Nine feet of water falling 108 inches. That's the advertised miracle, measured twice.", "weight": 2 }
     ],
     "flavors": ["wordplay", "groaner", "callback"],
     "attention_cost": 1,
@@ -1935,11 +1935,11 @@
     "tags": ["mail"]
   },
   {
-    "id": "market_gift_shop",
+    "id": "market_souvenir_stall",
     "category": "rehearsed",
-    "title": "Every boat a gift shop",
+    "title": "Every boat a souvenir stall",
     "variants": [
-      { "text": "The floating market. Forty boats, and every one is a gift shop. We needn't stop. They'll come to us.", "weight": 3 },
+      { "text": "The floating market. Forty boats, and every one is a souvenir stall. We needn't stop. They'll come to us.", "weight": 3 },
       { "text": "That's the market. Everything's a bargain. That's because everything's slightly damp.", "weight": 2 }
     ],
     "flavors": ["absurd", "wordplay"],
@@ -2132,7 +2132,7 @@
     "title": "A different key",
     "variants": [
       { "text": "Everything on this boat is about to rattle in a different key. Please enjoy the music.", "weight": 3 },
-      { "text": "That's washboard water. It's the river's way of giving you a free massage. Without consent.", "weight": 2 }
+      { "text": "That's washboard water. It's the river's way of giving you a free massage. Unsolicited.", "weight": 2 }
     ],
     "flavors": ["absurd", "wordplay"],
     "attention_cost": 1,
@@ -2195,7 +2195,7 @@
     "category": "rehearsed",
     "title": "The man who waves",
     "variants": [
-      { "text": "That man's been waving since 1998. It's his job. He's very good. He's never once been thanked.", "weight": 3 },
+      { "text": "That man's been waving since 1898. It's his job. He's very good. He's never once been thanked.", "weight": 3 },
       { "text": "A man on a tiny island, waving. I've known him fifteen years. We've never spoken. It's the best relationship I have.", "weight": 2 }
     ],
     "flavors": ["self_deprecating", "absurd"],
@@ -3071,11 +3071,11 @@
     "tags": ["squall"]
   },
   {
-    "id": "sunset_phones",
+    "id": "sunset_cameras",
     "category": "rehearsed",
-    "title": "Forty phones",
+    "title": "Forty cameras",
     "variants": [
-      { "text": "Look at the light. Look at the water. Look at the forty phones all pointed at the wrong thing.", "weight": 3 },
+      { "text": "Look at the light. Look at the water. Look at the forty cameras all pointed at the wrong thing.", "weight": 3 },
       { "text": "It's the golden hour. It's golden for about eleven minutes. Then it's the other hour.", "weight": 2 }
     ],
     "flavors": ["meta", "absurd"],
@@ -3780,7 +3780,7 @@
     "title": "Don't overtake",
     "variants": [
       { "text": "Coal, a thousand tons of it, all to keep somebody's boiler happy. I envy that boiler.", "weight": 3 },
-      { "text": "Don't tailgate. Don't honk. Don't, whatever you do, try to overtake. It's a long story. It involves Dennis.", "weight": 2 }
+      { "text": "Don't crowd her stern. Don't blow the whistle. Don't, whatever you do, try to overtake. It's a long story. It involves Dennis.", "weight": 2 }
     ],
     "flavors": ["self_deprecating", "callback"],
     "attention_cost": 1,

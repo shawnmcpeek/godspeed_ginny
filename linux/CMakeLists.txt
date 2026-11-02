@@ -70,6 +70,11 @@ set_target_properties(${BINARY_NAME}
 )
 
 
+# sentry-native (via sentry_flutter) uses C11 (_Generic). It defaults to C99
+# when unset, which produces -Wc11-extensions noise on Linux desktop builds.
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
 include(flutter/generated_plugins.cmake)

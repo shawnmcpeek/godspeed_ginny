@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:window_manager/legacy.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'engine/game_controller.dart';
 import 'screens/home_shell.dart';
@@ -21,24 +21,20 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = true;
 
-  await windowManager.ensureInitialized();
-  const size = ui.Size(kShotWidth, kShotHeight);
-  await windowManager.waitUntilReadyToShow(
-    const WindowOptions(
-      size: size,
-      minimumSize: size,
-      maximumSize: size,
-      center: true,
-      backgroundColor: Colors.black,
-      skipTaskbar: true,
-      titleBarStyle: TitleBarStyle.hidden,
-      title: 'Godspeed Ginny — screenshots',
-    ),
-    () async {
-      await windowManager.show();
-      await windowManager.focus();
-    },
-  );
+  const size = Size(kShotWidth, kShotHeight);
+  final window = WindowManager.instance.getCurrent();
+  if (window != null) {
+    window.title = 'Godspeed Ginny — screenshots';
+    window.titleBarStyle = TitleBarStyle.hidden;
+    window.isVisibleInTaskbar = false;
+    window.backgroundColor = Colors.black.toNative();
+    window.minimumSize = size.toNative();
+    window.maximumSize = size.toNative();
+    window.setSize(size.toNative(), false);
+    window.center();
+    window.show();
+    window.focus();
+  }
 
   final prefs = await SharedPreferences.getInstance();
   await prefs.clear();

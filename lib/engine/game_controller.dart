@@ -104,6 +104,8 @@ class GameController extends ChangeNotifier {
 
   void openPlay() {
     showTelemetry = false;
+    // Fresh landing wire each time you walk into the office.
+    game?.officeWire = null;
     shell = AppShell.play;
     _bump();
   }

@@ -57,6 +57,8 @@ class GameConfig {
   double get waterCrisisHull => (raw['waterCrisisHull'] as num).toDouble();
   double get waterCrisisSat => (raw['waterCrisisSat'] as num).toDouble();
   double get unresolvedHullScale => (raw['unresolvedHullScale'] as num).toDouble();
+  /// Floor so an announced hull hit always moves the Damage meter.
+  double get unresolvedHullMin => (raw['unresolvedHullMin'] as num?)?.toDouble() ?? 6;
   double get unresolvedWaterScale => (raw['unresolvedWaterScale'] as num).toDouble();
   double get unresolvedSatScale => (raw['unresolvedSatScale'] as num).toDouble();
   double get riskThreat => (raw['riskThreat'] as num).toDouble();
@@ -390,20 +392,32 @@ class Typo {
 class OfficeTelegram {
   OfficeTelegram({
     required this.header,
-    required this.lines,
+    required this.variants,
     required this.signoff,
   });
 
   factory OfficeTelegram.fromJson(Map<String, dynamic> j) {
+    final variantsRaw = j['variants'] as List?;
+    final List<List<String>> variants;
+    if (variantsRaw != null && variantsRaw.isNotEmpty) {
+      variants = variantsRaw.map((v) {
+        final map = Map<String, dynamic>.from(v as Map);
+        return (map['lines'] as List).map((e) => e as String).toList();
+      }).toList();
+    } else {
+      // Legacy single-body shape.
+      variants = [(j['lines'] as List).map((e) => e as String).toList()];
+    }
     return OfficeTelegram(
       header: j['header'] as String,
-      lines: (j['lines'] as List).map((e) => e as String).toList(),
+      variants: variants,
       signoff: j['signoff'] as String,
     );
   }
 
   final String header;
-  final List<String> lines;
+  /// Each entry is one full office wire (lines joined for display).
+  final List<List<String>> variants;
   final String signoff;
 }
 
