@@ -5,6 +5,7 @@ import '../content/loader.dart';
 import '../engine/game_controller.dart';
 import '../flame/river_scene.dart';
 import '../theme/app_theme.dart';
+import '../theme/branding.dart';
 import 'branch_screen.dart';
 import 'choice_screen.dart';
 import 'node_screen.dart';
@@ -67,9 +68,15 @@ class _HomeShellState extends State<HomeShell> {
   Widget build(BuildContext context) {
     final c = widget.controller;
     if (c.loading) {
-      return const Scaffold(
-        backgroundColor: AppColors.chart,
-        body: Center(child: CircularProgressIndicator(color: AppColors.water)),
+      return Scaffold(
+        backgroundColor: const Color(0xFFB8BEDB),
+        body: Center(
+          child: Image.asset(
+            Branding.splash,
+            fit: BoxFit.contain,
+            filterQuality: FilterQuality.high,
+          ),
+        ),
       );
     }
     if (c.loadError != null || c.game == null) {

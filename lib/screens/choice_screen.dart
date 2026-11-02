@@ -30,8 +30,9 @@ class _DucksChoice extends StatelessWidget {
     final done = g.choiceDone;
     final title = g.run!.goose ? d['titleGoose'] as String : d['title'] as String;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(bottom: 24),
       children: [
         GaugesBar(game: g),
         const SizedBox(height: 8),
@@ -41,20 +42,17 @@ class _DucksChoice extends StatelessWidget {
           style: AppTheme.mono.copyWith(fontSize: 14, letterSpacing: 1.4, color: AppColors.stamp),
         ),
         const SizedBox(height: 8),
-        Expanded(
-          child: done && g.run?.card != null
-              ? SingleChildScrollView(
-                  child: PlayCardView(card: g.run!.card!, strings: controller.strings),
-                )
-              : Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    border: Border.all(color: AppColors.water, width: 1.5),
-                  ),
-                  child: Text(d['note'] as String, style: Theme.of(context).textTheme.bodyMedium),
-                ),
-        ),
+        if (done && g.run?.card != null)
+          PlayCardView(card: g.run!.card!, strings: controller.strings)
+        else
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: AppColors.chart.withValues(alpha: 0.94),
+              border: Border.all(color: AppColors.water, width: 1.5),
+            ),
+            child: Text(d['note'] as String, style: Theme.of(context).textTheme.bodyMedium),
+          ),
         const SizedBox(height: 8),
         if (done)
           ChartButton(
@@ -98,8 +96,9 @@ class _BoulderChoice extends StatelessWidget {
     final b = Map<String, dynamic>.from(controller.strings['boulder'] as Map);
     final done = g.choiceDone;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(bottom: 24),
       children: [
         GaugesBar(game: g),
         const SizedBox(height: 8),
@@ -109,20 +108,17 @@ class _BoulderChoice extends StatelessWidget {
           style: AppTheme.mono.copyWith(fontSize: 14, letterSpacing: 1.4, color: AppColors.stamp),
         ),
         const SizedBox(height: 8),
-        Expanded(
-          child: done && g.run?.card != null
-              ? SingleChildScrollView(
-                  child: PlayCardView(card: g.run!.card!, strings: controller.strings),
-                )
-              : Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    border: Border.all(color: AppColors.water, width: 1.5),
-                  ),
-                  child: Text(b['note'] as String, style: Theme.of(context).textTheme.bodyMedium),
-                ),
-        ),
+        if (done && g.run?.card != null)
+          PlayCardView(card: g.run!.card!, strings: controller.strings)
+        else
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: AppColors.chart.withValues(alpha: 0.94),
+              border: Border.all(color: AppColors.water, width: 1.5),
+            ),
+            child: Text(b['note'] as String, style: Theme.of(context).textTheme.bodyMedium),
+          ),
         const SizedBox(height: 8),
         if (done)
           ChartButton(

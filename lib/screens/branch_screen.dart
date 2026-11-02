@@ -19,8 +19,9 @@ class BranchScreen extends StatelessWidget {
     final step = g.currentStep()!;
     final b = g.branches[step['id'] as String]!;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(bottom: 24),
       children: [
         GaugesBar(game: g),
         const SizedBox(height: 8),
@@ -35,29 +36,21 @@ class BranchScreen extends StatelessWidget {
         ),
         if (g.run?.card != null) ...[
           const SizedBox(height: 8),
-          Expanded(child: SingleChildScrollView(child: PlayCardView(card: g.run!.card!, strings: S))),
-        ] else
-          const Spacer(),
+          PlayCardView(card: g.run!.card!, strings: S),
+        ],
         const SizedBox(height: 8),
-        Flexible(
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Text(b.prompt, style: Theme.of(context).textTheme.bodyMedium),
-              const SizedBox(height: 8),
-              ...g.offeredEdges(b).map((o) {
-                final note = g.career.notes[o.id];
-                return ChartCardButton(
-                  title: o.charted.label,
-                  claim: o.charted.claim,
-                  claimPrefix: branchS['chartPrefix'] as String,
-                  annotation: note,
-                  onPressed: () => controller.chooseBranch(o.id),
-                );
-              }),
-            ],
-          ),
-        ),
+        Text(b.prompt, style: Theme.of(context).textTheme.bodyMedium),
+        const SizedBox(height: 8),
+        ...g.offeredEdges(b).map((o) {
+          final note = g.career.notes[o.id];
+          return ChartCardButton(
+            title: o.charted.label,
+            claim: o.charted.claim,
+            claimPrefix: branchS['chartPrefix'] as String,
+            annotation: note,
+            onPressed: () => controller.chooseBranch(o.id),
+          );
+        }),
       ],
     );
   }
