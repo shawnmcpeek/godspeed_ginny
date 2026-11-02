@@ -2,25 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'engine/game_controller.dart';
 import 'screens/home_shell.dart';
+import 'services/sentry_setup.dart';
 import 'theme/app_theme.dart';
 
 Future<void> main() async {
-  final binding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: binding);
-  debugPaintSizeEnabled = false;
-  debugPaintBaselinesEnabled = false;
-  debugPaintLayerBordersEnabled = false;
-  debugPaintPointersEnabled = false;
-  debugRepaintRainbowEnabled = false;
-  debugRepaintTextRainbowEnabled = false;
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-  runApp(const GodspeedGinnyApp());
+  await runWithSentry(() async {
+    final binding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: binding);
+    debugPaintSizeEnabled = false;
+    debugPaintBaselinesEnabled = false;
+    debugPaintLayerBordersEnabled = false;
+    debugPaintPointersEnabled = false;
+    debugRepaintRainbowEnabled = false;
+    debugRepaintTextRainbowEnabled = false;
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    runApp(SentryWidget(child: const GodspeedGinnyApp()));
+  });
 }
 
 class GodspeedGinnyApp extends StatefulWidget {

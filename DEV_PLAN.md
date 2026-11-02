@@ -248,10 +248,13 @@ There is no deck screen, draft screen or office step. The skipper's act develops
 ### F. Store / shipping
 - [x] Android upload keystore → `secrets/` + `android/key.properties` (gitignored)
 - [ ] iOS signing, listings, screenshots, trailer
-- [ ] Crash reporting (e.g. Sentry); minimal analytics
+- [x] Sentry project `godspeed-ginny` (org `daddoo-dev`) — crashes, sessions, light traces
+- [ ] Minimal product analytics beyond Sentry (optional later)
 - [ ] Performance budget on mid-tier phones
 - [ ] CI, release builds, QA checklist
-- [ ] Privacy policy / store compliance
+- [x] Store listing copy + Fastlane upload lanes (`fastlane/metadata`, Bottled Star ASC + Play credentials under `secrets/`)
+- [ ] Privacy policy page for Ginny support/marketing URLs if not live yet
+- [ ] Screenshots / feature graphic
 
 **Codemagic → Google Play:** reuse **Bottled Star**’s Play service-account JSON  
 (`Documents/github/bottled_star/secrets/google/play-store.json`).  
