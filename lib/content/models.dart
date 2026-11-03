@@ -191,11 +191,16 @@ class NodeDef {
     this.settleStages,
     this.stationCopy,
     this.pools = const [],
+    this.cleanText = const [],
   });
 
   factory NodeDef.fromJson(Map<String, dynamic> j) {
     final poolRaw = j['pool'];
+    final cleanRaw = j['clean_text'];
     return NodeDef(
+      cleanText: cleanRaw is String
+          ? [cleanRaw]
+          : (cleanRaw as List?)?.map((e) => e as String).toList() ?? const [],
       pools: poolRaw is String
           ? [poolRaw]
           : (poolRaw as List?)?.map((e) => e as String).toList() ?? const [],
@@ -246,6 +251,9 @@ class NodeDef {
 
   /// Random-scene pools this node can be drawn from (see `runPlan` steps with a `pool`).
   final List<String> pools;
+
+  /// Lines shown when this stretch is cleared with no threat left (a random one is used).
+  final List<String> cleanText;
 }
 
 class BranchDef {

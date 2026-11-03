@@ -661,6 +661,21 @@ class Game {
     commitCard(kind);
   }
 
+  /// Line shown when a stretch is cleared with no threat left. A stretch can carry its own
+  /// (`clean_text` in nodes.json); otherwise a calm or close-call line is drawn by its danger.
+  String _passLine(NodeDef n) {
+    if (n.cleanText.isNotEmpty) return pick(n.cleanText);
+    final close = n.threat >= cfg.closeCallThreat;
+    final pool = dig(S, close ? 'log.cleanClose' : 'log.cleanCalm');
+    final fallback = dig(S, 'log.clean') as String;
+    if (pool is! List || pool.isEmpty) return fallback;
+    final all = pool.cast<String>();
+    final fresh = all.where((l) => !_usedPassLines.contains(l)).toList();
+    final text = pick(fresh.isNotEmpty ? fresh : all);
+    _usedPassLines.add(text);
+    return text;
+  }
+
   void applyNodeResolution() {
     final n = nodes[run!.node]!;
     final c = cargo[run!.cargo]!;
@@ -713,16 +728,7 @@ class Game {
         }
       }
     } else {
-      final close = n.threat >= cfg.closeCallThreat;
-      final pool = dig(S, close ? 'log.cleanClose' : 'log.cleanCalm');
-      var text = dig(S, 'log.clean') as String;
-      if (pool is List && pool.isNotEmpty) {
-        final all = pool.cast<String>();
-        final fresh = all.where((l) => !_usedPassLines.contains(l)).toList();
-        text = pick(fresh.isNotEmpty ? fresh : all);
-        _usedPassLines.add(text);
-      }
-      say('good', text);
+      say('good', _passLine(n));
     }
     if (n.salvage && run!.threat <= cfg.salvageThreatMax) {
       run!.salvageGot = 1;

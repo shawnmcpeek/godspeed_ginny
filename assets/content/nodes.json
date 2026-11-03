@@ -1,6 +1,7 @@
 [
   {
     "id": "castoff",
+    "clean_text": "Lines are off and the Ginny is still afloat. Forty fares are calling that a success.",
     "name": "Casting off — Cra-Zi Landing",
     "sub": "No hazard. Bank the goodwill.",
     "type": "sight",
@@ -18,6 +19,7 @@
   },
   {
     "id": "hippo",
+    "clean_text": "The pod lets you pass. One of them yawns, and you decide to take it as permission.",
     "pool": "wild",
     "name": "The Hippo Shallows",
     "sub": "Chart said wide water",
@@ -36,6 +38,7 @@
   },
   {
     "id": "narrows",
+    "clean_text": "Out the far end of the cut with both walls where you left them. The paint, less so.",
     "pool": "wild",
     "name": "The Narrow Cut",
     "sub": "Rock either side",
@@ -54,6 +57,7 @@
   },
   {
     "id": "wreck",
+    "clean_text": "You slide past the Calliope without touching the bar. She watches you go, the way she watches everyone.",
     "name": "The Calliope",
     "sub": "Aground since '13",
     "type": "sight",
@@ -85,6 +89,7 @@
   },
   {
     "id": "mine",
+    "clean_text": "You bring her round in the dark and out the way you came. The wall never got a word in.",
     "name": "Ilostmi Mine",
     "sub": "Cul-de-sac. She does not reverse.",
     "type": "hazard",
@@ -108,6 +113,7 @@
   },
   {
     "id": "reach",
+    "clean_text": "The Reach is as wide as the chart claimed, which unsettles you more than a shoal would.",
     "pool": "wild",
     "name": "The Reach",
     "sub": "Wide water, good bottom",
@@ -126,6 +132,7 @@
   },
   {
     "id": "snags",
+    "clean_text": "You duck, the timber misses, and every passenger looks at the wrong thing. Perfect.",
     "pool": "wild",
     "name": "The Snag Field",
     "sub": "The chart does not mention a fence",
@@ -144,6 +151,7 @@
   },
   {
     "id": "croc",
+    "clean_text": "No crocodiles. The passengers have opinions. You let them have the whole bend.",
     "pool": "wild",
     "name": "Crocodile Bend",
     "sub": "Marked in a confident hand",
@@ -162,6 +170,7 @@
   },
   {
     "id": "mill",
+    "clean_text": "The race tugs, thinks about it, and lets go. The mill, wherever it is, is not impressed.",
     "pool": "wild",
     "name": "The Old Race",
     "sub": "The mill is gone. The water is not.",
@@ -180,6 +189,7 @@
   },
   {
     "id": "shrine",
+    "clean_text": "They photograph the shrine, misspell it, and photograph the misspelling.",
     "pool": "wild",
     "name": "The Unnamed Shrine",
     "sub": "A landing. A name that isn't on the chart.",
@@ -271,6 +281,7 @@
   },
   {
     "id": "market",
+    "clean_text": "You thread the skiffs without buying a single clay boat. It takes more discipline than it sounds.",
     "pool": "wild",
     "name": "The Floating Market",
     "sub": "Forty skiffs. Every one a souvenir stall.",
@@ -289,6 +300,7 @@
   },
   {
     "id": "fog",
+    "clean_text": "The fog thins and there is the river, right where you guessed it. You will not mention the guess.",
     "pool": "wild",
     "name": "The Fog Bank",
     "sub": "The chart says clear",
@@ -307,6 +319,7 @@
   },
   {
     "id": "bridge",
+    "clean_text": "Under the arch with a finger's width to spare. Somebody's hat was less fortunate.",
     "pool": "wild",
     "name": "The Low Bridge",
     "sub": "Three arches. The chart says four.",
@@ -325,6 +338,7 @@
   },
   {
     "id": "rapids",
+    "clean_text": "The chop gives out and the Ginny rattles on. Everything aboard is in a slightly different order.",
     "pool": "wild",
     "name": "The Washboard",
     "sub": "Water that has lost its temper",
@@ -343,6 +357,7 @@
   },
   {
     "id": "island",
+    "clean_text": "The man on the island waves. You wave. Nobody has ever been so well received for so little.",
     "pool": "wild",
     "name": "The Waving Island",
     "sub": "One tree. One man. He waves.",
@@ -361,6 +376,7 @@
   },
   {
     "id": "ferry",
+    "clean_text": "You slip under the cable with a hand's breadth of daylight. The ferryman does not look up.",
     "pool": "wild",
     "name": "The Cable Ferry",
     "sub": "The cable is at neck height",
@@ -379,6 +395,7 @@
   },
   {
     "id": "butterflies",
+    "clean_text": "The orange settles and the river is brown again. Several passengers say nothing, which is how you know.",
     "pool": "wild",
     "name": "The Butterfly Bank",
     "sub": "Everything is orange. Briefly.",
@@ -397,6 +414,7 @@
   },
   {
     "id": "kettle",
+    "clean_text": "The Kettle Rocks mutter and let you go. Not a drop of tea.",
     "pool": "wild",
     "name": "The Kettle Rocks",
     "sub": "They boil, if you are patient",
@@ -415,6 +433,7 @@
   },
   {
     "id": "pelicans",
+    "clean_text": "The jury watches you pass and files no comment.",
     "pool": "wild",
     "name": "The Pelican Parade",
     "sub": "Eleven pelicans. All of them in charge.",
@@ -433,6 +452,7 @@
   },
   {
     "id": "laundry",
+    "clean_text": "You duck the line and a sheet brushes your hat. A village has a clean week and does not know how close it was.",
     "pool": "wild",
     "name": "The Washing Line",
     "sub": "Someone's whole week, over the water",
@@ -451,6 +471,7 @@
   },
   {
     "id": "statue",
+    "clean_text": "The statue bows. So do you. It seems only fair.",
     "pool": "wild",
     "name": "The Bowing Statue",
     "sub": "Stone, enormous, apologetic",
@@ -469,6 +490,7 @@
   },
   {
     "id": "lanterns",
+    "clean_text": "The paper moons fall behind you. The village goes on waving at the dark.",
     "pool": "wild",
     "name": "The Lantern Village",
     "sub": "Paper moons on strings",
@@ -487,6 +509,7 @@
   },
   {
     "id": "otters",
+    "clean_text": "The otters go down the slide one more time, for no one.",
     "pool": "wild",
     "name": "The Otter Slide",
     "sub": "Not a hazard. A show.",
@@ -505,6 +528,7 @@
   },
   {
     "id": "herons",
+    "clean_text": "Every hat is still on every head. The herons make a note.",
     "pool": "wild",
     "name": "The Heron Rookery",
     "sub": "They have your hats in mind",
@@ -523,6 +547,7 @@
   },
   {
     "id": "buoy",
+    "clean_text": "The bell tolls once more and you are past the shoal. It was not on the chart, and it was right.",
     "pool": "wild",
     "name": "The Bell Buoy",
     "sub": "It rings for nobody",
@@ -541,6 +566,7 @@
   },
   {
     "id": "quarry",
+    "clean_text": "The blast comes a hundred yards behind you. Thursday would like to apologise.",
     "pool": "wild",
     "name": "The Old Quarry",
     "sub": "They still blast, on Thursdays",
@@ -559,6 +585,7 @@
   },
   {
     "id": "hotspring",
+    "clean_text": "The steam rolls by. The boiler glares at it and says nothing.",
     "pool": "wild",
     "name": "The Hot Spring",
     "sub": "Steam, and a boiler with ideas",
@@ -577,6 +604,7 @@
   },
   {
     "id": "squall",
+    "clean_text": "The squall moves on down the valley, looking for somebody else. Everything aboard is wet in a new way.",
     "pool": "wild",
     "name": "The Rain Squall",
     "sub": "It came from nowhere. It is going there too.",
@@ -595,6 +623,7 @@
   },
   {
     "id": "sunset",
+    "clean_text": "The light goes. The phones are put away. For a moment nobody is documenting anything.",
     "pool": "wild",
     "name": "The Golden Hour",
     "sub": "Everyone wants a photograph",
@@ -613,6 +642,7 @@
   },
   {
     "id": "graveyard",
+    "clean_text": "You sail through the hulks with a lighter touch than the rest of them had.",
     "pool": "wild",
     "name": "The Boat Graveyard",
     "sub": "Previous skippers' ideas",
@@ -631,6 +661,7 @@
   },
   {
     "id": "hermit",
+    "clean_text": "He raises one hand. You raise one hand. That is the whole conversation, and it is plenty.",
     "pool": "wild",
     "name": "The Hermit's Dock",
     "sub": "He has views",
@@ -649,6 +680,7 @@
   },
   {
     "id": "cliffs",
+    "clean_text": "The cliffs finish their chord and the wind goes back to being wind.",
     "pool": "wild",
     "name": "The Singing Cliffs",
     "sub": "The wind plays them",
@@ -667,6 +699,7 @@
   },
   {
     "id": "dredge",
+    "clean_text": "The great arm stays up. Whatever it was asking, nobody has answered.",
     "pool": "wild",
     "name": "The Sleeping Dredge",
     "sub": "Rust, and ambition",
@@ -685,6 +718,7 @@
   },
   {
     "id": "weirs",
+    "clean_text": "You pass between the nets without disturbing a single fish. They would like it known they noticed.",
     "pool": "wild",
     "name": "The Fish Weirs",
     "sub": "Nets, and the people who mind them",
@@ -703,6 +737,7 @@
   },
   {
     "id": "gardens",
+    "clean_text": "The cabbages rock gently in your wake. No scarecrow files a complaint.",
     "pool": "wild",
     "name": "The Floating Gardens",
     "sub": "Cabbages, afloat",
@@ -721,6 +756,7 @@
   },
   {
     "id": "customs",
+    "clean_text": "The stamp comes down, the inspector nods, and you are through. Nobody asked for your papers.",
     "pool": "wild",
     "name": "The Customs Post",
     "sub": "Papers",
@@ -739,6 +775,7 @@
   },
   {
     "id": "survey",
+    "clean_text": "You pass the surveyor's hut. The pencil is still on the table, and so is the afternoon he got it all wrong.",
     "pool": "wild",
     "name": "The Surveyor's Hut",
     "sub": "Where the chart was drawn",
@@ -757,6 +794,7 @@
   },
   {
     "id": "swarm",
+    "clean_text": "The dragonflies lose interest all at once and move on. You swallow only one.",
     "pool": "wild",
     "name": "The Dragonfly Swarm",
     "sub": "Iridescent. Everywhere.",
@@ -775,6 +813,7 @@
   },
   {
     "id": "smokehouse",
+    "clean_text": "You glide past the smokehouse. Lunch will have to remain an abstract idea.",
     "pool": "wild",
     "name": "The Smokehouse",
     "sub": "Lunch, in a cloud",
@@ -793,6 +832,7 @@
   },
   {
     "id": "steeple",
+    "clean_text": "You steer round the steeple. The bell, a fathom down, says nothing, which is the right thing.",
     "pool": "wild",
     "name": "The Drowned Steeple",
     "sub": "Church, up to its neck",
@@ -811,6 +851,7 @@
   },
   {
     "id": "swing",
+    "clean_text": "The children miss you by a boat's width and shriek their disappointment.",
     "pool": "wild",
     "name": "The Rope Swing",
     "sub": "Children, airborne",
@@ -829,6 +870,7 @@
   },
   {
     "id": "bore",
+    "clean_text": "The wall of water lifts the Ginny, sets her down, and goes on up the river, unbothered.",
     "pool": "wild",
     "name": "The Tidal Bore",
     "sub": "A wall of water, politely",
@@ -847,6 +889,7 @@
   },
   {
     "id": "barge",
+    "clean_text": "The barge goes by like a village changing its mind. The captain gives you the nicest look he has.",
     "pool": "wild",
     "name": "The Slow Barge",
     "sub": "Right of way, by tonnage",
