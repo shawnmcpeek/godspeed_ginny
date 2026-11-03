@@ -698,23 +698,37 @@ class Game {
     } else if (run!.threat > 0) {
       final t = run!.threat;
       final sides = (dig(S, 'log.sides') as List).cast<String>();
+      final custom = n.unresolvedText;
       say(
         'bad',
-        fmt('log.unresolved', {
-          'label': n.threatLabel ?? dig(S, 'log.unresolvedFallback') as String,
-          'side': pick(sides),
-        }),
+        custom != null && custom.isNotEmpty
+            ? custom
+            : fmt('log.unresolved', {
+                'label': n.threatLabel ?? dig(S, 'log.unresolvedFallback') as String,
+                'side': pick(sides),
+              }),
       );
-      // Scale + floor so "takes a hit" always moves the Damage meter on the 0–100 dial.
-      final hit = math.max(
-        cfg.unresolvedHullMin,
-        (t * cfg.unresolvedHullScale).round().toDouble(),
-      );
-      damageHull(hit);
-      run!.water = clamp(run!.water + t * cfg.unresolvedWaterScale, 0, cfg.gaugeClamp);
-      run!.sat = clamp(run!.sat - t * cfg.unresolvedSatScale, 0, 100);
-      if (c.hasEffect('play_note')) say('act', dig(S, 'log.pianoNote') as String);
-      if (c.hasEffect('escape') && !career.leopardOut) {
+      // Only a real collision damages the hull, rattles the piano or lets the leopard out.
+      final impact = n.mishap != 'wet' && n.mishap != 'mood';
+      if (n.mishap == 'wet') {
+        run!.water = clamp(run!.water + t * cfg.unresolvedWetScale, 0, cfg.gaugeClamp);
+        run!.sat = clamp(run!.sat - t * cfg.unresolvedSatScale, 0, 100);
+      } else if (n.mishap == 'mood') {
+        run!.sat = clamp(run!.sat - t * cfg.unresolvedMoodScale, 0, 100);
+      } else {
+        // Scale + floor so "takes a hit" always moves the Damage meter on the 0–100 dial.
+        final hit = math.max(
+          cfg.unresolvedHullMin,
+          (t * cfg.unresolvedHullScale).round().toDouble(),
+        );
+        damageHull(hit);
+        run!.water = clamp(run!.water + t * cfg.unresolvedWaterScale, 0, cfg.gaugeClamp);
+        run!.sat = clamp(run!.sat - t * cfg.unresolvedSatScale, 0, 100);
+      }
+      if (impact && c.hasEffect('play_note')) {
+        say('act', dig(S, 'log.pianoNote') as String);
+      }
+      if (impact && c.hasEffect('escape') && !career.leopardOut) {
         final fx = c.effects.firstWhere((e) => e['effect'] == 'escape');
         final chanceKey = fx['chance_key'] as String?;
         final p = chanceKey != null

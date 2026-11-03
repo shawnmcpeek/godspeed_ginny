@@ -36,6 +36,8 @@
   "waterCrisisSat": 10,
   "unresolvedHullScale": 3.5,
   "unresolvedHullMin": 6,
+  "unresolvedWetScale": 5,
+  "unresolvedMoodScale": 3,
   "unresolvedWaterScale": 2,
   "unresolvedSatScale": 2,
   "riskThreat": 4,

@@ -151,6 +151,8 @@
   },
   {
     "id": "croc",
+    "mishap": "mood",
+    "unresolved_text": "The bend is empty and everyone knows it. The room wanted teeth and got a lecture on tides.",
     "clean_text": "No crocodiles. The passengers have opinions. You let them have the whole bend.",
     "pool": "wild",
     "name": "Crocodile Bend",
@@ -414,6 +416,8 @@
   },
   {
     "id": "kettle",
+    "mishap": "mood",
+    "unresolved_text": "You pass too close and the Kettle Rocks boil over onto the deck. Nobody is hurt. Everyone smells of eggs.",
     "clean_text": "The Kettle Rocks mutter and let you go. Not a drop of tea.",
     "pool": "wild",
     "name": "The Kettle Rocks",
@@ -452,6 +456,8 @@
   },
   {
     "id": "laundry",
+    "mishap": "mood",
+    "unresolved_text": "A bedsheet takes you full in the face. Then a second. A passenger emerges wearing someone else's trousers.",
     "clean_text": "You duck the line and a sheet brushes your hat. A village has a clean week and does not know how close it was.",
     "pool": "wild",
     "name": "The Washing Line",
@@ -528,6 +534,8 @@
   },
   {
     "id": "herons",
+    "mishap": "mood",
+    "unresolved_text": "A heron takes a hat. Then a sandwich. By the time you look up, they have taken the principle of the thing.",
     "clean_text": "Every hat is still on every head. The herons make a note.",
     "pool": "wild",
     "name": "The Heron Rookery",
@@ -585,6 +593,8 @@
   },
   {
     "id": "hotspring",
+    "mishap": "mood",
+    "unresolved_text": "The steam rolls over the boat. Everyone is very warm, and the boiler is smug about it.",
     "clean_text": "The steam rolls by. The boiler glares at it and says nothing.",
     "pool": "wild",
     "name": "The Hot Spring",
@@ -604,6 +614,8 @@
   },
   {
     "id": "squall",
+    "mishap": "wet",
+    "unresolved_text": "The squall catches you broadside. Rain comes in from every direction at once, and a surprising amount of it ends up inside.",
     "clean_text": "The squall moves on down the valley, looking for somebody else. Everything aboard is wet in a new way.",
     "pool": "wild",
     "name": "The Rain Squall",
@@ -756,6 +768,8 @@
   },
   {
     "id": "customs",
+    "mishap": "mood",
+    "unresolved_text": "The inspector holds you up for forms. The forms have forms. The room watches the sun move.",
     "clean_text": "The stamp comes down, the inspector nods, and you are through. Nobody asked for your papers.",
     "pool": "wild",
     "name": "The Customs Post",
@@ -794,6 +808,8 @@
   },
   {
     "id": "swarm",
+    "mishap": "mood",
+    "unresolved_text": "The dragonflies find the passengers. There is a good deal of swatting, and some of it connects.",
     "clean_text": "The dragonflies lose interest all at once and move on. You swallow only one.",
     "pool": "wild",
     "name": "The Dragonfly Swarm",
@@ -851,6 +867,8 @@
   },
   {
     "id": "swing",
+    "mishap": "wet",
+    "unresolved_text": "A child lets go at exactly the wrong moment. The splash arrives from above, the boat is entirely under it, and forty people are wet in a new way.",
     "clean_text": "The children miss you by a boat's width and shriek their disappointment.",
     "pool": "wild",
     "name": "The Rope Swing",

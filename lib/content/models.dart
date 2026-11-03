@@ -66,6 +66,10 @@ class GameConfig {
   double get unresolvedHullScale => (raw['unresolvedHullScale'] as num).toDouble();
   /// Floor so an announced hull hit always moves the Damage meter.
   double get unresolvedHullMin => (raw['unresolvedHullMin'] as num?)?.toDouble() ?? 6;
+  /// Water added per point of threat left when a "wet" stretch (a splash, a squall) goes badly.
+  double get unresolvedWetScale => (raw['unresolvedWetScale'] as num?)?.toDouble() ?? 5;
+  /// Room lost per point of threat left when a "mood" stretch (hats, sheets, paperwork) goes badly.
+  double get unresolvedMoodScale => (raw['unresolvedMoodScale'] as num?)?.toDouble() ?? 3;
   double get unresolvedWaterScale => (raw['unresolvedWaterScale'] as num).toDouble();
   double get unresolvedSatScale => (raw['unresolvedSatScale'] as num).toDouble();
   double get riskThreat => (raw['riskThreat'] as num).toDouble();
@@ -192,12 +196,16 @@ class NodeDef {
     this.stationCopy,
     this.pools = const [],
     this.cleanText = const [],
+    this.mishap = 'hull',
+    this.unresolvedText,
   });
 
   factory NodeDef.fromJson(Map<String, dynamic> j) {
     final poolRaw = j['pool'];
     final cleanRaw = j['clean_text'];
     return NodeDef(
+      mishap: j['mishap'] as String? ?? 'hull',
+      unresolvedText: j['unresolved_text'] as String?,
       cleanText: cleanRaw is String
           ? [cleanRaw]
           : (cleanRaw as List?)?.map((e) => e as String).toList() ?? const [],
@@ -254,6 +262,13 @@ class NodeDef {
 
   /// Lines shown when this stretch is cleared with no threat left (a random one is used).
   final List<String> cleanText;
+
+  /// What a failed stretch costs: 'hull' (a collision: damage, water, room), 'wet' (a splash or
+  /// squall: water and room, no damage) or 'mood' (hats, sheets, paperwork: room only).
+  final String mishap;
+
+  /// Line shown when this stretch is not cleared; falls back to the generic "takes a hit" line.
+  final String? unresolvedText;
 }
 
 class BranchDef {
