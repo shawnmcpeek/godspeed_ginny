@@ -46,7 +46,14 @@ class GameConfig {
   double get steerBoilerReduce => (raw['steerBoilerReduce'] as num).toDouble();
   double get wrenchHullReduce => (raw['wrenchHullReduce'] as num).toDouble();
   double get bailWaterReduce => (raw['bailWaterReduce'] as num).toDouble();
+  /// Maximum chance a passenger bolts when bailing; scales up with how much water is aboard.
   double get bailJumpChance => (raw['bailJumpChance'] as num).toDouble();
+  double get bailJumpFrom => (raw['bailJumpFrom'] as num?)?.toDouble() ?? 55;
+  double get bailJumpFull => (raw['bailJumpFull'] as num?)?.toDouble() ?? 100;
+  /// Water level at which bailing counts as real work (no dead air).
+  double get bailUsefulAt => (raw['bailUsefulAt'] as num?)?.toDouble() ?? 25;
+  /// Room worry per beat per point of unresolved threat while working a real problem.
+  double get worryScale => (raw['worryScale'] as num?)?.toDouble() ?? 0.25;
   double get hullWaterFactor => (raw['hullWaterFactor'] as num).toDouble();
   double get boilerCrisisAt => (raw['boilerCrisisAt'] as num).toDouble();
   double get boilerCrisisVent => (raw['boilerCrisisVent'] as num).toDouble();

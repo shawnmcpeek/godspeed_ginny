@@ -41,7 +41,20 @@ Fantasy must read in a **phone screenshot** and a **15-second trailer**, not onl
 
 ---
 
-## 3. Visual / presentation recommendation (agreed direction)
+## 3. Visual / presentation recommendation
+
+### 3.0 Cockpit view (current direction — supersedes the ribbon/stage plan below)
+You are the skipper, seen from the helm. **First-person, portrait, looking forward down the river.**
+- **Top ~50%: the scene ahead.** Layered forward view (sky, banks, water, light per region) with one hero silhouette per stretch that grows toward you as the hazard nears. Landmarks, animals and obstacles read at a glance. Only the bow tip of the boat shows.
+- **Middle: the dash.** Round boiler and water dials in the corners, linear room and damage scales between them, beat pips beneath (built; see `gauges_bar.dart`).
+- **Joke tabs.** Tabs pop up from the dash like keys on a cash register; **only jokes** appear there, about 3 at a time (the spontaneous hand, §4A System 1). Tap a tab to expand it (flavors, cost, risk, topic fit, learned passenger tells); the expanded card grows upward over the scene, never over the dash. A redraw ("think of something else") pops a fresh set.
+- **Bottom: the helm.** The top half of the wheel, in the thumb zone. Turning or tapping it is **Steer**.
+- **Dash buttons** next to their gauges: **Repair** and **Bail**. Each press spends a beat. A button pulses when its gauge is in the red and greys out when there is nothing to fix.
+- **Optional beat: turn around to patter.** Telling a joke could turn the view to the passengers (faces, the heckler) while the hazard keeps coming behind you. Makes the talk-versus-steer trade visible with no extra UI. Decide after the first prototype.
+- **Art plan:** 5–6 region kits plus one hero silhouette per stretch, reused heavily. Start with about 10 heroes (the landmarks and a few wild stretches). Wheel, bezels and gauge faces replace the painted placeholders when the art is ready.
+- **Accessibility:** a tap alternative to wheel-dragging, reduce-motion honored, every gauge and button labelled for screen readers.
+
+### 3.1 Earlier plan: 2D ribbon + docked stage (superseded by 3.0; kept for reference)
 
 **Not 3D. Not a continuous free-sail sim. Not cabaret staging. Not instrument-peephole as the main view.**
 
@@ -130,6 +143,23 @@ There is no deck screen, draft screen or office step. The skipper's act develops
 - **Cost and risk:** cost is 1 or 2 beats (quick one-liners, long stories); risk uses the existing field.
 - **Callbacks:** a joke with a `callback_to` target pays extra if the setup was told earlier in the run.
 - **Reactions:** the room meter is the main read. The 1–2 notable passengers (goal passengers and the loudest critic) also show a named reaction after each joke. Per-passenger satisfaction is tracked underneath.
+
+### The verbs (decided)
+Four ways to spend a beat, one per gauge (the boiler has no button of its own; steering burns it):
+| Verb | Control | Fixes | Notes |
+|------|---------|-------|-------|
+| Patter | Joke tabs | The room | The main verb |
+| Steer | Wheel | Threat (the hazard ahead) | Also burns boiler: venting 18 per beat, instead of the 32 it used to. Moving the boat uses the fire |
+| Repair | Dash button by the damage scale | Damage (hull) | Flavor covers collisions now, and boiler malfunctions later |
+| Bail | Dash button by the water dial | Water | Buckets; unlocks the bail-only jokes |
+
+**Morale rules (decided):**
+- Silence is not always dead air. A skipper steering through a real hazard is doing his job, and the room does not mind.
+- A **non-patter beat is free of dead air when it works a real problem** (steer with threat ahead, repair with damage, bail with water at 25+). The room then worries in proportion to the hazard still unresolved: threat × 0.25 per beat, capped at the full silence drain (3).
+- A beat with **nothing to fix**, and any non-patter beat at the falls (where the show is the point), costs the full silence drain.
+- So a stubborn hazard like the mine (threat 12) still costs morale while it fights you; a calm stretch asks for jokes.
+- **Bailing no longer scares passengers by default.** Jump chance is 0 below 55 water and scales up to 45% at 100, so bailing at 40 reads as effort and bailing at 80 starts to cost you passengers.
+- Both rules are in `config.json` (`worryScale`, `bailUsefulAt`, `bailJumpFrom`, `bailJumpFull`, `bailJumpChance`) and in `Game.beatDrain` / `Game.bailJumpChanceAt`. **Not yet playtested.**
 
 ### System 2 — River map and the lying chart
 **Run structure (decided, first version built):** a run is about **18 scenes**, like a ride with many short beats rather than a few long ones.

@@ -53,12 +53,12 @@
     "scriptAnywhere": "Works anywhere",
     "scriptElsewhere": "The rest of the script",
     "steer": "Steer",
-    "steerHint": "−{n} threat · −{b} boiler · silence",
+    "steerHint": "−{n} threat · −{b} boiler",
     "steerHintSelling": "−{b} boiler · still underway · silence",
-    "wrench": "Go below",
-    "wrenchHint": "−{n} damage · silence",
+    "wrench": "Repair",
+    "wrenchHint": "−{n} damage",
     "bail": "Bail",
-    "bailHint": "buckets · −{n} water · silence",
+    "bailHint": "buckets · −{n} water",
     "aboard": "Aboard:",
     "hold": "Hold:",
     "iceLeft": " — {pct}% left"
@@ -112,7 +112,7 @@
     "stations": {
       "open": "On the water",
       "steer": "Steer",
-      "wrench": "Went below",
+      "wrench": "Repaired",
       "bail": "Bailed",
       "patter": "Patter",
       "boulder": "The boulder"

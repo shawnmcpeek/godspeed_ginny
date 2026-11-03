@@ -517,7 +517,7 @@ class Game {
     }
   }
 
-  void spend(int cost, String station) {
+  void spend(int cost, String station, {double? drain}) {
     final node = nodes[run!.node]!;
     final wasTalk = station == 'patter';
     for (var i = 0; i < cost; i++) {
@@ -532,7 +532,7 @@ class Game {
         0,
         cfg.gaugeClamp,
       );
-      if (!wasTalk) run!.sat = clamp(run!.sat - cfg.silenceDrain, 0, 100);
+      if (!wasTalk) run!.sat = clamp(run!.sat - (drain ?? cfg.silenceDrain), 0, 100);
       applyBeatCargo();
       run!.beatsSpent[station] = (run!.beatsSpent[station] ?? 0) + 1;
       run!.nodeBeats[station] = (run!.nodeBeats[station] ?? 0) + 1;
@@ -590,8 +590,35 @@ class Game {
     commitCard('patter');
   }
 
+  /// Room lost on a non-patter beat. Working a real problem is not dead air: the room only
+  /// worries in proportion to the hazard still unresolved. Idle beats (nothing to fix, or the
+  /// falls, where the show is the point) cost the full silence drain.
+  double beatDrain(String kind, NodeDef node) {
+    final r = run!;
+    if (node.selling) return cfg.silenceDrain;
+    final useful = switch (kind) {
+      'steer' => r.threat > 0,
+      'wrench' => r.hull > 0,
+      'bail' => r.water >= cfg.bailUsefulAt,
+      _ => false,
+    };
+    if (!useful) return cfg.silenceDrain;
+    return math.min(cfg.silenceDrain, r.threat * cfg.worryScale);
+  }
+
+  /// Chance a passenger bolts while you bail: none while the leak is manageable, rising toward
+  /// [GameConfig.bailJumpChance] as the boat fills.
+  double bailJumpChanceAt(double water) {
+    final span = cfg.bailJumpFull - cfg.bailJumpFrom;
+    if (span <= 0) return cfg.bailJumpChance;
+    final t = math.max(0.0, math.min(1.0, (water - cfg.bailJumpFrom) / span));
+    return cfg.bailJumpChance * t;
+  }
+
   void doAction(String kind) {
     final node = nodes[run!.node]!;
+    final drain = beatDrain(kind, node);
+    final jumpChance = bailJumpChanceAt(run!.water);
     beginTurn();
     if (kind == 'steer') {
       if (node.selling) {
@@ -609,20 +636,24 @@ class Game {
       run!.water = clamp(run!.water - cfg.bailWaterReduce, 0, cfg.gaugeClamp);
       run!.nodeBailed = true;
       say('act', node.stationCopy?['bail'] ?? dig(S, 'log.bail') as String);
-      final jumped = !node.selling && chance(cfg.bailJumpChance);
+      final jumped = !node.selling && chance(jumpChance);
       if (jumped) say('bad', dig(S, 'log.bailJump') as String);
       for (final j in content.jokes) {
         if (j.unlock?['method'] == 'bail' && !run!.hand.contains(j.id)) {
           run!.hand.add(j.id);
         }
       }
-      spend(1, kind);
-      if (!jumped && !node.selling) say('beat', dig(S, 'log.silence') as String);
+      spend(1, kind, drain: drain);
+      if (!jumped && !node.selling && drain >= cfg.silenceDrain) {
+        say('beat', dig(S, 'log.silence') as String);
+      }
       commitCard(kind);
       return;
     }
-    spend(1, kind);
-    if (kind != 'patter') say('beat', dig(S, 'log.silence') as String);
+    spend(1, kind, drain: drain);
+    if (kind != 'patter' && drain >= cfg.silenceDrain) {
+      say('beat', dig(S, 'log.silence') as String);
+    }
     commitCard(kind);
   }
 
