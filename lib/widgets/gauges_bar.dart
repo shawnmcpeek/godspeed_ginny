@@ -10,24 +10,45 @@ import '../theme/app_theme.dart';
 ///
 /// Everything is painted in code, so brass bezels and faces can be swapped for art later.
 class GaugesBar extends StatefulWidget {
-  const GaugesBar({super.key, required this.game});
+  const GaugesBar({super.key, required this.game, this.showRepair = false, this.onRepair});
 
   final Game game;
+
+  /// Shows the Repair button to the right of the damage scale (only on the stretch screen).
+  final bool showRepair;
+
+  /// Called when Repair is pressed. Null disables the button (e.g. while waiting to continue).
+  final VoidCallback? onRepair;
 
   @override
   State<GaugesBar> createState() => _GaugesBarState();
 }
 
-class _GaugesBarState extends State<GaugesBar> with SingleTickerProviderStateMixin {
+class _GaugesBarState extends State<GaugesBar> with TickerProviderStateMixin {
   late final AnimationController _shake = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 140),
   );
 
+  late final AnimationController _pulse = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 800),
+  );
+
   @override
   void dispose() {
     _shake.dispose();
+    _pulse.dispose();
     super.dispose();
+  }
+
+  void _syncPulse(bool want) {
+    if (want && !_pulse.isAnimating) {
+      _pulse.repeat(reverse: true);
+    } else if (!want && _pulse.isAnimating) {
+      _pulse.stop();
+      _pulse.value = 0;
+    }
   }
 
   void _syncShake(bool anyHot, bool reduceMotion) {
@@ -55,8 +76,11 @@ class _GaugesBarState extends State<GaugesBar> with SingleTickerProviderStateMix
     final hullHot = r.hull >= 35;
     final roomHot = r.sat <= 30;
     final anyHot = boilerHot || waterHot || hullHot || roomHot;
+    final repairEnabled = widget.onRepair != null && r.hull > 0;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _syncShake(anyHot, reduceMotion);
+      if (!mounted) return;
+      _syncShake(anyHot, reduceMotion);
+      _syncPulse(widget.showRepair && repairEnabled && hullHot && !reduceMotion);
     });
 
     final refundFloor = ((game.cfg['refundSatFloor'] as num?)?.toDouble() ?? 45) / max;
@@ -102,17 +126,35 @@ class _GaugesBarState extends State<GaugesBar> with SingleTickerProviderStateMix
                   rightCaption: 'TIPS',
                 ),
                 const SizedBox(height: 6),
-                _LinearGauge(
-                  label: L['hull'] as String,
-                  value: r.hull,
-                  max: max,
-                  hot: hullHot,
-                  shake: _shake,
-                  delta: d['hull'],
-                  deltaKey: 'hull',
-                  zones: [
-                    _Zone(0, 0.5, AppColors.water.withValues(alpha: 0.18)),
-                    _Zone(0.5, 1, AppColors.stamp.withValues(alpha: 0.4)),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: _LinearGauge(
+                        label: L['hull'] as String,
+                        value: r.hull,
+                        max: max,
+                        hot: hullHot,
+                        shake: _shake,
+                        delta: d['hull'],
+                        deltaKey: 'hull',
+                        zones: [
+                          _Zone(0, 0.5, AppColors.water.withValues(alpha: 0.18)),
+                          _Zone(0.5, 1, AppColors.stamp.withValues(alpha: 0.4)),
+                        ],
+                      ),
+                    ),
+                    if (widget.showRepair) ...[
+                      const SizedBox(width: 8),
+                      _DashButton(
+                        label: ((game.S['node'] as Map)['wrench'] as String),
+                        icon: Icons.build,
+                        enabled: repairEnabled,
+                        urgent: hullHot,
+                        pulse: _pulse,
+                        onPressed: widget.onRepair,
+                      ),
+                    ],
                   ],
                 ),
                 if (totalBeats > 0) ...[
@@ -587,4 +629,74 @@ Color _deltaColor(String key, double n) {
   const badUp = {'boiler', 'water', 'hull', 'threat'};
   if (n > 0) return badUp.contains(key) ? AppColors.stamp : AppColors.brass;
   return badUp.contains(key) ? AppColors.brass : AppColors.stamp;
+}
+
+/// A brass push-button on the dash. Pulses red when its gauge is in danger, greys out when
+/// there is nothing to fix. Each press spends a beat.
+class _DashButton extends StatelessWidget {
+  const _DashButton({
+    required this.label,
+    required this.icon,
+    required this.enabled,
+    required this.urgent,
+    required this.pulse,
+    required this.onPressed,
+  });
+
+  final String label;
+  final IconData icon;
+  final bool enabled;
+  final bool urgent;
+  final Animation<double> pulse;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      label: '$label, spends one beat${urgent && enabled ? ', needed now' : ''}',
+      child: ExcludeSemantics(
+        child: Opacity(
+          opacity: enabled ? 1 : 0.35,
+          child: AnimatedBuilder(
+            animation: pulse,
+            builder: (context, child) {
+              final glow = enabled && urgent ? pulse.value : 0.0;
+              final border = Color.lerp(AppColors.brass, AppColors.stamp, glow)!;
+              return Material(
+                color: Color.lerp(AppColors.chart, AppColors.stamp, glow * 0.18),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  side: BorderSide(color: border, width: 2),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(6),
+                  onTap: enabled ? onPressed : null,
+                  child: child,
+                ),
+              );
+            },
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 64, minHeight: 48),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon, size: 16, color: urgent && enabled ? AppColors.stamp : AppColors.ink),
+                    Text(
+                      label.toUpperCase(),
+                      style: AppTheme.mono.copyWith(fontSize: 10, letterSpacing: 1.0),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

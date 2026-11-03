@@ -68,7 +68,11 @@ class NodeScreen extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 24),
       children: [
-        GaugesBar(game: g),
+        GaugesBar(
+          game: g,
+          showRepair: true,
+          onRepair: (waiting || r.beat < 1) ? null : () => controller.doAction('wrench'),
+        ),
         const SizedBox(height: 8),
         Text(n.name, style: AppTheme.display.copyWith(fontSize: 22)),
         Text(
@@ -138,16 +142,6 @@ class NodeScreen extends StatelessWidget {
                           'b': g.cfg.steerBoilerReduce.round(),
                         }),
                   onPressed: r.beat < 1 ? null : () => controller.doAction('steer'),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: ChartButton(
-                  label: nodeS['wrench'] as String,
-                  hint: fill(nodeS['wrenchHint'] as String, {
-                    'n': g.cfg.wrenchHullReduce.round(),
-                  }),
-                  onPressed: r.beat < 1 ? null : () => controller.doAction('wrench'),
                 ),
               ),
               const SizedBox(width: 8),
