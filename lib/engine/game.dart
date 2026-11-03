@@ -268,7 +268,11 @@ class Game {
     return !jokeOnTopic(joke);
   }
 
+  /// Pass lines already shown this run, so the same one does not repeat back to back.
+  final Set<String> _usedPassLines = {};
+
   void startRun(String cargoId) {
+    _usedPassLines.clear();
     final goose = career.runs >= cfg.gooseAfterRuns;
     final hand = content.jokes
         .where((j) {
@@ -709,7 +713,16 @@ class Game {
         }
       }
     } else {
-      say('good', dig(S, 'log.clean') as String);
+      final close = n.threat >= cfg.closeCallThreat;
+      final pool = dig(S, close ? 'log.cleanClose' : 'log.cleanCalm');
+      var text = dig(S, 'log.clean') as String;
+      if (pool is List && pool.isNotEmpty) {
+        final all = pool.cast<String>();
+        final fresh = all.where((l) => !_usedPassLines.contains(l)).toList();
+        text = pick(fresh.isNotEmpty ? fresh : all);
+        _usedPassLines.add(text);
+      }
+      say('good', text);
     }
     if (n.salvage && run!.threat <= cfg.salvageThreatMax) {
       run!.salvageGot = 1;

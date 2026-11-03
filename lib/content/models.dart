@@ -71,6 +71,9 @@ class GameConfig {
   double get riskThreat => (raw['riskThreat'] as num).toDouble();
   double get riskSat => (raw['riskSat'] as num).toDouble();
   double get riskWater => (raw['riskWater'] as num).toDouble();
+  /// Stretches that started with at least this much threat earn the "close call" pass line;
+  /// gentler ones get a calm pass line.
+  double get closeCallThreat => (raw['closeCallThreat'] as num?)?.toDouble() ?? 5;
   double get jokeStrongAt => (raw['jokeStrongAt'] as num).toDouble();
   double get jokeFairAt => (raw['jokeFairAt'] as num).toDouble();
   double get jokeFlatAt => (raw['jokeFlatAt'] as num).toDouble();

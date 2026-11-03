@@ -100,6 +100,8 @@
     "cleanSelling": "You've sold it as hard as it can be sold.",
     "fallsUnsold": "Forty people paid for a legend. You spent the advertised falls on the boat.",
     "clean": "Clean water. Nobody noticed how close that was, which is the job.",
+    "cleanCalm": ["Nothing happened. The river allows it.", "A quiet stretch. You will want to remember it later, and you won't.", "Smooth water. The Ginny holds her tongue.", "Past it without incident. The incident is being saved for later.", "That went by like a postcard.", "No harm done. You'll find some by Nowhere.", "The river lets you through. It has been known to change its mind.", "Easy water. The boiler has been told not to get used to it.", "Another bend behind you. The chart has nothing to say about it, which is unusual."],
+    "cleanClose": ["Clean water. Nobody noticed how close that was, which is the job.", "Through it. The passengers think that was the plan.", "You clear it by about the width of an apology.", "Safe on the far side. Your hands are only shaking a little.", "Clear. You decide not to look back, and it works.", "Nobody noticed how close that was. You noticed. You will be noticing at three in the morning.", "You thread it. Somebody applauds. They think it is part of the show.", "Out the other side. You tell yourself it was controlled.", "She comes through with her paint intact, which is more than the chart can say."],
     "fallsHigh": "They rate the falls generously. They are lying, and they are lying for you.",
     "fallsMid": "They rate the falls honestly. That costs money.",
     "fallsLow": "One of them writes 'nine feet' in a notebook. You saw it happen.",

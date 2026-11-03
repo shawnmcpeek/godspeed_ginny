@@ -53,6 +53,7 @@
   "jokeStrongAt": 6,
   "jokeFairAt": 2,
   "jokeFlatAt": -1,
+  "closeCallThreat": 5,
   "salvageThreatMax": 2,
   "salvagePay": 55,
   "leopardEscapeChance": 0.5,
