@@ -19,6 +19,7 @@
   },
   {
     "id": "hippo",
+    "unresolved_text": "The channel closes to a hippo's width. One of them leans on the hull, politely, and the old girl feels it for a mile.",
     "clean_text": "The pod lets you pass. One of them yawns, and you decide to take it as permission.",
     "pool": "wild",
     "name": "The Hippo Shallows",
@@ -38,6 +39,7 @@
   },
   {
     "id": "narrows",
+    "unresolved_text": "The cut takes a stripe of paint off one side and a little more off the other. The rock does not apologise.",
     "clean_text": "Out the far end of the cut with both walls where you left them. The paint, less so.",
     "pool": "wild",
     "name": "The Narrow Cut",
@@ -57,6 +59,7 @@
   },
   {
     "id": "wreck",
+    "unresolved_text": "The Ginny touches the bar. A long groan runs through her, and the Calliope, to her credit, does not say 'told you so.'",
     "clean_text": "You slide past the Calliope without touching the bar. She watches you go, the way she watches everyone.",
     "name": "The Calliope",
     "sub": "Aground since '13",
@@ -89,6 +92,7 @@
   },
   {
     "id": "mine",
+    "unresolved_text": "The wall turns her for you. There is a sound like a cathedral door, and every passenger decides to remember it.",
     "clean_text": "You bring her round in the dark and out the way you came. The wall never got a word in.",
     "name": "Ilostmi Mine",
     "sub": "Cul-de-sac. She does not reverse.",
@@ -113,6 +117,7 @@
   },
   {
     "id": "reach",
+    "unresolved_text": "The shoal was not on the chart, and the keel tells you so in a low voice.",
     "clean_text": "The Reach is as wide as the chart claimed, which unsettles you more than a shoal would.",
     "pool": "wild",
     "name": "The Reach",
@@ -132,6 +137,7 @@
   },
   {
     "id": "snags",
+    "unresolved_text": "A snag finds the hull and rakes along the planking with the sound of a very long fingernail.",
     "clean_text": "You duck, the timber misses, and every passenger looks at the wrong thing. Perfect.",
     "pool": "wild",
     "name": "The Snag Field",
@@ -172,6 +178,7 @@
   },
   {
     "id": "mill",
+    "unresolved_text": "The race takes the Ginny sideways, spins her once, and sets her down without comment. Something in her aches.",
     "clean_text": "The race tugs, thinks about it, and lets go. The mill, wherever it is, is not impressed.",
     "pool": "wild",
     "name": "The Old Race",
@@ -191,6 +198,8 @@
   },
   {
     "id": "shrine",
+    "mishap": "mood",
+    "unresolved_text": "The landing is slick. A passenger sits down hard on a step that is not on the chart. The shrine has seen worse.",
     "clean_text": "They photograph the shrine, misspell it, and photograph the misspelling.",
     "pool": "wild",
     "name": "The Unnamed Shrine",
@@ -283,6 +292,7 @@
   },
   {
     "id": "market",
+    "unresolved_text": "You clip a skiff. Eleven clay boats go into the river, and a good deal of the Ginny's paint goes with them.",
     "clean_text": "You thread the skiffs without buying a single clay boat. It takes more discipline than it sounds.",
     "pool": "wild",
     "name": "The Floating Market",
@@ -302,6 +312,7 @@
   },
   {
     "id": "fog",
+    "unresolved_text": "Something solid appears in the fog about a second after you hit it. You are not sure what. The Ginny is.",
     "clean_text": "The fog thins and there is the river, right where you guessed it. You will not mention the guess.",
     "pool": "wild",
     "name": "The Fog Bank",
@@ -321,6 +332,7 @@
   },
   {
     "id": "bridge",
+    "unresolved_text": "The bridge takes the top off something. The awning, a hat, the Ginny's good name.",
     "clean_text": "Under the arch with a finger's width to spare. Somebody's hat was less fortunate.",
     "pool": "wild",
     "name": "The Low Bridge",
@@ -340,6 +352,7 @@
   },
   {
     "id": "rapids",
+    "unresolved_text": "The chop gets under her. Every rivet makes a small complaint, and a few make it permanent.",
     "clean_text": "The chop gives out and the Ginny rattles on. Everything aboard is in a slightly different order.",
     "pool": "wild",
     "name": "The Washboard",
@@ -359,6 +372,7 @@
   },
   {
     "id": "island",
+    "unresolved_text": "The shallows take the keel for a moment. The man on the island stops waving, which is somehow worse.",
     "clean_text": "The man on the island waves. You wave. Nobody has ever been so well received for so little.",
     "pool": "wild",
     "name": "The Waving Island",
@@ -378,6 +392,7 @@
   },
   {
     "id": "ferry",
+    "unresolved_text": "The cable catches the funnel and sings. The ferryman looks up for the first time in years.",
     "clean_text": "You slip under the cable with a hand's breadth of daylight. The ferryman does not look up.",
     "pool": "wild",
     "name": "The Cable Ferry",
@@ -555,6 +570,7 @@
   },
   {
     "id": "buoy",
+    "unresolved_text": "The bell buoy bongs off the hull. Everyone says 'ah.' The shoal, smug, has been there the whole time.",
     "clean_text": "The bell tolls once more and you are past the shoal. It was not on the chart, and it was right.",
     "pool": "wild",
     "name": "The Bell Buoy",
@@ -574,6 +590,7 @@
   },
   {
     "id": "quarry",
+    "unresolved_text": "Loose rock comes down on the boat from the Thursday blast. The Ginny wears a few of the stones for a mile.",
     "clean_text": "The blast comes a hundred yards behind you. Thursday would like to apologise.",
     "pool": "wild",
     "name": "The Old Quarry",
@@ -654,6 +671,7 @@
   },
   {
     "id": "graveyard",
+    "unresolved_text": "A hulk reaches out and takes a piece of you as a keepsake. It is mutual; it was already missing a piece.",
     "clean_text": "You sail through the hulks with a lighter touch than the rest of them had.",
     "pool": "wild",
     "name": "The Boat Graveyard",
@@ -711,6 +729,7 @@
   },
   {
     "id": "dredge",
+    "unresolved_text": "The dredge's arm catches the rail, groans, and lets go. Fifty years of rust, and it still has a grip.",
     "clean_text": "The great arm stays up. Whatever it was asking, nobody has answered.",
     "pool": "wild",
     "name": "The Sleeping Dredge",
@@ -730,6 +749,8 @@
   },
   {
     "id": "weirs",
+    "mishap": "mood",
+    "unresolved_text": "The nets wrap the rudder. The fishermen free you with the patience of men who are, and always have been, right. The room does not enjoy it.",
     "clean_text": "You pass between the nets without disturbing a single fish. They would like it known they noticed.",
     "pool": "wild",
     "name": "The Fish Weirs",
@@ -848,6 +869,7 @@
   },
   {
     "id": "steeple",
+    "unresolved_text": "You kiss the steeple. A cloud of old plaster, one startled gull, and from a fathom down, a single 'bong.'",
     "clean_text": "You steer round the steeple. The bell, a fathom down, says nothing, which is the right thing.",
     "pool": "wild",
     "name": "The Drowned Steeple",
@@ -888,6 +910,7 @@
   },
   {
     "id": "bore",
+    "unresolved_text": "The wall of water takes the Ginny broadside and sets her down hard. Water everywhere, including places that were dry on purpose.",
     "clean_text": "The wall of water lifts the Ginny, sets her down, and goes on up the river, unbothered.",
     "pool": "wild",
     "name": "The Tidal Bore",
@@ -907,6 +930,7 @@
   },
   {
     "id": "barge",
+    "unresolved_text": "The barge's wake takes the Ginny's shoulder, and then the barge itself, gently, takes the rest. The captain does not look down.",
     "clean_text": "The barge goes by like a village changing its mind. The captain gives you the nicest look he has.",
     "pool": "wild",
     "name": "The Slow Barge",

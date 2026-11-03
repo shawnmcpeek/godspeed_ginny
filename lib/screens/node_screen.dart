@@ -70,8 +70,9 @@ class NodeScreen extends StatelessWidget {
       children: [
         GaugesBar(
           game: g,
-          showRepair: true,
+          showActions: true,
           onRepair: (waiting || r.beat < 1) ? null : () => controller.doAction('wrench'),
+          onBail: (waiting || r.beat < 1) ? null : () => controller.doAction('bail'),
         ),
         const SizedBox(height: 8),
         Text(n.name, style: AppTheme.display.copyWith(fontSize: 22)),
@@ -142,16 +143,6 @@ class NodeScreen extends StatelessWidget {
                           'b': g.cfg.steerBoilerReduce.round(),
                         }),
                   onPressed: r.beat < 1 ? null : () => controller.doAction('steer'),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: ChartButton(
-                  label: nodeS['bail'] as String,
-                  hint: fill(nodeS['bailHint'] as String, {
-                    'n': g.cfg.bailWaterReduce.round(),
-                  }),
-                  onPressed: r.beat < 1 ? null : () => controller.doAction('bail'),
                 ),
               ),
             ],

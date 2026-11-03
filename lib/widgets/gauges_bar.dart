@@ -10,15 +10,24 @@ import '../theme/app_theme.dart';
 ///
 /// Everything is painted in code, so brass bezels and faces can be swapped for art later.
 class GaugesBar extends StatefulWidget {
-  const GaugesBar({super.key, required this.game, this.showRepair = false, this.onRepair});
+  const GaugesBar({
+    super.key,
+    required this.game,
+    this.showActions = false,
+    this.onRepair,
+    this.onBail,
+  });
 
   final Game game;
 
-  /// Shows the Repair button to the right of the damage scale (only on the stretch screen).
-  final bool showRepair;
+  /// Shows the Repair and Bail buttons beside their gauges (only on the stretch screen).
+  final bool showActions;
 
   /// Called when Repair is pressed. Null disables the button (e.g. while waiting to continue).
   final VoidCallback? onRepair;
+
+  /// Called when Bail is pressed. Null disables the button.
+  final VoidCallback? onBail;
 
   @override
   State<GaugesBar> createState() => _GaugesBarState();
@@ -77,10 +86,15 @@ class _GaugesBarState extends State<GaugesBar> with TickerProviderStateMixin {
     final roomHot = r.sat <= 30;
     final anyHot = boilerHot || waterHot || hullHot || roomHot;
     final repairEnabled = widget.onRepair != null && r.hull > 0;
+    final bailEnabled = widget.onBail != null && r.water > 0;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _syncShake(anyHot, reduceMotion);
-      _syncPulse(widget.showRepair && repairEnabled && hullHot && !reduceMotion);
+      _syncPulse(
+        widget.showActions &&
+            !reduceMotion &&
+            ((repairEnabled && hullHot) || (bailEnabled && waterHot)),
+      );
     });
 
     final refundFloor = ((game.cfg['refundSatFloor'] as num?)?.toDouble() ?? 45) / max;
@@ -144,7 +158,7 @@ class _GaugesBarState extends State<GaugesBar> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    if (widget.showRepair) ...[
+                    if (widget.showActions) ...[
                       const SizedBox(width: 8),
                       _DashButton(
                         label: ((game.S['node'] as Map)['wrench'] as String),
@@ -165,15 +179,32 @@ class _GaugesBarState extends State<GaugesBar> with TickerProviderStateMixin {
             ),
           ),
           const SizedBox(width: 10),
-          _RoundGauge(
-            label: L['water'] as String,
-            icon: Icons.water_drop,
-            value: r.water,
-            max: max,
-            hot: waterHot,
-            shake: _shake,
-            delta: d['water'],
-            deltaKey: 'water',
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _RoundGauge(
+                label: L['water'] as String,
+                icon: Icons.water_drop,
+                value: r.water,
+                max: max,
+                hot: waterHot,
+                shake: _shake,
+                delta: d['water'],
+                deltaKey: 'water',
+              ),
+              if (widget.showActions) ...[
+                const SizedBox(height: 6),
+                _DashButton(
+                  label: ((game.S['node'] as Map)['bail'] as String),
+                  icon: Icons.format_color_reset,
+                  enabled: bailEnabled,
+                  urgent: waterHot,
+                  pulse: _pulse,
+                  onPressed: widget.onBail,
+                  compact: true,
+                ),
+              ],
+            ],
           ),
         ],
       ),
@@ -641,14 +672,37 @@ class _DashButton extends StatelessWidget {
     required this.urgent,
     required this.pulse,
     required this.onPressed,
+    this.compact = false,
   });
 
+  /// Wide, single-line variant used under a dial.
+  final bool compact;
   final String label;
   final IconData icon;
   final bool enabled;
   final bool urgent;
   final Animation<double> pulse;
   final VoidCallback? onPressed;
+
+  Widget _content() {
+    final color = urgent && enabled ? AppColors.stamp : AppColors.ink;
+    final text = Text(
+      label.toUpperCase(),
+      style: AppTheme.mono.copyWith(fontSize: 10, letterSpacing: 1.0),
+    );
+    if (compact) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [Icon(icon, size: 15, color: color), const SizedBox(width: 5), text],
+      );
+    }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [Icon(icon, size: 16, color: color), text],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -658,7 +712,7 @@ class _DashButton extends StatelessWidget {
       label: '$label, spends one beat${urgent && enabled ? ', needed now' : ''}',
       child: ExcludeSemantics(
         child: Opacity(
-          opacity: enabled ? 1 : 0.35,
+          opacity: enabled ? 1 : 0.5,
           child: AnimatedBuilder(
             animation: pulse,
             builder: (context, child) {
@@ -678,20 +732,13 @@ class _DashButton extends StatelessWidget {
               );
             },
             child: ConstrainedBox(
-              constraints: const BoxConstraints(minWidth: 64, minHeight: 48),
+              constraints: BoxConstraints(
+                minWidth: compact ? 82 : 64,
+                minHeight: compact ? 40 : 48,
+              ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(icon, size: 16, color: urgent && enabled ? AppColors.stamp : AppColors.ink),
-                    Text(
-                      label.toUpperCase(),
-                      style: AppTheme.mono.copyWith(fontSize: 10, letterSpacing: 1.0),
-                    ),
-                  ],
-                ),
+                child: _content(),
               ),
             ),
           ),
