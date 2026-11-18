@@ -161,6 +161,7 @@ class CockpitNodeOverlay extends StatelessWidget {
                           ChartButton(
                             label: dig(S, 'card.continue') as String,
                             wide: true,
+                            fill: AppColors.chart.withValues(alpha: 0.94),
                             onPressed: controller.continueNode,
                           )
                         else ...[

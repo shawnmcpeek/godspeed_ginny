@@ -10,6 +10,7 @@ class ChartButton extends StatelessWidget {
     this.onPressed,
     this.wide = false,
     this.hot = false,
+    this.fill,
   });
 
   final String label;
@@ -17,6 +18,9 @@ class ChartButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool wide;
   final bool hot;
+
+  /// Optional background, for when the button sits over artwork (cockpit view).
+  final Color? fill;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,7 @@ class ChartButton extends StatelessWidget {
             constraints: const BoxConstraints(minHeight: 52),
             padding: AppTheme.chartButtonPadding,
             decoration: BoxDecoration(
+              color: fill,
               border: Border.all(color: border, width: 1.5),
             ),
             child: Column(
