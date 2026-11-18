@@ -51,7 +51,8 @@ android {
 
     defaultConfig {
         applicationId = "pro.daddoodev.godspeedginny"
-        minSdk = flutter.minSdkVersion
+        // sentry_flutter requires API 26+
+        minSdk = maxOf(flutter.minSdkVersion, 26)
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
