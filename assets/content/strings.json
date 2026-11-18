@@ -160,8 +160,6 @@
   },
   "boulder": {
     "title": "The boulder",
-    "sub": "I am conflicted.",
-    "note": "Left or right of the boulder. Same rock. You are conflicted.",
     "left": "Left",
     "leftHint": "Port side of the rock",
     "right": "Right",

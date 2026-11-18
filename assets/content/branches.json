@@ -310,7 +310,7 @@
   },
   {
     "id": "fork_boulder",
-    "prompt": "The chart shows two channels around a rock. The rock is not on the chart. You are conflicted.",
+    "prompt": "The chart shows two channels around a rock. The rock is not on the chart.",
     "pick": 2,
     "edges": [
       {
@@ -331,7 +331,7 @@
           "material": "low",
           "surprise": "same_rock_either_way"
         },
-        "annotation_on_discovery": "same rock. still conflicted.",
+        "annotation_on_discovery": "same rock.",
         "boiler_bonus": 0
       },
       {
@@ -352,7 +352,7 @@
           "material": "low",
           "surprise": "same_rock_either_way"
         },
-        "annotation_on_discovery": "same rock. still conflicted.",
+        "annotation_on_discovery": "same rock.",
         "boiler_bonus": 0
       },
       {

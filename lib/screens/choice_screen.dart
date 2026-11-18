@@ -112,23 +112,11 @@ class _BoulderChoice extends StatelessWidget {
           const SizedBox(height: 8),
         ],
         Text(b['title'] as String, style: AppTheme.display.copyWith(fontSize: 22)),
-        Text(
-          (b['sub'] as String).toUpperCase(),
-          style: AppTheme.mono.copyWith(fontSize: 14, letterSpacing: 1.4, color: AppColors.stamp),
-        ),
         const SizedBox(height: 8),
-        if (done && g.run?.card != null)
-          PlayCardView(card: g.run!.card!, strings: controller.strings)
-        else
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: AppColors.chart.withValues(alpha: 0.94),
-              border: Border.all(color: AppColors.water, width: 1.5),
-            ),
-            child: Text(b['note'] as String, style: Theme.of(context).textTheme.bodyMedium),
-          ),
-        const SizedBox(height: 8),
+        if (done && g.run?.card != null) ...[
+          PlayCardView(card: g.run!.card!, strings: controller.strings),
+          const SizedBox(height: 8),
+        ],
         if (done)
           ChartButton(
             label: b['carryOn'] as String,

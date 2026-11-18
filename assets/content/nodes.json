@@ -251,7 +251,7 @@
     "water_rate": 2,
     "joke_tags_favored": ["boulder"],
     "tags": ["boulder"],
-    "open": "Same granite either way. The river splits around it, and so do you. You are conflicted.",
+    "open": "Same granite either way. The river splits around it, and so do you.",
     "selling": false,
     "salvage": false,
     "settle_stages": null

@@ -860,10 +860,8 @@ class Game {
       damageHull((bCfg['scrapeHull'] as num).toDouble());
       run!.water = clamp(run!.water + (bCfg['scrapeWater'] as num).toDouble(), 0, cfg.gaugeClamp);
       run!.sat = clamp(run!.sat - (bCfg['scrapeSat'] as num).toDouble(), 0, 100);
-      say('bad', bS['scrape'] as String);
-    } else {
-      say('good', bS['clear'] as String);
     }
+    // The result is only the punchline; the gauges (and the card's deltas) show hit or miss.
     final punchlines = (bS['punchlines'] as List)
         .map((e) => JokeVariant.fromJson(Map<String, dynamic>.from(e as Map)))
         .toList();
