@@ -71,11 +71,11 @@ class _HomeShellState extends State<HomeShell> {
         g.run != null &&
         (g.screen == 'node' || g.screen == 'branch' || g.screen == 'choice') &&
         !c.showTelemetry;
-    // First-person cockpit for stretches. Other play screens still use the chart UI.
+    // First-person cockpit for stretches, branches and choices.
     final cockpitActive = kCockpitNodeView &&
         c.shell == AppShell.play &&
         g.run != null &&
-        g.screen == 'node' &&
+        (g.screen == 'node' || g.screen == 'branch' || g.screen == 'choice') &&
         !c.showTelemetry;
     final showPlayFooter = c.shell == AppShell.play && !c.showTelemetry;
     final career = fill(S['career'] as String, {

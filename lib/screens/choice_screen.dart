@@ -7,21 +7,25 @@ import '../widgets/gauges_bar.dart';
 import '../widgets/play_card_view.dart';
 
 class ChoiceScreen extends StatelessWidget {
-  const ChoiceScreen({super.key, required this.controller});
+  const ChoiceScreen({super.key, required this.controller, this.showGauges = true});
 
   final GameController controller;
+
+  /// The cockpit view has its own gauges, so it turns the chart gauge bar off.
+  final bool showGauges;
 
   @override
   Widget build(BuildContext context) {
     return controller.g.choiceId == 'boulder'
-        ? _BoulderChoice(controller: controller)
-        : _DucksChoice(controller: controller);
+        ? _BoulderChoice(controller: controller, showGauges: showGauges)
+        : _DucksChoice(controller: controller, showGauges: showGauges);
   }
 }
 
 class _DucksChoice extends StatelessWidget {
-  const _DucksChoice({required this.controller});
+  const _DucksChoice({required this.controller, required this.showGauges});
   final GameController controller;
+  final bool showGauges;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +38,10 @@ class _DucksChoice extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 24),
       children: [
-        GaugesBar(game: g),
-        const SizedBox(height: 8),
+        if (showGauges) ...[
+          GaugesBar(game: g),
+          const SizedBox(height: 8),
+        ],
         Text(title, style: AppTheme.display.copyWith(fontSize: 22)),
         Text(
           (d['sub'] as String).toUpperCase(),
@@ -87,8 +93,9 @@ class _DucksChoice extends StatelessWidget {
 }
 
 class _BoulderChoice extends StatelessWidget {
-  const _BoulderChoice({required this.controller});
+  const _BoulderChoice({required this.controller, required this.showGauges});
   final GameController controller;
+  final bool showGauges;
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +107,10 @@ class _BoulderChoice extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 24),
       children: [
-        GaugesBar(game: g),
-        const SizedBox(height: 8),
+        if (showGauges) ...[
+          GaugesBar(game: g),
+          const SizedBox(height: 8),
+        ],
         Text(b['title'] as String, style: AppTheme.display.copyWith(fontSize: 22)),
         Text(
           (b['sub'] as String).toUpperCase(),

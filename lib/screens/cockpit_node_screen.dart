@@ -12,6 +12,8 @@ import '../flame/cockpit/cockpit_layout.dart';
 import '../theme/app_theme.dart';
 import '../widgets/chart_button.dart';
 import '../widgets/play_card_view.dart';
+import 'branch_screen.dart';
+import 'choice_screen.dart';
 import 'node_screen.dart' show JokeButton, ScriptSect;
 
 /// Which scene art to show for a stretch. Everything uses the placeholder for now;
@@ -35,8 +37,9 @@ class CockpitStage extends StatelessWidget {
   }
 }
 
-/// Everything Flutter draws on top of the cockpit during a stretch: tap targets
-/// over the wheel and dash buttons, the stretch heading, the card, and the joke tabs.
+/// Everything Flutter draws on top of the cockpit: tap targets over the wheel and
+/// dash buttons, and the window content. On a stretch that is the heading, card and
+/// joke tabs; on branch and choice screens it is that screen inside one panel.
 ///
 /// It also feeds the real game state to [game] as a [CockpitSnapshot] each build.
 class CockpitNodeOverlay extends StatelessWidget {
@@ -62,7 +65,8 @@ class CockpitNodeOverlay extends StatelessWidget {
     final max = g.cfg.gaugeDisplayMax;
     double frac(double v) => (v / max).clamp(0.0, 1.0).toDouble();
     final waiting = r.awaitingContinue;
-    final canAct = !waiting && r.beat >= 1;
+    final isNode = g.screen == 'node';
+    final canAct = isNode && !waiting && r.beat >= 1;
     final repairOn = canAct && r.hull > 0;
     final bailOn = canAct && r.water > 0;
 
@@ -144,7 +148,13 @@ class CockpitNodeOverlay extends StatelessWidget {
               right: 10,
               top: windowTop,
               height: (windowBottom - windowTop).clamp(0.0, size.height).toDouble(),
-              child: Column(
+              child: !isNode
+                  ? _Panel(
+                      child: g.screen == 'branch'
+                          ? BranchScreen(controller: controller, showGauges: false)
+                          : ChoiceScreen(controller: controller, showGauges: false),
+                    )
+                  : Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _Heading(name: n.name, sub: n.sub, threat: threat),
@@ -256,6 +266,25 @@ class CockpitNodeOverlay extends StatelessWidget {
           child: const SizedBox.expand(),
         ),
       ),
+    );
+  }
+}
+
+/// One translucent dialog panel behind a whole screen (branch and choice screens).
+class _Panel extends StatelessWidget {
+  const _Panel({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: AppColors.chart.withValues(alpha: 0.93),
+        border: Border.all(color: AppColors.water, width: 1.5),
+      ),
+      child: child,
     );
   }
 }

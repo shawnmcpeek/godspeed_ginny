@@ -7,9 +7,12 @@ import '../widgets/gauges_bar.dart';
 import '../widgets/play_card_view.dart';
 
 class BranchScreen extends StatelessWidget {
-  const BranchScreen({super.key, required this.controller});
+  const BranchScreen({super.key, required this.controller, this.showGauges = true});
 
   final GameController controller;
+
+  /// The cockpit view has its own gauges, so it turns the chart gauge bar off.
+  final bool showGauges;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +26,10 @@ class BranchScreen extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 24),
       children: [
-        GaugesBar(game: g),
-        const SizedBox(height: 8),
+        if (showGauges) ...[
+          GaugesBar(game: g),
+          const SizedBox(height: 8),
+        ],
         Text(branchS['title'] as String, style: AppTheme.display.copyWith(fontSize: 22)),
         Text(
           (branchS['sub'] as String).toUpperCase(),
