@@ -29,6 +29,7 @@ flutter:
   assets:
     - assets/content/
     - assets/branding/
+    - assets/cockpit/
 
 flutter_launcher_icons:
   android: true

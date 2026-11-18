@@ -149,17 +149,17 @@ class NodeScreen extends StatelessWidget {
           ),
           SectionLabel(nodeS['orSay'] as String),
           if (here.isNotEmpty) ...[
-            _ScriptSect(nodeS['scriptHere'] as String),
-            ...here.map((id) => _JokeButton(controller: controller, id: id)),
+            ScriptSect(nodeS['scriptHere'] as String),
+            ...here.map((id) => JokeButton(controller: controller, id: id)),
           ],
           if (anywhere.isNotEmpty) ...[
-            _ScriptSect(nodeS['scriptAnywhere'] as String),
-            ...anywhere.map((id) => _JokeButton(controller: controller, id: id)),
+            ScriptSect(nodeS['scriptAnywhere'] as String),
+            ...anywhere.map((id) => JokeButton(controller: controller, id: id)),
           ],
           if (elsewhere.isNotEmpty) ...[
-            _ScriptSect(nodeS['scriptElsewhere'] as String),
+            ScriptSect(nodeS['scriptElsewhere'] as String),
             ...elsewhere.map(
-              (id) => _JokeButton(controller: controller, id: id, cold: true),
+              (id) => JokeButton(controller: controller, id: id, cold: true),
             ),
           ],
           const SizedBox(height: 8),
@@ -200,8 +200,8 @@ class NodeScreen extends StatelessWidget {
   }
 }
 
-class _ScriptSect extends StatelessWidget {
-  const _ScriptSect(this.text);
+class ScriptSect extends StatelessWidget {
+  const ScriptSect(this.text);
   final String text;
 
   @override
@@ -216,8 +216,8 @@ class _ScriptSect extends StatelessWidget {
   }
 }
 
-class _JokeButton extends StatelessWidget {
-  const _JokeButton({
+class JokeButton extends StatelessWidget {
+  const JokeButton({
     required this.controller,
     required this.id,
     this.cold = false,

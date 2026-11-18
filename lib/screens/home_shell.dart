@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../content/loader.dart';
 import '../engine/game_controller.dart';
+import '../flame/cockpit/cockpit_game.dart';
+import '../flame/cockpit/cockpit_layout.dart';
 import '../flame/river_scene.dart';
 import '../theme/app_theme.dart';
 import 'branch_screen.dart';
 import 'choice_screen.dart';
+import 'cockpit_node_screen.dart';
 import 'credits_screen.dart';
 import 'node_screen.dart';
 import 'office_screen.dart';
@@ -26,11 +29,13 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> {
   late final RiverScene _river;
+  late final CockpitGame _cockpit;
 
   @override
   void initState() {
     super.initState();
     _river = RiverScene();
+    _cockpit = CockpitGame();
   }
 
   @override
@@ -66,6 +71,12 @@ class _HomeShellState extends State<HomeShell> {
         g.run != null &&
         (g.screen == 'node' || g.screen == 'branch' || g.screen == 'choice') &&
         !c.showTelemetry;
+    // First-person cockpit for stretches. Other play screens still use the chart UI.
+    final cockpitActive = kCockpitNodeView &&
+        c.shell == AppShell.play &&
+        g.run != null &&
+        g.screen == 'node' &&
+        !c.showTelemetry;
     final showPlayFooter = c.shell == AppShell.play && !c.showTelemetry;
     final career = fill(S['career'] as String, {
       'runs': g.career.runs,
@@ -84,7 +95,7 @@ class _HomeShellState extends State<HomeShell> {
           Positioned.fill(
             child: IgnorePointer(
               child: Opacity(
-                opacity: playing ? 0.22 : 0,
+                opacity: playing && !cockpitActive ? 0.22 : 0,
                 child: GameWidget(
                   game: _river,
                   loadingBuilder: (_) => const SizedBox.shrink(),
@@ -93,6 +104,16 @@ class _HomeShellState extends State<HomeShell> {
               ),
             ),
           ),
+          // Kept mounted (offstage) so the game and its images load once.
+          Positioned.fill(
+            child: Offstage(
+              offstage: !cockpitActive,
+              child: CockpitStage(game: _cockpit),
+            ),
+          ),
+          if (cockpitActive)
+            CockpitNodeOverlay(controller: c, game: _cockpit)
+          else
           ColoredBox(
             color: playing ? AppColors.chart.withValues(alpha: 0.82) : AppColors.chart,
             child: SafeArea(
