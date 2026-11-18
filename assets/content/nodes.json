@@ -1,9 +1,9 @@
 [
   {
     "id": "castoff",
-    "clean_text": "Lines are off and the Ginny is still afloat. Forty fares are calling that a success.",
-    "name": "Casting off — Cra-Zi Landing",
-    "sub": "No hazard. Bank the goodwill.",
+    "clean_text": "Clear of the landing and still afloat. Forty fares are calling that a success.",
+    "name": "Clear of Cra-Zi Landing",
+    "sub": "Already underway. No hazard. Bank the goodwill.",
     "type": "sight",
     "beats": 3,
     "threat": 0,
@@ -12,7 +12,7 @@
     "water_rate": 2,
     "joke_tags_favored": ["crazi", "boat"],
     "tags": ["crazi", "boat", "port", "river"],
-    "open": "Lines off. Forty fares booked for Nowhere. Three days. It is always three days.",
+    "open": "You're in the channel. Lines are a memory. Forty fares booked for Nowhere — three days, always three days. Quiet water. Work the room before the river gets ideas.",
     "selling": false,
     "salvage": false,
     "settle_stages": null
@@ -78,11 +78,11 @@
     "settle_stages": [
       {
         "min_runs": 0,
-        "text": "A steam launch on her side in the mud, listing hard, boiler still faintly hissing. Nobody has ever come back for her."
+        "text": "A steam launch on her side in the mud, listing hard, boiler still faintly hissing a tune no one can place. Nobody has ever come back for her."
       },
       {
         "min_runs": 8,
-        "text": "The Calliope is down to her rail now. Stack still standing. Still, faintly, venting."
+        "text": "The Calliope is down to her rail now. Stack still standing. Still, faintly, venting a sad tune."
       },
       {
         "min_runs": 16,
@@ -191,7 +191,7 @@
     "water_rate": 3,
     "joke_tags_favored": ["mill", "boat"],
     "tags": ["mill", "boat"],
-    "open": "A mill race with the mill long gone. The water still thinks it has a job, and it is doing that job at you.",
+    "open": "A mill race with the mill long gone. The race did not retire with it.",
     "selling": false,
     "salvage": false,
     "settle_stages": null
@@ -242,16 +242,16 @@
   {
     "id": "boulder",
     "name": "The boulder",
-    "sub": "The river splits.",
-    "type": "choice",
-    "beats": 0,
+    "sub": "One rock. Two opinions.",
+    "type": "sight",
+    "beats": 2,
     "threat": 0,
     "threat_label": null,
-    "boiler_rate": 0,
-    "water_rate": 0,
+    "boiler_rate": 4,
+    "water_rate": 2,
     "joke_tags_favored": ["boulder"],
     "tags": ["boulder"],
-    "open": null,
+    "open": "Same granite either way. The river splits around it, and so do you. You are conflicted.",
     "selling": false,
     "salvage": false,
     "settle_stages": null

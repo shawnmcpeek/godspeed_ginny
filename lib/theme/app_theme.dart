@@ -113,6 +113,8 @@ abstract final class AppTheme {
         fontWeight: FontWeight.w700,
       );
 
+  static TextStyle emphasis(TextStyle base) => base.copyWith(fontStyle: FontStyle.italic);
+
   static TextStyle get handwriting => GoogleFonts.caveat(
         color: AppColors.pencil,
         fontSize: 21,

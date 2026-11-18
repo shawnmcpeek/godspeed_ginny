@@ -6,7 +6,7 @@
   "startBoiler": 15,
   "startWater": 10,
   "startHull": 0,
-  "startSat": 50,
+  "startSat": 35,
   "startCargoHealth": 100,
   "gaugeClamp": 140,
   "gaugeDisplayMax": 100,
@@ -104,7 +104,11 @@
         [{ "kind": "branch", "id": "fork1" }, { "kind": "node", "id": null }],
         [{ "kind": "branch", "id": "fork2" }, { "kind": "node", "id": null }],
         [{ "kind": "node", "id": "wreck" }],
-        [{ "kind": "choice", "id": "boulder" }],
+        [
+          { "kind": "branch", "id": "fork_boulder" },
+          { "kind": "node", "id": "boulder" },
+          { "kind": "choice", "id": "boulder" }
+        ],
         [{ "kind": "node", "id": "falls" }],
         [{ "kind": "choice", "id": "ducks" }],
         [{ "kind": "node", "id": null, "pool": "wild" }],

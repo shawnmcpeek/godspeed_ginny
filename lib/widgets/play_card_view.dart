@@ -86,6 +86,23 @@ class PlayCardView extends StatelessWidget {
   }
 }
 
+Widget _emphasized(String text, TextStyle style) {
+  final pattern = RegExp(r'\*([^*]+)\*');
+  final spans = <InlineSpan>[];
+  var start = 0;
+  for (final match in pattern.allMatches(text)) {
+    if (match.start > start) {
+      spans.add(TextSpan(text: text.substring(start, match.start), style: style));
+    }
+    spans.add(TextSpan(text: match.group(1), style: AppTheme.emphasis(style)));
+    start = match.end;
+  }
+  if (start < text.length) {
+    spans.add(TextSpan(text: text.substring(start), style: style));
+  }
+  return Text.rich(TextSpan(children: spans));
+}
+
 class _LogLine extends StatelessWidget {
   const _LogLine({required this.line, required this.eyebrow});
 
@@ -112,9 +129,9 @@ class _LogLine extends StatelessWidget {
       case 'beat':
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 7),
-          child: Text(
+          child: _emphasized(
             line.text,
-            style: AppTheme.mono.copyWith(fontSize: 16, color: AppColors.inkSoft),
+            AppTheme.mono.copyWith(fontSize: 16, color: AppColors.inkSoft),
           ),
         );
       default:
@@ -136,7 +153,7 @@ class _LogLine extends StatelessWidget {
               eyebrow.toUpperCase(),
               style: AppTheme.mono.copyWith(fontSize: 12, letterSpacing: 1.8),
             ),
-          Text(line.text, style: style),
+          _emphasized(line.text, style),
         ],
       ),
     );

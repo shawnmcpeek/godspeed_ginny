@@ -20,7 +20,7 @@
     "creditsTitle": "About the cruise",
     "creditsBody": "McRiver Cruises & Cargo presents Godspeed Ginny — river trials. A skipper comedy of bad charts, worse freight, and a boat that will not reverse. Inspired by the tradition of the guided river tour where the skipper is the entertainment. Not affiliated with any theme park.",
     "creditsSignoff": "— Cra-Zi Landing",
-    "toTitle": "leave the landing"
+    "toTitle": "Give up the trip"
   },
   "gauges": {
     "boiler": "Boiler",
@@ -75,7 +75,7 @@
   },
   "log": {
     "skipperEyebrow": "SKIPPER",
-    "deadpan": "— delivered completely straight. He is not making a joke.",
+    "deadpan": "— delivered completely straight.",
     "jokeOffTopic": "Wrong stretch for that — it plays off-topic.",
     "jokeStrong": "It lands. You can feel the boat lighten.",
     "jokeFair": "Polite. A few of them got it.",
@@ -160,14 +160,14 @@
   },
   "boulder": {
     "title": "The boulder",
-    "sub": "The river splits.",
-    "note": "I am conflicted on which direction to go. Left or right.",
+    "sub": "I am conflicted.",
+    "note": "Left or right of the boulder. Same rock. You are conflicted.",
     "left": "Left",
-    "leftHint": "Port around the rock",
+    "leftHint": "Port side of the rock",
     "right": "Right",
-    "rightHint": "Starboard around the rock",
+    "rightHint": "Starboard side of the rock",
     "scrape": "The rail finds the granite. There was a clean side. This was not it.",
-    "clear": "Clear water. The other channel would not have been.",
+    "clear": "Clear water past the rock. You picked a side. It happened to be the clean one.",
     "punchlines": [
       { "text": "The boulder is no longer conflicted.", "weight": 3 },
       { "text": "I guess the boulder wasn't conflicted.", "weight": 2 }

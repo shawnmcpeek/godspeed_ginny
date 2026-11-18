@@ -58,8 +58,7 @@
     "category": "rehearsed",
     "title": "Named for a knight",
     "variants": [
-      { "text": "Named for a knight who went over it in armour. Or a surveyor named Knight. Or it's just 'night,' spelled wrong. Pick one.", "weight": 3 },
-      { "text": "Knight Falls. Named after Sir somebody. The chart's the only record and the chart is a rumour.", "weight": 2 }
+      { "text": "Knight Falls. Named after Sir Knight. *Looks at the chart.* Oh, sorry. Sir Dwight.", "weight": 3 }
     ],
     "flavors": ["wordplay", "meta"],
     "attention_cost": 1,
@@ -149,11 +148,9 @@
     "category": "story",
     "title": "White Star Line",
     "variants": [
-      { "text": "I worked for White Star Line. …We'll leave it there.", "weight": 3 },
-      { "text": "Before this? White Star Line. I'd rather not go into it.", "weight": 2 },
-      { "text": "White Star. Yes. That White Star. No further questions.", "weight": 1 }
+      { "text": "I'm really expecting good things from this trip. The last time I had a sinking feeling about a trip was when I worked for the White Star Line.", "weight": 3 }
     ],
-    "flavors": ["dark", "self_deprecating", "meta"],
+    "flavors": ["pun", "dark", "wordplay"],
     "attention_cost": 1,
     "deadpan": true,
     "at": [],
@@ -174,7 +171,7 @@
     ],
     "flavors": ["groaner", "self_deprecating", "wordplay"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": [],
     "clashes_with": ["white_star"],
     "fatigue_runs": 2,
@@ -288,19 +285,19 @@
   {
     "id": "no_crocodiles",
     "category": "rehearsed",
-    "title": "Crocodile Bend",
+    "title": "It's a croc",
     "variants": [
-      { "text": "The chart says crocodile. I have looked. I am still looking. If you see one, do not tell me — I have a bit.", "weight": 3 },
-      { "text": "Crocodile Bend. Named in hope. Stocked in never. I apologise on behalf of the reptiles.", "weight": 2 }
+      { "text": "They say there are crocodiles. I think it's a croc.", "weight": 3 },
+      { "text": "You were promised crocodiles. I was promised a quiet bend. I think we both got a croc.", "weight": 2 }
     ],
-    "flavors": ["meta", "self_deprecating", "absurd"],
+    "flavors": ["pun", "wordplay"],
     "attention_cost": 1,
     "deadpan": false,
     "at": ["croc"],
     "fatigue_runs": 2,
     "callback_to": [],
     "risk": null,
-    "tags": ["animal", "chart"]
+    "tags": ["croc", "chart"]
   },
   {
     "id": "welcome_crazi",
@@ -460,12 +457,11 @@
   {
     "id": "second_survey",
     "category": "rehearsed",
-    "title": "A second survey",
+    "title": "Wrong names",
     "variants": [
-      { "text": "They could fix the chart. That'd mean a second survey. Nobody's paying for a second survey while the first one still floats most boats.", "weight": 3 },
-      { "text": "Every wrong name on this water could be corrected tomorrow. It would cost money. So it won't be.", "weight": 2 }
+      { "text": "Every wrong name on this water could be corrected tomorrow. It would cost money, but all my assets are liquid.", "weight": 3 }
     ],
-    "flavors": ["dark", "meta"],
+    "flavors": ["pun", "wordplay"],
     "attention_cost": 1,
     "deadpan": false,
     "at": ["chart"],
@@ -524,23 +520,6 @@
     "callback_to": [],
     "risk": { "chance": 0.3, "generates": "overboard" },
     "tags": ["risk"]
-  },
-  {
-    "id": "conflicted_boulder",
-    "category": "rehearsed",
-    "title": "Conflicted",
-    "variants": [
-      { "text": "The river splits around a boulder here. I am conflicted on which way to go. Left or right.", "weight": 3 },
-      { "text": "Big rock, two channels. I am conflicted. You are looking at me like that is not a nautical term.", "weight": 2 }
-    ],
-    "flavors": ["pun", "wordplay", "groaner"],
-    "attention_cost": 1,
-    "deadpan": true,
-    "at": ["boulder"],
-    "fatigue_runs": 2,
-    "callback_to": [],
-    "risk": null,
-    "tags": ["landmark", "signature"]
   },
   {
     "id": "rule_two",
@@ -651,7 +630,7 @@
     "deadpan": false,
     "at": [],
     "callback_to": [],
-    "risk": {"chance": 0.12, "generates": "overboard"},
+    "risk": { "chance": 0.12, "generates": "overboard" },
     "tags": ["general"]
   },
   {
@@ -728,7 +707,7 @@
     ],
     "flavors": ["dark"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": [],
     "callback_to": [],
     "risk": null,
@@ -1288,7 +1267,7 @@
     ],
     "flavors": ["dark", "wordplay"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["hippo", "animal"],
     "callback_to": [],
     "risk": null,
@@ -1400,7 +1379,7 @@
     ],
     "flavors": ["self_deprecating", "absurd"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["wreck"],
     "callback_to": [],
     "risk": null,
@@ -1467,7 +1446,7 @@
     "deadpan": false,
     "at": ["mine"],
     "callback_to": [],
-    "risk": {"chance": 0.2, "generates": "overboard"},
+    "risk": { "chance": 0.2, "generates": "overboard" },
     "tags": ["mine"]
   },
   {
@@ -1567,30 +1546,45 @@
     "tags": ["snags"]
   },
   {
-    "id": "croc_holiday",
+    "id": "croc_cartographer",
     "category": "rehearsed",
-    "title": "On holiday",
+    "title": "Full of teeth",
     "variants": [
-      { "text": "The crocodiles are on holiday. They sent a postcard. It says 'Wish you weren't here.'", "weight": 3 },
-      { "text": "No crocodiles today. They've taken a long weekend. It's the only time anyone on this river gets one.", "weight": 2 }
+      { "text": "The cartographer says the crocs here are full of teeth. I think he's full of it.", "weight": 3 },
+      { "text": "Full of teeth, according to the chart. I've read his other notes. Full of it runs in the family.", "weight": 2 }
     ],
-    "flavors": ["groaner", "pun", "callback"],
+    "flavors": ["pun", "groaner"],
     "attention_cost": 1,
     "deadpan": false,
     "at": ["croc"],
-    "callback_to": ["no_crocodiles"],
+    "callback_to": [],
+    "risk": null,
+    "tags": ["croc", "chart"]
+  },
+  {
+    "id": "croc_gator",
+    "category": "rehearsed",
+    "title": "Not a gator",
+    "variants": [
+      { "text": "If you see the crocs, don't call them gators. They *really* don't like that.", "weight": 3 },
+      { "text": "Alligator is the other one. Use that word here and they *really* will correct you.", "weight": 2 }
+    ],
+    "flavors": ["groaner", "wordplay"],
+    "attention_cost": 1,
+    "deadpan": false,
+    "at": ["croc"],
+    "callback_to": [],
     "risk": null,
     "tags": ["croc"]
   },
   {
-    "id": "croc_teeth",
+    "id": "croc_scoot",
     "category": "rehearsed",
-    "title": "The teeth",
+    "title": "Tip the scales",
     "variants": [
-      { "text": "You can read a crocodile's mood by its teeth. Today, the teeth are elsewhere.", "weight": 3 },
-      { "text": "This is where the teeth live. They're away. They'll be back, and they'll want to hear all about it.", "weight": 2 }
+      { "text": "Let's scoot along. Now. Before the crocs come and tip the scales.", "weight": 3 }
     ],
-    "flavors": ["dark", "absurd"],
+    "flavors": ["wordplay", "pun"],
     "attention_cost": 1,
     "deadpan": false,
     "at": ["croc"],
@@ -1601,14 +1595,14 @@
   {
     "id": "mill_loyal",
     "category": "rehearsed",
-    "title": "Loyal",
+    "title": "Still in it",
     "variants": [
-      { "text": "The mill's gone. The race stayed. It says it's loyal.", "weight": 3 },
-      { "text": "They tore the mill down in '04. The water didn't get the memo. It's still working overtime.", "weight": 2 }
+      { "text": "It's a mill race. The mill dropped out in '04. The race is still being run.", "weight": 3 },
+      { "text": "The mill is gone. That leaves the race, and a race does not slow down for us.", "weight": 2 }
     ],
-    "flavors": ["absurd", "self_deprecating"],
+    "flavors": ["wordplay", "pun"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["mill"],
     "callback_to": [],
     "risk": null,
@@ -1617,12 +1611,12 @@
   {
     "id": "mill_habit",
     "category": "rehearsed",
-    "title": "Out of habit",
+    "title": "The song",
     "variants": [
-      { "text": "The wheel is long gone. The river keeps turning out of habit. I know the feeling.", "weight": 3 },
-      { "text": "A century of grinding corn, and the river still thinks it's got a quota.", "weight": 2 }
+      { "text": "Down by the old mill stream. Lovely song. Wrong water. A stream wanders. This one is racing.", "weight": 3 },
+      { "text": "Save the mill-stream song. They wrote it for the quiet part. The race did not get a verse.", "weight": 2 }
     ],
-    "flavors": ["self_deprecating", "absurd"],
+    "flavors": ["wordplay", "groaner"],
     "attention_cost": 1,
     "deadpan": false,
     "at": ["mill"],
@@ -1992,7 +1986,7 @@
     ],
     "flavors": ["absurd", "meta"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["market", "chart"],
     "callback_to": [],
     "risk": null,
@@ -2056,7 +2050,7 @@
     ],
     "flavors": ["meta", "dark"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["fog", "chart"],
     "callback_to": [],
     "risk": null,
@@ -2264,7 +2258,7 @@
     ],
     "flavors": ["dark", "wordplay"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["ferry"],
     "callback_to": [],
     "risk": null,
@@ -2456,7 +2450,7 @@
     ],
     "flavors": ["self_deprecating", "absurd"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["chaos"],
     "callback_to": [],
     "risk": null,
@@ -2936,7 +2930,7 @@
     ],
     "flavors": ["dark", "self_deprecating"],
     "attention_cost": 1,
-    "deadpan": true,
+    "deadpan": false,
     "at": ["quarry"],
     "callback_to": [],
     "risk": null,

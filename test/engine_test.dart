@@ -62,4 +62,77 @@ void main() {
     expect(game.run!.hull - before, (content.config.boulder['scrapeHull'] as num).toDouble());
     expect(game.run!.card!.deltas['hull'], (content.config.boulder['scrapeHull'] as num).toDouble());
   });
+
+  test('boulder plan is fork then approach then left/right choice', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final content = await loadGameContent();
+    final game = Game(content, Telemetry(content.config, prefs), prefs);
+
+    game.startRun('mail_sacks');
+    final plan = game.run!.plan;
+    final forkAt = plan.indexWhere((s) => s['kind'] == 'branch' && s['id'] == 'fork_boulder');
+    expect(forkAt, greaterThanOrEqualTo(0));
+    expect(plan[forkAt + 1]['kind'], 'node');
+    expect(plan[forkAt + 1]['id'], 'boulder');
+    expect(plan[forkAt + 2]['kind'], 'choice');
+    expect(plan[forkAt + 2]['id'], 'boulder');
+
+    game.run!.step = forkAt;
+    await game.chooseBranch('boulder_port');
+    expect(game.screen, 'node');
+    expect(game.run!.node, 'boulder');
+    expect(game.choiceId, isNull);
+
+    game.run!.beat = 0;
+    game.continueNode();
+    expect(game.screen, 'choice');
+    expect(game.choiceId, 'boulder');
+    expect(game.choiceDone, isFalse);
+  });
+
+  test('a finished stretch opens the next fork without a Next pause', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final content = await loadGameContent();
+    final game = Game(content, Telemetry(content.config, prefs), prefs);
+
+    game.startRun('mail_sacks');
+    final plan = game.run!.plan;
+    final nodeAt = plan.indexWhere((s) => s['kind'] == 'node' && s['id'] == 'boulder');
+    game.run!.plan[nodeAt + 1] = {'kind': 'branch', 'id': 'fork2'};
+    game.run!.step = nodeAt;
+    game.enterNode('boulder');
+    game.run!.beat = 1;
+
+    game.doAction('steer');
+
+    expect(game.screen, 'branch');
+    expect(game.run!.awaitingContinue, isFalse);
+    expect(game.currentStep()!['id'], 'fork2');
+    expect(game.run!.card, isNotNull);
+  });
+
+  test('clearing the boulder opens the next fork without Carry on', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final content = await loadGameContent();
+    final game = Game(content, Telemetry(content.config, prefs), prefs);
+
+    game.startRun('mail_sacks');
+    final plan = game.run!.plan;
+    final choiceAt = plan.indexWhere((s) => s['kind'] == 'choice' && s['id'] == 'boulder');
+    game.run!.plan[choiceAt + 1] = {'kind': 'branch', 'id': 'fork2'};
+    game.run!.step = choiceAt;
+    game.screen = 'choice';
+    game.choiceId = 'boulder';
+    game.choiceDone = false;
+    game.run!.boulderScrape = 'left';
+
+    game.chooseBoulder('right');
+
+    expect(game.screen, 'branch');
+    expect(game.currentStep()!['id'], 'fork2');
+    expect(game.run!.card!.lines.map((l) => l.text).join('\n'), contains('Clear water'));
+  });
 }

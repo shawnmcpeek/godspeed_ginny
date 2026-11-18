@@ -173,6 +173,7 @@ class Game {
       beatsSpent: _before == null ? 0 : (_before!['beat']! - run!.beat).round(),
     );
     _turnLines = null;
+    if (ended && _nextStepIsDecision()) continueNode();
   }
 
   String nodeOpenText(NodeDef node) {
@@ -758,6 +759,17 @@ class Game {
     });
   }
 
+  /// The step after this one is a fork or a left/right choice. The result card can
+  /// travel with it; a Next button in between only repeats the same screen.
+  bool _nextStepIsDecision() {
+    final r = run;
+    if (r == null) return false;
+    final i = r.step + 1;
+    if (i >= r.plan.length) return false;
+    final kind = r.plan[i]['kind'];
+    return kind == 'branch' || kind == 'choice';
+  }
+
   void continueNode() {
     run!.awaitingContinue = false;
     run!.step++;
@@ -835,6 +847,9 @@ class Game {
       beatsSpent: 0,
     );
     _turnLines = null;
+    if (currentStep()?['kind'] == 'choice' && _nextStepIsDecision()) {
+      continueAfterChoice();
+    }
   }
 
   void chooseBoulder(String side) {
@@ -863,6 +878,9 @@ class Game {
       beatsSpent: 0,
     );
     _turnLines = null;
+    if (currentStep()?['kind'] == 'choice' && _nextStepIsDecision()) {
+      continueAfterChoice();
+    }
   }
 
   void continueAfterChoice() {
