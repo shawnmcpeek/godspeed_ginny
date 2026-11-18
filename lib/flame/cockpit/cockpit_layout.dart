@@ -33,10 +33,9 @@ class CockpitLayout {
   static const double wheelSpriteSize = 370;
   static const double wheelHitRadius = 150;
 
-  // Lamps (lit sprites are 140 x 140, centred).
+  // Lamps (lit sprites are 140 x 140, centred): heat and leak.
   static const Offset heatLamp = Offset(205, 1712);
   static const Offset leakLamp = Offset(875, 1712);
-  static const Offset hazardLamp = Offset(540, 1402);
   static const double lampSpriteSize = 140;
 
   // Beat pips are drawn in code because stretches have 2 to 5 beats.

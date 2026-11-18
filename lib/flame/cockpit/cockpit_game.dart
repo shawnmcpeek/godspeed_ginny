@@ -138,13 +138,6 @@ class CockpitGame extends FlameGame {
         (s, t) => s.water >= 0.8 ? _pulse(s, t, 2.2) : 0,
       ),
     );
-    await root.add(
-      _Lamp(
-        await _sprite('lamp_hazard_on.png'),
-        CockpitLayout.hazardLamp,
-        (s, t) => s.threat > 0 ? _pulse(s, t, 1.2 + math.min(s.threat, 20.0) * 0.08) : 0,
-      ),
-    );
 
     final repair = _ButtonOverlay(CockpitLayout.repairCenter, (s) => s.repair);
     final bail = _ButtonOverlay(CockpitLayout.bailCenter, (s) => s.bail);

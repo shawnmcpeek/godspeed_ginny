@@ -113,18 +113,6 @@
         140,
         140
       ]
-    },
-    "hazard": {
-      "center": [
-        540,
-        1402
-      ],
-      "color": "#ffb020",
-      "sprite": "lamp_hazard_on.png",
-      "sprite_size": [
-        140,
-        140
-      ]
     }
   },
   "wheel": {
