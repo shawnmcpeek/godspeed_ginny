@@ -1183,7 +1183,7 @@
     "title": "The cartographer",
     "variants": [
       { "text": "The chart was drawn by one man in one afternoon. He was very sure. It's the best thing about him.", "weight": 3 },
-      { "text": "The cartographer drew this in a single sitting. We all sat down afterwards, too, out of respect.", "weight": 2 }
+      { "text": "He drew this in one sitting. That wasn't surprising as he didn't have a leg to stand on.", "weight": 2 }
     ],
     "flavors": ["dark", "meta", "callback"],
     "attention_cost": 1,
