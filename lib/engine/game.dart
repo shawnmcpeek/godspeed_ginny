@@ -271,9 +271,11 @@ class Game {
 
   /// Pass lines already shown this run, so the same one does not repeat back to back.
   final Set<String> _usedPassLines = {};
+  final Set<String> _usedPianoLines = {};
 
   void startRun(String cargoId) {
     _usedPassLines.clear();
+    _usedPianoLines.clear();
     final goose = career.runs >= cfg.gooseAfterRuns;
     final hand = content.jokes
         .where((j) {
@@ -727,7 +729,16 @@ class Game {
         run!.sat = clamp(run!.sat - t * cfg.unresolvedSatScale, 0, 100);
       }
       if (impact && c.hasEffect('play_note')) {
-        say('act', dig(S, 'log.pianoNote') as String);
+        final pn = dig(S, 'log.pianoNote');
+        final lines = pn is List ? pn.cast<String>() : <String>[pn as String];
+        var fresh = lines.where((l) => !_usedPianoLines.contains(l)).toList();
+        if (fresh.isEmpty) {
+          _usedPianoLines.clear();
+          fresh = lines;
+        }
+        final note = pick(fresh);
+        _usedPianoLines.add(note);
+        say('act', note);
       }
       if (impact && c.hasEffect('escape') && !career.leopardOut) {
         final fx = c.effects.firstWhere((e) => e['effect'] == 'escape');

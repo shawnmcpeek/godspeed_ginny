@@ -12,10 +12,10 @@ import '../flame/cockpit/cockpit_game.dart';
 import '../flame/cockpit/cockpit_layout.dart';
 import '../theme/app_theme.dart';
 import '../widgets/chart_button.dart';
+import '../widgets/joke_drum.dart';
 import '../widgets/play_card_view.dart';
 import 'branch_screen.dart';
 import 'choice_screen.dart';
-import 'node_screen.dart' show JokeButton, ScriptSect;
 
 /// Which scene art to show for a stretch. Everything uses the placeholder for now;
 /// this is where per-region kits and hero scenes get chosen (by node tags or type).
@@ -103,24 +103,6 @@ class CockpitNodeOverlay extends StatelessWidget {
       );
     }
 
-    final here = <String>[];
-    final anywhere = <String>[];
-    final elsewhere = <String>[];
-    for (final id in r.hand) {
-      final j = g.jokes[id]!;
-      if (g.jokeOnTopic(j)) {
-        here.add(id);
-      } else if (j.at.isEmpty) {
-        anywhere.add(id);
-      } else {
-        elsewhere.add(id);
-      }
-    }
-    int byScore(String a, String b) => g.scoreJoke(g.jokes[b]!) - g.scoreJoke(g.jokes[a]!);
-    here.sort(byScore);
-    anywhere.sort(byScore);
-    elsewhere.sort(byScore);
-
     final ice = cargo.hasEffect('melt')
         ? fill(nodeS['iceLeft'] as String, {'pct': r.cargoHealth.round()})
         : '';
@@ -147,31 +129,16 @@ class CockpitNodeOverlay extends StatelessWidget {
         final left = math.max(geom.windowSideInset, pad.left + 8);
         final right = math.max(geom.windowSideInset, pad.right + 8);
 
-        final jokeLists = <Widget>[
-          if (waiting)
-            ChartButton(
-              label: dig(S, 'card.continue') as String,
-              wide: true,
-              fill: AppColors.chart.withValues(alpha: 0.94),
-              onPressed: controller.continueNode,
-            )
-          else ...[
-            if (here.isNotEmpty) ...[
-              ScriptSect(nodeS['scriptHere'] as String),
-              ...here.map((id) => JokeButton(controller: controller, id: id)),
-            ],
-            if (anywhere.isNotEmpty) ...[
-              ScriptSect(nodeS['scriptAnywhere'] as String),
-              ...anywhere.map((id) => JokeButton(controller: controller, id: id)),
-            ],
-            if (elsewhere.isNotEmpty) ...[
-              ScriptSect(nodeS['scriptElsewhere'] as String),
-              ...elsewhere.map(
-                (id) => JokeButton(controller: controller, id: id, cold: true),
-              ),
-            ],
-          ],
-        ];
+        final continueButton = ChartButton(
+          label: dig(S, 'card.continue') as String,
+          wide: true,
+          fill: AppColors.chart.withValues(alpha: 0.94),
+          onPressed: controller.continueNode,
+        );
+        final drum = JokeDrum(
+          key: ValueKey('drum:${r.node}:${identityHashCode(r)}'),
+          controller: controller,
+        );
         final manifest = _Manifest(
           text: '${nodeS['aboard']} $aboard\n${nodeS['hold']} ${cargo.name}$ice',
         );
@@ -214,10 +181,7 @@ class CockpitNodeOverlay extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 flex: 6,
-                child: ListView(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  children: jokeLists,
-                ),
+                child: waiting ? ListView(children: [continueButton]) : drum,
               ),
             ],
           );
@@ -227,16 +191,26 @@ class CockpitNodeOverlay extends StatelessWidget {
             children: [
               heading,
               const SizedBox(height: 6),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  children: [
-                    ...cardWidgets,
-                    ...jokeLists,
-                    if (!waiting) ...[const SizedBox(height: 6), manifest],
-                  ],
+              if (waiting)
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    children: [...cardWidgets, continueButton],
+                  ),
+                )
+              else ...[
+                Flexible(
+                  flex: 2,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [...cardWidgets, manifest],
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 6),
+                Expanded(flex: 3, child: drum),
+              ],
             ],
           );
         }
