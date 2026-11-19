@@ -1,10 +1,11 @@
-import 'dart:math' as math;
 import 'dart:ui';
 
 /// Flip to false to fall back to the original stacked node screen (no cockpit).
 const bool kCockpitNodeView = true;
 
-/// Fixed design space for the cockpit art (portrait, 1080 x 1920).
+/// Design space of the dash group (portrait, 1080 x 1920). The dash, dials, bars,
+/// lamps, buttons and wheel are all placed in this space and then mapped onto the
+/// screen by [CockpitGeometry]; the shell (awning, poles, deck) adapts separately.
 ///
 /// Every number here comes from `assets/cockpit/manifest.json`. If the art is
 /// regenerated, update the manifest and this file together.
@@ -47,38 +48,98 @@ class CockpitLayout {
   static const Offset repairCenter = Offset(290, 1795);
   static const Offset bailCenter = Offset(790, 1795);
   static const double buttonHitRadius = 64;
-
-  // The part of the window the Flutter overlay may use for text and joke tabs.
-  static const double windowTop = 190;
-  static const double windowBottom = 1300;
 }
 
-/// How the 1080 x 1920 design space sits on a real screen.
+/// How the cockpit sits on a real screen, for either orientation.
 ///
-/// Anchored to the bottom and centred. A screen taller than 9:16 shows extra sky
-/// above the awning (the scene layer stretches to fill it). A wider screen
-/// letterboxes at the sides for now. Landscape is a later pass.
-class CockpitFit {
-  const CockpitFit(this.scale, this.dx, this.dy);
+/// Portrait is width-locked: 1080 design units span the screen width and the
+/// height flexes. The awning hangs from the top, the deck and dash sit on the
+/// bottom, and the poles stretch between them, so a taller phone gets a taller
+/// window rather than empty sky.
+///
+/// Landscape is height-locked: 1080 design units span the screen height and the
+/// width flexes (1440 to 2520). The dash group shrinks to [landscapeGroupScale]
+/// and stays centred; the deck and awning come in pre-rendered width buckets that
+/// are stretched slightly to the exact width.
+class CockpitGeometry {
+  CockpitGeometry._({
+    required this.size,
+    required this.landscape,
+    required this.s,
+    required this.g,
+  });
 
-  factory CockpitFit.forSize(double width, double height) {
-    if (width <= 0 || height <= 0) return const CockpitFit(1, 0, 0);
-    final scale = math.min(
-      width / CockpitLayout.designW,
-      height / CockpitLayout.designH,
-    );
-    return CockpitFit(
-      scale,
-      (width - CockpitLayout.designW * scale) / 2,
-      height - CockpitLayout.designH * scale,
+  factory CockpitGeometry.forSize(double width, double height) {
+    final w = width <= 0 ? 1080.0 : width;
+    final h = height <= 0 ? 1920.0 : height;
+    final land = w > h;
+    return CockpitGeometry._(
+      size: Size(w, h),
+      landscape: land,
+      s: land ? h / 1080 : w / 1080,
+      g: land ? landscapeGroupScale : 1.0,
     );
   }
 
-  final double scale;
-  final double dx;
-  final double dy;
+  static const double landscapeGroupScale = 0.84;
+  static const List<int> landscapeBuckets = [1440, 1728, 2088, 2520];
 
-  Offset toScreen(Offset p) => Offset(dx + p.dx * scale, dy + p.dy * scale);
+  static const double poleInset = 46; // pole centre from the screen edge (design units)
+  static const double poleWidth = 26;
+  static const double portraitAwningH = 200;
+  static const double landscapeAwningH = 120;
+  static const double portraitDeckH = 720;
+  static const double landscapeDeckH = 540;
 
-  double toScreenY(double y) => dy + y * scale;
+  final Size size;
+  final bool landscape;
+
+  /// Design units to screen pixels for the shell (awning, poles, deck).
+  final double s;
+
+  /// Extra scale applied to the dash group (1 in portrait).
+  final double g;
+
+  /// Design units to screen pixels for the dash group.
+  double get k => s * g;
+
+  /// Screen position of dash-group design point (0, 0).
+  Offset get groupOrigin => Offset(size.width / 2 - 540 * k, size.height - 1920 * k);
+
+  Offset toScreen(Offset p) => Offset(groupOrigin.dx + p.dx * k, groupOrigin.dy + p.dy * k);
+
+  double toScreenY(double y) => groupOrigin.dy + y * k;
+
+  /// Landscape width in design units (height is 1080).
+  double get designWidth => size.width / s;
+
+  int get bucket {
+    final wd = designWidth;
+    var best = landscapeBuckets.first;
+    for (final b in landscapeBuckets) {
+      if ((b - wd).abs() < (best - wd).abs()) best = b;
+    }
+    return best;
+  }
+
+  /// Asset-name suffix for the shell pieces: `p`, or `l1440` etc.
+  String get shellKey => landscape ? 'l$bucket' : 'p';
+
+  double get awningHeight => (landscape ? landscapeAwningH : portraitAwningH) * s;
+  double get deckHeight => (landscape ? landscapeDeckH : portraitDeckH) * s;
+
+  /// Lowest point of the awning's valance at screen centre.
+  double get awningClear => (landscape ? 96 : 190) * s;
+
+  /// Where the overlay window starts and ends vertically (screen pixels).
+  double get windowTop => awningClear;
+  double get windowBottom => toScreenY(1300);
+
+  /// Pole centre x positions and the y where they meet the rail.
+  double get poleLeftX => poleInset * s;
+  double get poleRightX => size.width - poleInset * s;
+  double get poleBaseY => toScreenY(1480);
+
+  /// Horizontal room the overlay should keep clear of the poles.
+  double get windowSideInset => (poleInset + poleWidth / 2 + 8) * s;
 }

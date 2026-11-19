@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
 
@@ -41,31 +42,41 @@ class CockpitSnapshot {
 
 /// First-person helm view: the scene ahead, the boat, and live instruments.
 ///
-/// Layers, back to front: scene (swappable, crossfades), frame (boat with a
-/// transparent window), needles, bar markers, beat pips, glass glare, lamps,
-/// button states, wheel. Everything lives in a 1080 x 1920 design space that is
-/// scaled onto the screen by [CockpitFit].
+/// Back to front: scene (swappable, crossfades), deck, poles, the dash group
+/// (dash, needles, bar markers, beat pips, glass glare, lamps, button states,
+/// wheel), then the awning. The scene, poles, deck and awning are laid out in
+/// screen space and adapt to the screen (see [CockpitGeometry]); the dash group is
+/// drawn in a fixed 1080 x 1920 space and scaled as one unit.
 class CockpitGame extends FlameGame {
   CockpitGame();
 
   /// Scene id to asset. Add real art here; the game picks one per stretch.
+  /// Each scene has a portrait image and a landscape image (cover-fitted).
   static const Map<String, String> sceneAssets = {
     'default': 'assets/cockpit/scene_placeholder.png',
+  };
+  static const Map<String, String> sceneAssetsLand = {
+    'default': 'assets/cockpit/scene_placeholder_land.png',
   };
 
   static const String _dir = 'assets/cockpit/';
 
   CockpitSnapshot snapshot = const CockpitSnapshot();
-  CockpitFit fit = const CockpitFit(1, 0, 0);
+  CockpitGeometry geom = CockpitGeometry.forSize(1080, 1920);
 
   final Map<String, Image> _images = {};
   PositionComponent? _root;
   _SceneLayer? _scene;
+  _Poles? _poles;
+  SpriteComponent? _deck;
+  SpriteComponent? _awning;
   _Wheel? _wheel;
   _ButtonOverlay? _repairOverlay;
   _ButtonOverlay? _bailOverlay;
   String _wantedScene = 'default';
   String? _shownScene;
+  String? _shellKey;
+  bool _loaded = false;
 
   @override
   Color backgroundColor() => const Color(0xFF1B2F2C);
@@ -85,21 +96,36 @@ class CockpitGame extends FlameGame {
 
   @override
   Future<void> onLoad() async {
-    final root = PositionComponent(
-      size: Vector2(CockpitLayout.designW, CockpitLayout.designH),
-    );
-    _root = root;
-    await add(root);
-    _applyFit();
+    geom = CockpitGeometry.forSize(size.x, size.y);
 
     final scene = _SceneLayer();
     _scene = scene;
-    await root.add(scene);
+    await add(scene);
+
+    final poles = _Poles();
+    _poles = poles;
+    await add(poles);
+
+    final deck = SpriteComponent(priority: 1);
+    final awning = SpriteComponent(priority: 4);
+    _deck = deck;
+    _awning = awning;
+    await add(deck);
+    await add(awning);
+
+    // The dash group: fixed 1080 x 1920 design space, scaled as one unit.
+    final root = PositionComponent(
+      size: Vector2(CockpitLayout.designW, CockpitLayout.designH),
+      priority: 3,
+    );
+    _root = root;
+    await add(root);
 
     await root.add(
       SpriteComponent(
-        sprite: await _sprite('frame.png'),
-        size: Vector2(CockpitLayout.designW, CockpitLayout.designH),
+        sprite: await _sprite('dash.webp'),
+        position: Vector2(40, 1380),
+        size: Vector2(1000, 540),
         priority: 1,
       ),
     );
@@ -150,21 +176,54 @@ class CockpitGame extends FlameGame {
     _wheel = wheel;
     await root.add(wheel);
 
+    _loaded = true;
+    _applyLayout();
+    await _syncShell();
     await _syncScene();
   }
 
   @override
   void onGameResize(Vector2 size) {
     super.onGameResize(size);
-    fit = CockpitFit.forSize(size.x, size.y);
-    _applyFit();
+    geom = CockpitGeometry.forSize(size.x, size.y);
+    if (!_loaded) return;
+    _applyLayout();
+    unawaited(_syncShell());
+    unawaited(_syncScene());
   }
 
-  void _applyFit() {
+  /// Position everything that depends on the screen size.
+  void _applyLayout() {
+    final g = geom;
     final root = _root;
-    if (root == null) return;
-    root.position = Vector2(fit.dx, fit.dy);
-    root.scale = Vector2.all(fit.scale);
+    if (root != null) {
+      root.position = Vector2(g.groupOrigin.dx, g.groupOrigin.dy);
+      root.scale = Vector2.all(g.k);
+    }
+    _scene?.size = size.clone();
+    final deck = _deck;
+    if (deck != null) {
+      deck.size = Vector2(g.size.width, g.deckHeight);
+      deck.position = Vector2(0, g.size.height - g.deckHeight);
+    }
+    final awning = _awning;
+    if (awning != null) {
+      awning.size = Vector2(g.size.width, g.awningHeight);
+      awning.position = Vector2.zero();
+    }
+  }
+
+  /// Load the deck and awning art for the current orientation and width bucket.
+  /// Pieces load lazily, so only the set in use is ever in memory.
+  Future<void> _syncShell() async {
+    final key = geom.shellKey;
+    if (key == _shellKey) return;
+    _shellKey = key;
+    final deck = await _sprite('deck_$key.webp');
+    final awning = await _sprite('awning_$key.webp');
+    if (_shellKey != key) return;
+    _deck?.sprite = deck;
+    _awning?.sprite = awning;
   }
 
   /// Crossfade to the scene art for [key] (see [sceneAssets]). Safe to call every
@@ -178,11 +237,14 @@ class CockpitGame extends FlameGame {
     final scene = _scene;
     if (scene == null) return;
     final key = _wantedScene;
-    if (key == _shownScene) return;
-    _shownScene = key;
-    final path = sceneAssets[key] ?? sceneAssets['default']!;
+    final land = geom.landscape;
+    final id = '$key|${land ? 'l' : 'p'}';
+    if (id == _shownScene) return;
+    _shownScene = id;
+    final map = land ? sceneAssetsLand : sceneAssets;
+    final path = map[key] ?? map['default']!;
     final image = await _image(path);
-    if (_wantedScene != key) return;
+    if (_shownScene != id) return;
     scene.show(image, instant: !scene.hasImage);
   }
 
@@ -204,15 +266,13 @@ double _pulse(CockpitSnapshot s, double t, double hz) {
 double _ease(double current, double target, double dt, double rate) =>
     current + (target - current) * (1 - math.exp(-rate * dt));
 
-/// The view ahead. Two images crossfade on a scene change. A gentle sway moves
-/// the world (not the boat) so the cockpit feels afloat; it grows with threat
-/// and hull damage and is off under reduce-motion.
+/// The view ahead, cover-fitted to the screen (centred, cropped to fit). Two
+/// images crossfade on a scene change. A gentle sway moves the world (not the
+/// boat) so the cockpit feels afloat; it grows with threat and hull damage and is
+/// off under reduce-motion. The image is drawn 8% oversize so the sway never
+/// shows an edge.
 class _SceneLayer extends PositionComponent with HasGameReference<CockpitGame> {
-  _SceneLayer()
-      : super(
-          size: Vector2(CockpitLayout.designW, CockpitLayout.designH),
-          priority: 0,
-        );
+  _SceneLayer() : super(priority: 0);
 
   Image? _current;
   Image? _incoming;
@@ -252,58 +312,106 @@ class _SceneLayer extends PositionComponent with HasGameReference<CockpitGame> {
     if (current == null) return;
     final s = game.snapshot;
     final amp = s.reduceMotion ? 0.0 : 1.0 + math.min(s.threat, 20.0) * 0.05 + s.hull * 1.2;
-    const w = CockpitLayout.designW;
-    const h = CockpitLayout.designH;
+    final w = game.size.x;
+    final h = game.size.y;
+    final px = game.geom.s; // sway is in design units, so scale it to the screen
 
     canvas.save();
-    canvas.translate(w / 2 + math.sin(_t * 0.9) * 5 * amp, h / 2 + math.sin(_t * 1.3) * 4 * amp);
+    canvas.translate(
+      w / 2 + math.sin(_t * 0.9) * 5 * amp * px,
+      h / 2 + math.sin(_t * 1.3) * 4 * amp * px,
+    );
     canvas.rotate(math.sin(_t * 0.6) * 0.004 * amp);
     canvas.scale(1.08);
-    canvas.translate(-w / 2, -h / 2);
-    _draw(canvas, current, 1);
+    _draw(canvas, current, 1, w, h);
     final incoming = _incoming;
-    if (incoming != null) _draw(canvas, incoming, _fade.clamp(0.0, 1.0).toDouble());
+    if (incoming != null) _draw(canvas, incoming, _fade.clamp(0.0, 1.0).toDouble(), w, h);
     canvas.restore();
   }
 
-  void _draw(Canvas canvas, Image image, double alpha) {
-    const w = CockpitLayout.designW;
-    const h = CockpitLayout.designH;
-    final paint = Paint()..color = Color.fromARGB((alpha * 255).round(), 255, 255, 255);
+  void _draw(Canvas canvas, Image image, double alpha, double w, double h) {
+    final paint = Paint()
+      ..filterQuality = FilterQuality.medium
+      ..color = Color.fromARGB((alpha * 255).round(), 255, 255, 255);
     final iw = image.width.toDouble();
     final ih = image.height.toDouble();
-    canvas.drawImageRect(image, Rect.fromLTWH(0, 0, iw, ih), const Rect.fromLTWH(0, 0, w, h), paint);
+    final c = math.max(w / iw, h / ih);
+    canvas.drawImageRect(
+      image,
+      Rect.fromLTWH(0, 0, iw, ih),
+      Rect.fromCenter(center: Offset.zero, width: iw * c, height: ih * c),
+      paint,
+    );
+  }
+}
 
-    // Fill the area outside the design rectangle (tall or wide screens, plus sway
-    // margin) by stretching the image's edge rows and columns outward.
-    final f = game.fit;
-    final extraTop = f.dy / f.scale + 200;
-    final extraSide = f.dx / f.scale + 200;
-    const extraBottom = 200.0;
-    canvas.drawImageRect(
-      image,
-      Rect.fromLTWH(0, 0, iw, 2),
-      Rect.fromLTRB(-extraSide, -extraTop, w + extraSide, 0),
-      paint,
-    );
-    canvas.drawImageRect(
-      image,
-      Rect.fromLTWH(0, ih - 2, iw, 2),
-      Rect.fromLTRB(-extraSide, h, w + extraSide, h + extraBottom),
-      paint,
-    );
-    canvas.drawImageRect(
-      image,
-      Rect.fromLTWH(0, 0, 2, ih),
-      Rect.fromLTRB(-extraSide, 0, 0, h),
-      paint,
-    );
-    canvas.drawImageRect(
-      image,
-      Rect.fromLTWH(iw - 2, 0, 2, ih),
-      Rect.fromLTRB(w, 0, w + extraSide, h),
-      paint,
-    );
+/// The two awning poles, drawn in code so they stretch to any screen height.
+/// They run from the top of the screen (hidden behind the awning) down to a brass
+/// foot on the gunwale rail.
+class _Poles extends PositionComponent with HasGameReference<CockpitGame> {
+  _Poles() : super(priority: 2);
+
+  static const _bandsFromBase = [310.0, 780.0, 1230.0];
+
+  @override
+  void render(Canvas canvas) {
+    final g = game.geom;
+    final base = g.poleBaseY;
+    final w = CockpitGeometry.poleWidth * g.k;
+    for (final cx in [g.poleLeftX, g.poleRightX]) {
+      final rect = Rect.fromLTRB(cx - w / 2, 0, cx + w / 2, base);
+      // soft shadow
+      canvas.drawRect(
+        rect.shift(Offset(w * 0.3, 0)),
+        Paint()
+          ..color = const Color(0x66000000)
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, w * 0.18),
+      );
+      // turned-wood shading across the width
+      canvas.drawRect(
+        rect,
+        Paint()
+          ..shader = Gradient.linear(
+            Offset(rect.left, 0),
+            Offset(rect.right, 0),
+            const [
+              Color(0xFF1B120B),
+              Color(0xFF5A3D25),
+              Color(0xFF8A6240),
+              Color(0xFF4A3019),
+              Color(0xFF150D07),
+            ],
+            const [0, 0.25, 0.45, 0.7, 1],
+          ),
+      );
+      // brass collars
+      final brass = Paint()
+        ..shader = Gradient.linear(
+          Offset(rect.left, 0),
+          Offset(rect.right, 0),
+          const [Color(0xFF6B4710), Color(0xFFE9C872), Color(0xFFC48A30), Color(0xFF5A3C0C)],
+          const [0, 0.3, 0.65, 1],
+        );
+      for (final d in _bandsFromBase) {
+        final y = base - d * g.k;
+        if (y < 0) continue;
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(
+            Rect.fromLTWH(cx - 15 * g.k, y, 30 * g.k, 16 * g.k),
+            Radius.circular(3 * g.k),
+          ),
+          brass,
+        );
+      }
+      // foot
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTRB(cx - 17 * g.k, base - 18 * g.k, cx + 17 * g.k, base + 20 * g.k),
+          Radius.circular(6 * g.k),
+        ),
+        brass,
+      );
+    }
   }
 }
 

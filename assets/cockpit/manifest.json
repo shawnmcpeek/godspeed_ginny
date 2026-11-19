@@ -1,20 +1,36 @@
 {
-  "canvas": [
+  "note": "Design space: portrait = 1080 wide x (screenH/screenW*1080) tall, width-locked. Landscape = 1080 tall x (screenW/screenH*1080) wide, height-locked. The \"dash group\" (dash, gauges, needles, bars, lamps, buttons, wheel) always uses the 1080x1920 coordinates below, mapped with: X = screenW/2 + (x-540)*g*s ; Y = screenH - (1920-y)*g*s ; s = design->screen scale, g = 1 (portrait) or 0.84 (landscape).",
+  "dash_group_canvas": [
     1080,
     1920
   ],
   "png_scale": 2,
-  "note": "All coordinates are in 1080x1920 design space. PNGs are @2x. Rotating sprites are square and pivot at their CENTER.",
-  "layers_z_order": [
-    "scene (swap per stretch)",
-    "frame",
-    "needle_boiler",
-    "needle_water",
-    "marker x2 (slider caps)",
-    "glass_overlay",
-    "lamp_*_on (additive)",
-    "wheel"
-  ],
+  "landscape_png_scale": 1.5,
+  "landscape": {
+    "ls": 0.84,
+    "tip_y": 588.6,
+    "buckets": [
+      1440,
+      1728,
+      2088,
+      2520
+    ],
+    "awning_h": 120
+  },
+  "portrait": {
+    "awning_h": 200
+  },
+  "dash": {
+    "sprite": "dash.png",
+    "origin": [
+      40,
+      1380
+    ],
+    "size": [
+      1000,
+      540
+    ]
+  },
   "gauges": {
     "boiler": {
       "center": [
@@ -77,8 +93,7 @@
     "marker_size": [
       40,
       56
-    ],
-    "marker_anchor": "center (sprite center is 20,28; the cap itself is centered on y=28)"
+    ]
   },
   "beats": {
     "center": [
@@ -87,7 +102,7 @@
     ],
     "spacing": 46,
     "max": 5,
-    "note": "drawn in code (ring r=17, lens r=11)"
+    "note": "drawn in code"
   },
   "lamps": {
     "heat": {
@@ -124,8 +139,7 @@
     "sprite_size": [
       370,
       370
-    ],
-    "note": "bottom of the wheel runs off-screen by design"
+    ]
   },
   "buttons": {
     "repair": {

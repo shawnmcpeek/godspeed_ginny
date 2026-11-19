@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -128,77 +129,128 @@ class CockpitNodeOverlay extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = constraints.biggest;
-        final fit = CockpitFit.forSize(size.width, size.height);
+        final geom = CockpitGeometry.forSize(size.width, size.height);
+        final land = geom.landscape;
         final screen = Offset.zero & size;
+        final pad = MediaQuery.of(context).padding;
 
+        // Tap target: the art's radius, but never smaller than a thumb-friendly 28.
         Rect circle(Offset designCenter, double designRadius) => Rect.fromCircle(
-              center: fit.toScreen(designCenter),
-              radius: designRadius * fit.scale,
+              center: geom.toScreen(designCenter),
+              radius: math.max(designRadius * geom.k, 28),
             ).intersect(screen);
 
-        final windowTop = fit.toScreenY(CockpitLayout.windowTop);
-        final windowBottom = fit.toScreenY(CockpitLayout.windowBottom);
+        final windowTop = geom.windowTop;
+        // Landscape has little room above the bow, so branch and choice screens
+        // borrow the strip down to the dash panel.
+        final windowBottom = (land && !isNode) ? geom.toScreenY(1405) : geom.windowBottom;
+        final left = math.max(geom.windowSideInset, pad.left + 8);
+        final right = math.max(geom.windowSideInset, pad.right + 8);
+
+        final jokeLists = <Widget>[
+          if (waiting)
+            ChartButton(
+              label: dig(S, 'card.continue') as String,
+              wide: true,
+              fill: AppColors.chart.withValues(alpha: 0.94),
+              onPressed: controller.continueNode,
+            )
+          else ...[
+            if (here.isNotEmpty) ...[
+              ScriptSect(nodeS['scriptHere'] as String),
+              ...here.map((id) => JokeButton(controller: controller, id: id)),
+            ],
+            if (anywhere.isNotEmpty) ...[
+              ScriptSect(nodeS['scriptAnywhere'] as String),
+              ...anywhere.map((id) => JokeButton(controller: controller, id: id)),
+            ],
+            if (elsewhere.isNotEmpty) ...[
+              ScriptSect(nodeS['scriptElsewhere'] as String),
+              ...elsewhere.map(
+                (id) => JokeButton(controller: controller, id: id, cold: true),
+              ),
+            ],
+          ],
+        ];
+        final manifest = _Manifest(
+          text: '${nodeS['aboard']} $aboard\n${nodeS['hold']} ${cargo.name}$ice',
+        );
+        final heading = _Heading(name: n.name, sub: n.sub, threat: threat);
+        final cardWidgets = <Widget>[
+          if (r.card != null) ...[
+            PlayCardView(card: r.card!, strings: S),
+            const SizedBox(height: 6),
+          ],
+        ];
+
+        Widget windowContent;
+        if (!isNode) {
+          windowContent = _Panel(
+            child: g.screen == 'branch'
+                ? BranchScreen(controller: controller, showGauges: false)
+                : ChoiceScreen(controller: controller, showGauges: false),
+          );
+        } else if (land) {
+          // Two columns: what is happening on the left, what you can do on the right.
+          windowContent = Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                flex: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    heading,
+                    const SizedBox(height: 6),
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        children: [...cardWidgets, if (!waiting) manifest],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                flex: 6,
+                child: ListView(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  children: jokeLists,
+                ),
+              ),
+            ],
+          );
+        } else {
+          windowContent = Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              heading,
+              const SizedBox(height: 6),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  children: [
+                    ...cardWidgets,
+                    ...jokeLists,
+                    if (!waiting) ...[const SizedBox(height: 6), manifest],
+                  ],
+                ),
+              ),
+            ],
+          );
+        }
 
         return Stack(
           fit: StackFit.expand,
           children: [
             // Window content: stretch heading, card, joke tabs.
             Positioned(
-              left: 10,
-              right: 10,
+              left: left,
+              right: right,
               top: windowTop,
               height: (windowBottom - windowTop).clamp(0.0, size.height).toDouble(),
-              child: !isNode
-                  ? _Panel(
-                      child: g.screen == 'branch'
-                          ? BranchScreen(controller: controller, showGauges: false)
-                          : ChoiceScreen(controller: controller, showGauges: false),
-                    )
-                  : Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _Heading(name: n.name, sub: n.sub, threat: threat),
-                  const SizedBox(height: 6),
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      children: [
-                        if (r.card != null) ...[
-                          PlayCardView(card: r.card!, strings: S),
-                          const SizedBox(height: 6),
-                        ],
-                        if (waiting)
-                          ChartButton(
-                            label: dig(S, 'card.continue') as String,
-                            wide: true,
-                            fill: AppColors.chart.withValues(alpha: 0.94),
-                            onPressed: controller.continueNode,
-                          )
-                        else ...[
-                          if (here.isNotEmpty) ...[
-                            ScriptSect(nodeS['scriptHere'] as String),
-                            ...here.map((id) => JokeButton(controller: controller, id: id)),
-                          ],
-                          if (anywhere.isNotEmpty) ...[
-                            ScriptSect(nodeS['scriptAnywhere'] as String),
-                            ...anywhere.map((id) => JokeButton(controller: controller, id: id)),
-                          ],
-                          if (elsewhere.isNotEmpty) ...[
-                            ScriptSect(nodeS['scriptElsewhere'] as String),
-                            ...elsewhere.map(
-                              (id) => JokeButton(controller: controller, id: id, cold: true),
-                            ),
-                          ],
-                          const SizedBox(height: 6),
-                          _Manifest(
-                            text: '${nodeS['aboard']} $aboard\n${nodeS['hold']} ${cargo.name}$ice',
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              child: windowContent,
             ),
 
             // Tap targets over the baked-in art. Steer is the wheel.

@@ -19,10 +19,8 @@ Future<void> main() async {
     debugPaintPointersEnabled = false;
     debugRepaintRainbowEnabled = false;
     debugRepaintTextRainbowEnabled = false;
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // Portrait or landscape. The cockpit has art for both (see CockpitGeometry).
+    await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     runApp(SentryWidget(child: const GodspeedGinnyApp()));
   });
 }
