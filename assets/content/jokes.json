@@ -3229,7 +3229,7 @@
     "category": "rehearsed",
     "title": "Slightly flat",
     "variants": [
-      { "text": "It's slightly flat. The cliffs have been told, but they've a lot on their minds.", "weight": 3 },
+      { "text": "The Singing Cliffs! They're a little flat today. I've never been able to put a peg on what's wrong with them, but I guess you can't tune a rock.", "weight": 3 },
       { "text": "It's a very sad tune. It's been the same tune since before the river. It's the only one they know.", "weight": 2 }
     ],
     "flavors": ["self_deprecating", "wordplay"],
