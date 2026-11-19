@@ -3230,7 +3230,7 @@
     "title": "Slightly flat",
     "variants": [
       { "text": "The Singing Cliffs! They're a little flat today. I've never been able to put a peg on what's wrong with them, but I guess you can't tune a rock.", "weight": 3 },
-      { "text": "It's a very sad tune. It's been the same tune since before the river. It's the only one they know.", "weight": 2 }
+      { "text": "It's a very sad tune. I think Hoagy Carmichael wrote it for the river. The river thought it was 'Lazy River' and just kept going.", "weight": 2 }
     ],
     "flavors": ["self_deprecating", "wordplay"],
     "attention_cost": 1,
