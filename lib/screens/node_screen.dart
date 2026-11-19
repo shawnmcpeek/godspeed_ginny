@@ -7,7 +7,7 @@ import '../theme/app_theme.dart';
 import '../widgets/chart_button.dart';
 import '../widgets/gauges_bar.dart';
 import '../widgets/play_card_view.dart';
-import '../widgets/telegram_view.dart';
+import '../widgets/telegram_vi ew.dart';
 
 class NodeScreen extends StatelessWidget {
   const NodeScreen({super.key, required this.controller});
@@ -29,7 +29,9 @@ class NodeScreen extends StatelessWidget {
       threat = nodeS['sellingThreat'] as String;
     } else if (n.threatLabel != null) {
       threat = fill(
-        n.salvage ? nodeS['threatSalvage'] as String : nodeS['threatClear'] as String,
+        n.salvage
+            ? nodeS['threatSalvage'] as String
+            : nodeS['threatClear'] as String,
         {
           'label': n.threatLabel!.toUpperCase(),
           'threat': r.threat.round(),
@@ -55,7 +57,8 @@ class NodeScreen extends StatelessWidget {
         elsewhere.add(id);
       }
     }
-    int byScore(String a, String b) => g.scoreJoke(g.jokes[b]!) - g.scoreJoke(g.jokes[a]!);
+    int byScore(String a, String b) =>
+        g.scoreJoke(g.jokes[b]!) - g.scoreJoke(g.jokes[a]!);
     here.sort(byScore);
     anywhere.sort(byScore);
     elsewhere.sort(byScore);
@@ -71,8 +74,12 @@ class NodeScreen extends StatelessWidget {
         GaugesBar(
           game: g,
           showActions: true,
-          onRepair: (waiting || r.beat < 1) ? null : () => controller.doAction('wrench'),
-          onBail: (waiting || r.beat < 1) ? null : () => controller.doAction('bail'),
+          onRepair: (waiting || r.beat < 1)
+              ? null
+              : () => controller.doAction('wrench'),
+          onBail: (waiting || r.beat < 1)
+              ? null
+              : () => controller.doAction('bail'),
         ),
         const SizedBox(height: 8),
         Text(n.name, style: AppTheme.display.copyWith(fontSize: 22)),
@@ -100,7 +107,9 @@ class NodeScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 6),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: spent ? AppColors.ink.withValues(alpha: 0.25) : Colors.transparent,
+                  color: spent
+                      ? AppColors.ink.withValues(alpha: 0.25)
+                      : Colors.transparent,
                   border: Border.all(
                     color: spent ? Colors.transparent : AppColors.ink,
                     width: 2,
@@ -142,7 +151,9 @@ class NodeScreen extends StatelessWidget {
                           'n': g.cfg.steerThreatReduce.round(),
                           'b': g.cfg.steerBoilerReduce.round(),
                         }),
-                  onPressed: r.beat < 1 ? null : () => controller.doAction('steer'),
+                  onPressed: r.beat < 1
+                      ? null
+                      : () => controller.doAction('steer'),
                 ),
               ),
             ],
@@ -165,7 +176,10 @@ class NodeScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Text.rich(
             TextSpan(
-              style: AppTheme.mono.copyWith(fontSize: 12, color: AppColors.inkSoft),
+              style: AppTheme.mono.copyWith(
+                fontSize: 12,
+                color: AppColors.inkSoft,
+              ),
               children: [
                 TextSpan(text: '${nodeS['aboard']} '),
                 ...r.pax.expand(
@@ -201,7 +215,7 @@ class NodeScreen extends StatelessWidget {
 }
 
 class ScriptSect extends StatelessWidget {
-  const ScriptSect(this.text);
+  const ScriptSect(this.text, {super.key});
   final String text;
 
   @override
@@ -218,6 +232,7 @@ class ScriptSect extends StatelessWidget {
 
 class JokeButton extends StatelessWidget {
   const JokeButton({
+    super.key,
     required this.controller,
     required this.id,
     this.cold = false,
@@ -240,8 +255,8 @@ class JokeButton extends StatelessWidget {
     final border = j.risk != null
         ? AppColors.stamp
         : cold
-            ? AppColors.inkSoft
-            : AppColors.water;
+        ? AppColors.inkSoft
+        : AppColors.water;
 
     return Opacity(
       opacity: disabled ? 0.35 : (times > 0 ? 0.45 : (cold ? 0.72 : 1)),
@@ -268,12 +283,18 @@ class JokeButton extends StatelessWidget {
                 children: [
                   Text(
                     j.title,
-                    style: AppTheme.display.copyWith(fontSize: 15, fontWeight: FontWeight.w500),
+                    style: AppTheme.display.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: 3),
                   Text(
                     meta.toUpperCase(),
-                    style: AppTheme.mono.copyWith(fontSize: 12, letterSpacing: 1.2),
+                    style: AppTheme.mono.copyWith(
+                      fontSize: 12,
+                      letterSpacing: 1.2,
+                    ),
                   ),
                 ],
               ),
@@ -301,8 +322,8 @@ class JokeButton extends StatelessWidget {
     final read = est >= cfg.jokeStrongAt
         ? meta['readsStrong']
         : est >= cfg.jokeFairAt
-            ? meta['readsFair']
-            : meta['readsFlat'];
+        ? meta['readsFair']
+        : meta['readsFlat'];
     bits.add(read as String);
     return '${j.flavors.join(' / ')} · ${bits.join(' · ')}';
   }
