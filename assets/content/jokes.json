@@ -2670,7 +2670,7 @@
     "title": "Someone's whole week",
     "variants": [
       { "text": "Somebody's whole week is hanging there. Please don't look. It's the nicest thing on this river.", "weight": 3 },
-      { "text": "It's called a clothesline. The river calls it a challenge.", "weight": 2 }
+      { "text": "Don't get hung up on that. It's just a clothesline.", "weight": 2 }
     ],
     "flavors": ["self_deprecating", "wordplay"],
     "attention_cost": 1,
