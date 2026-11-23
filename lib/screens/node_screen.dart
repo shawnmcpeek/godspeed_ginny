@@ -7,7 +7,7 @@ import '../theme/app_theme.dart';
 import '../widgets/chart_button.dart';
 import '../widgets/gauges_bar.dart';
 import '../widgets/play_card_view.dart';
-import '../widgets/telegram_vi ew.dart';
+import '../widgets/telegram_view.dart';
 
 class NodeScreen extends StatelessWidget {
   const NodeScreen({super.key, required this.controller});
