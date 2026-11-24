@@ -242,7 +242,7 @@
   {
     "id": "boulder",
     "name": "The boulder",
-    "sub": "One rock. Two opinions.",
+    "sub": "A boulder, mid-river.",
     "type": "sight",
     "beats": 2,
     "threat": 0,
@@ -251,7 +251,7 @@
     "water_rate": 2,
     "joke_tags_favored": ["boulder"],
     "tags": ["boulder"],
-    "open": "Same granite either way. The river splits around it, and so do you. You are conflicted.",
+    "open": "A boulder sits in the middle of the river. The water goes around it. So must we.",
     "selling": false,
     "salvage": false,
     "settle_stages": null

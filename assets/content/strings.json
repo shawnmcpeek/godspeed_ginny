@@ -160,14 +160,12 @@
   },
   "boulder": {
     "title": "The boulder",
-    "sub": "I am conflicted.",
-    "note": "Left or right of the boulder. Same rock. You are conflicted.",
     "left": "Left",
-    "leftHint": "Port side of the rock",
+    "leftHint": "Port side of the boulder",
     "right": "Right",
-    "rightHint": "Starboard side of the rock",
-    "scrape": "The rail finds the granite. There was a clean side. This was not it.",
-    "clear": "Clear water past the rock. You picked a side. It happened to be the clean one.",
+    "rightHint": "Starboard side of the boulder",
+    "scrape": "The rail finds the granite.",
+    "clear": "Clear water past the boulder.",
     "punchlines": [
       { "text": "The boulder is no longer conflicted.", "weight": 3 },
       { "text": "I guess the boulder wasn't conflicted.", "weight": 2 }

@@ -310,7 +310,7 @@
   },
   {
     "id": "fork_boulder",
-    "prompt": "The chart shows two channels around a rock. The rock is not on the chart. You are conflicted.",
+    "prompt": "The chart shows two channels around a boulder. The boulder is not on the chart.",
     "pick": 2,
     "edges": [
       {
@@ -331,7 +331,7 @@
           "material": "low",
           "surprise": "same_rock_either_way"
         },
-        "annotation_on_discovery": "same rock. still conflicted.",
+        "annotation_on_discovery": "same boulder.",
         "boiler_bonus": 0
       },
       {
@@ -352,28 +352,7 @@
           "material": "low",
           "surprise": "same_rock_either_way"
         },
-        "annotation_on_discovery": "same rock. still conflicted.",
-        "boiler_bonus": 0
-      },
-      {
-        "id": "boulder_middle",
-        "from": "fork_boulder",
-        "to": "boulder",
-        "leg": "outbound",
-        "charted": {
-          "label": "Straight at it",
-          "claim": "No rock charted. Hold the middle.",
-          "time": "fast",
-          "danger": "low",
-          "material": "low"
-        },
-        "actual": {
-          "time": "slow",
-          "danger": "high",
-          "material": "low",
-          "surprise": "there_is_absolutely_a_rock"
-        },
-        "annotation_on_discovery": "there is absolutely a rock.",
+        "annotation_on_discovery": "same boulder.",
         "boiler_bonus": 0
       }
     ]
