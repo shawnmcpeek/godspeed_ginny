@@ -63,7 +63,7 @@ void main() {
     expect(game.run!.card!.deltas['hull'], (content.config.boulder['scrapeHull'] as num).toDouble());
   });
 
-  test('boulder plan is fork then approach then left/right choice', () async {
+  test('boulder plan is approach then left/right choice, no fork', () async {
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();
     final content = await loadGameContent();
@@ -71,15 +71,14 @@ void main() {
 
     game.startRun('mail_sacks');
     final plan = game.run!.plan;
-    final forkAt = plan.indexWhere((s) => s['kind'] == 'branch' && s['id'] == 'fork_boulder');
-    expect(forkAt, greaterThanOrEqualTo(0));
-    expect(plan[forkAt + 1]['kind'], 'node');
-    expect(plan[forkAt + 1]['id'], 'boulder');
-    expect(plan[forkAt + 2]['kind'], 'choice');
-    expect(plan[forkAt + 2]['id'], 'boulder');
+    expect(plan.any((s) => s['id'] == 'fork_boulder'), isFalse);
+    final nodeAt = plan.indexWhere((s) => s['kind'] == 'node' && s['id'] == 'boulder');
+    expect(nodeAt, greaterThanOrEqualTo(0));
+    expect(plan[nodeAt + 1]['kind'], 'choice');
+    expect(plan[nodeAt + 1]['id'], 'boulder');
 
-    game.run!.step = forkAt;
-    await game.chooseBranch('boulder_port');
+    game.run!.step = nodeAt;
+    game.enterNode('boulder');
     expect(game.screen, 'node');
     expect(game.run!.node, 'boulder');
     expect(game.choiceId, isNull);

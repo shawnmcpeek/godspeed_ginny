@@ -307,54 +307,5 @@
         "boiler_bonus": 0
       }
     ]
-  },
-  {
-    "id": "fork_boulder",
-    "prompt": "The chart shows two channels around a boulder. The boulder is not on the chart.",
-    "pick": 2,
-    "edges": [
-      {
-        "id": "boulder_port",
-        "from": "fork_boulder",
-        "to": "boulder",
-        "leg": "outbound",
-        "charted": {
-          "label": "The Left Channel",
-          "claim": "Port around. Clear water.",
-          "time": "fast",
-          "danger": "low",
-          "material": "low"
-        },
-        "actual": {
-          "time": "fast",
-          "danger": "high",
-          "material": "low",
-          "surprise": "same_rock_either_way"
-        },
-        "annotation_on_discovery": "same boulder.",
-        "boiler_bonus": 0
-      },
-      {
-        "id": "boulder_starboard",
-        "from": "fork_boulder",
-        "to": "boulder",
-        "leg": "outbound",
-        "charted": {
-          "label": "The Right Channel",
-          "claim": "Starboard around. Good bottom.",
-          "time": "fast",
-          "danger": "low",
-          "material": "low"
-        },
-        "actual": {
-          "time": "fast",
-          "danger": "high",
-          "material": "low",
-          "surprise": "same_rock_either_way"
-        },
-        "annotation_on_discovery": "same boulder.",
-        "boiler_bonus": 0
-      }
-    ]
   }
 ]

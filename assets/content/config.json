@@ -104,11 +104,7 @@
         [{ "kind": "branch", "id": "fork1" }, { "kind": "node", "id": null }],
         [{ "kind": "branch", "id": "fork2" }, { "kind": "node", "id": null }],
         [{ "kind": "node", "id": "wreck" }],
-        [
-          { "kind": "branch", "id": "fork_boulder" },
-          { "kind": "node", "id": "boulder" },
-          { "kind": "choice", "id": "boulder" }
-        ],
+        [{ "kind": "node", "id": "boulder" }, { "kind": "choice", "id": "boulder" }],
         [{ "kind": "node", "id": "falls" }],
         [{ "kind": "choice", "id": "ducks" }],
         [{ "kind": "node", "id": null, "pool": "wild" }],
